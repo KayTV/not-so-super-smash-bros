@@ -5,8 +5,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var swig = require('swig');
-
 
 // *** routes *** //
 var routes = require('./routes/index.js');
@@ -15,17 +13,11 @@ var routes = require('./routes/index.js');
 // *** express instance *** //
 var app = express();
 
+app.set('port', process.env.PORT || 3000);
 
-// *** view engine *** //
-var swig = new swig.Swig();
-app.engine('html', swig.renderFile);
-app.set('view engine', 'html');
-
-
-// *** static directory *** //
-app.set('views', path.join(__dirname, 'views'));
-
-
+var server = app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + server.address().port);
+});
 // *** config middleware *** //
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -35,6 +27,9 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 
 // *** main routes *** //
+app.get('/', function(req, res, next) {
+  res.sendFile(path.join(__dirname, '../client/', 'layout.html'));
+});
 app.use('/', routes);
 
 
@@ -45,7 +40,15 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// *** SOCKET.IO *** //
+var io = require('socket.io').listen(server);
 
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
 // *** error handlers *** //
 
 // development error handler
@@ -71,4 +74,4 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+module.exports = server;

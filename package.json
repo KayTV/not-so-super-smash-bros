@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./src/server/bin/www"
+    "start": "node ./src/server/app.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -11,7 +11,9 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "morgan": "~1.6.1",
+    "phaser": "^2.4.8",
     "serve-favicon": "~2.3.0",
+    "socket.io": "^1.4.6",
     "swig": "^1.4.2"
   },
   "devDependencies": {
