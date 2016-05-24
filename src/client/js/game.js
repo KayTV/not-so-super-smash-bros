@@ -235,6 +235,7 @@ MarioGame.prototype = {
         //  Move to the right
         this.player1.body.velocity.x = 150;
         this.player1.animations.play('right');
+        this.updateGame();
     }
 		else if(this.cursors.up.isDown)
 		{
@@ -311,6 +312,14 @@ MarioGame.prototype = {
       player1.kill();
 
     }
+  },
+  updateGame: function() {
+    socket.emit('game-update', {data: this.player1.position});
+  },
+  updatePositions: function() {
+    socket.on('game-update', function(data) {
+      return data;
+    })
   }
 }
 

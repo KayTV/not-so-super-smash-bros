@@ -42,13 +42,24 @@ app.use(function(req, res, next) {
 
 // *** SOCKET.IO *** //
 var io = require('socket.io').listen(server);
+var rooms = {};
 
-io.on('connection', function(socket){
+io.on('connect', function(socket){
   console.log('a user connected');
+  // socket.room = data.gameRoom;
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
+  socket.on('game-update', function(data) {
+    console.log('data:', data);
+    io.sockets.emit('game-update', data);
+  })
 });
+
+// io.on('game-update', function(data) {
+//   console.log('data:', data);
+// })
+
 // *** error handlers *** //
 
 // development error handler
