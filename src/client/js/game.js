@@ -1,5 +1,6 @@
 console.log('SANITY');
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
+var socket = io();
 
 var MarioGame = function() {
   this.player1 = null;
@@ -22,6 +23,9 @@ MarioGame.prototype = {
   init: function () {
     this.game.renderer.renderSession.roundPixels = true;
     this.physics.startSystem(Phaser.Physics.ARCADE);
+    socket.on('connect', function(){
+      console.log('connected');
+    })
   },
 
   preload: function() {
