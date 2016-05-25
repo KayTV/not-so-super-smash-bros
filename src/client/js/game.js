@@ -1,7 +1,6 @@
 console.log('SANITY');
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
 var socket = io();
-// var right = false;
 
 var MarioGame = function() {
   this.player1 = null;
@@ -228,20 +227,11 @@ MarioGame.prototype = {
 
     //  Reset the player1s velocity (movement)
     this.player1.body.velocity.x = 0;
-    // console.log('right', right);
-    // var right = right || false;
 
     var self = this;
     socket.on('game-update', function(data) {
-      console.log(self.right);
       self.right = data.right;
-      // console.log(right);
-      // console.log('Touch!');
     })
-
-    if (this.right === true) {
-      console.log("right:", this.right);
-    }
 
     if (this.cursors.left.isDown)
     {
