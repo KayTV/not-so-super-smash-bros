@@ -30,6 +30,12 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../client/', 'layout.html'));
 });
+
+app.get('/controller', function(req, res) {
+  //Serve up phone page here.
+  res.sendFile(path.join(__dirname, '../client', 'controller.html'));
+});
+
 app.use('/', routes);
 
 
@@ -52,7 +58,7 @@ io.on('connect', function(socket){
   });
   socket.on('game-update', function(data) {
     console.log('data:', data.data);
-    // io.sockets.in(rooms[socket.room].id).emit('game-update', data);
+    io.sockets.emit('game-update', data);
   })
 });
 
