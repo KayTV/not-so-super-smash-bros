@@ -16,8 +16,6 @@ Splash.prototype = {
       // Sprite Assets
       game.load.image('bullet', 'assets/weapons/bullet2.png')
       game.load.spritesheet('dude', 'assets/sprites/MegaManSprite2.png', 55, 55);
-      game.load.spritesheet('turtle', 'assets/marioLevel/marioBad.png', 45, 45);
-      game.load.image('star', 'assets/marioLevel/marioStar.png');
     },
     preload: function() {
       this.loadScripts();
