@@ -1,7 +1,7 @@
 var socket = io();
 
 var players = [];
-var bullets;
+// var bullets;
 
 function Game () {
   this.bullets;
@@ -116,7 +116,7 @@ Game.prototype = {
     this.physics.arcade.collide(this.player2, this.platforms);
     this.physics.arcade.collide(this.player2, this.moveBox, this.customSep, null, this);
 
-    var standing = this.player1.body.blocked.down || this.player1.body.touching.down || this.locked;
+    var standing = this.player1.body.blocked.down || this.player1.body.touching.down;
 
     //  Reset the player1s velocity (movement)
     this.player1.body.velocity.x = 0;
@@ -153,16 +153,16 @@ Game.prototype = {
     }
     if(this.fireButton.isDown || this.fire === true)
 		{
-			this.fire();
+			this.fireGun();
 		}
     //  Allow the player1 to jump if they are touching the ground.
-    if (this.cursors.up.isDown && this.player1.body.touching.down)
+    if (this.cursors.up.isDown || this.jump === true && this.player1.body.touching.down)
     {
         this.player1.body.velocity.y = -350;
     }
 
   },
-  fire: function() {
+  fireGun: function() {
     if (this.time.now > this.nextFire && this.bullets.countDead() > 0)
     {
         this.nextFire = this.time.now + this.fireRate;
@@ -170,10 +170,10 @@ Game.prototype = {
         var bullet = this.bullets.getFirstDead();
 
         bullet.reset(this.player1.x, this.player1.y);
-        if(this.cursors.right.isDown || this.cursors.up.isDown) {
+        if(this.cursors.right.isDown || this.right === true) {
           bullet.body.velocity.x = 400;
         }
-        if(this.cursors.left.isDown || this.cursors.down.isDown) {
+        if(this.cursors.left.isDown || this.left === true) {
           bullet.body.velocity.x = -400;
         }
         else {
