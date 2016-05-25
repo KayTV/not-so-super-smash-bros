@@ -36,7 +36,7 @@ app.get('/controller', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'controller.html'));
 });
 
-app.use('/', routes);
+// app.use('/', routes);
 
 
 // catch 404 and forward to error handler
