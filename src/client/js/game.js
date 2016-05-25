@@ -1,6 +1,7 @@
 console.log('SANITY');
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
 var socket = io();
+// var right = false;
 
 var MarioGame = function() {
   this.player1 = null;
@@ -17,11 +18,13 @@ var MarioGame = function() {
   this.fireRate = 100;
   this.nextFire = 0;
   this.bulletTime = 0;
+  this.right = false;
 }
 
 MarioGame.prototype = {
   init: function () {
     this.game.renderer.renderSession.roundPixels = true;
+    this.game.stage.disableVisibilityChange = true;
     this.physics.startSystem(Phaser.Physics.ARCADE);
     socket.on('connect', function(){
       console.log('connected');
@@ -225,6 +228,20 @@ MarioGame.prototype = {
 
     //  Reset the player1s velocity (movement)
     this.player1.body.velocity.x = 0;
+    // console.log('right', right);
+    // var right = right || false;
+
+    var self = this;
+    socket.on('game-update', function(data) {
+      console.log(self.right);
+      self.right = data.right;
+      // console.log(right);
+      // console.log('Touch!');
+    })
+
+    if (this.right === true) {
+      console.log("right:", this.right);
+    }
 
     if (this.cursors.left.isDown)
     {
@@ -232,7 +249,7 @@ MarioGame.prototype = {
         this.player1.body.velocity.x = -150;
         this.player1.animations.play('left');
     }
-    else if ( this.cursors.right.isDown)
+    else if ( this.cursors.right.isDown || this.right === true)
     {
         //  Move to the right
         this.player1.body.velocity.x = 150;
