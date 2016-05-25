@@ -1,6 +1,6 @@
 var socket = io();
 
-var MarioGame = function() {
+var Game = function() {
   this.player1 = null;
   this.platforms;
   this.cursors;
@@ -18,7 +18,7 @@ var MarioGame = function() {
   this.right = false;
 }
 
-MarioGame.prototype = {
+Game.prototype = {
   init: function () {
     this.game.renderer.renderSession.roundPixels = true;
     this.game.stage.disableVisibilityChange = true;
@@ -29,16 +29,16 @@ MarioGame.prototype = {
   },
 
   preload: function() {
-    // this.load.image('sky', 'assets/marioLevel/MarioLevelBackground.png');
-    // this.load.image('ground', 'assets/marioLevel/ground.png');
-    // this.load.image('star', 'assets/marioLevel/marioStar.png');
-		// this.load.image('box', 'assets/marioLevel/ledge2.png');
-		// this.load.image('littlebox', 'assets/marioLevel/box.png');
-		// this.load.image('pipe', 'assets/marioLevel/pipe2.png');
-		// this.load.image('bullet', 'assets/weapons/bullet2.png')
-    // this.load.spritesheet('dude', 'assets/sprites/MegaManSprite2.png', 55, 55);
-    // this.load.spritesheet('turtle', 'assets/marioLevel/marioBad.png', 45, 45);
-    // this.load.image('move-box', 'assets/marioLevel/box.png')
+  //   this.load.image('sky', 'assets/marioLevel/MarioLevelBackground.png');
+  //   this.load.image('ground', 'assets/marioLevel/ground.png');
+  //   this.load.image('star', 'assets/marioLevel/marioStar.png');
+	// 	this.load.image('box', 'assets/marioLevel/ledge2.png');
+	// 	this.load.image('littlebox', 'assets/marioLevel/box.png');
+	// 	this.load.image('pipe', 'assets/marioLevel/pipe2.png');
+	// 	this.load.image('bullet', 'assets/weapons/bullet2.png')
+  //   this.load.spritesheet('dude', 'assets/sprites/MegaManSprite2.png', 55, 55);
+  //   this.load.spritesheet('turtle', 'assets/marioLevel/marioBad.png', 45, 45);
+  //   this.load.image('move-box', 'assets/marioLevel/box.png')
   },
   create: function() {
     this.add.sprite(0, 0, 'sky');
@@ -396,6 +396,3 @@ CloudPlatform.prototype.stop = function () {
     this.tweenX.stop();
     this.tweenY.stop();
 };
-
-// Call game
-game.state.add('Game', MarioGame, true);

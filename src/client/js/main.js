@@ -6,11 +6,11 @@ function Main() {}
 
 Main.prototype = {
     preload: function() {
-        game.load.script('splash', 'states/splash.js');
+      game.load.script('splash', 'states/splash.js');
     },
     create: function() {
-        game.state.add('Splash', Splash);
-        game.state.start('Splash');
+      game.state.add('Splash', Splash);
+      game.state.start('Splash');
     }
 };
 
