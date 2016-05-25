@@ -26,9 +26,8 @@ var paths = {
   scripts: [
     './src/client/js/*.js',
   ],
-  server: [
-    './src/server/app.js'
-  ],
+  server:
+    './src/server/app.js',
   distServer: [
     './dist/server/bin/www'
   ]

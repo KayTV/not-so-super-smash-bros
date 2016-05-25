@@ -7,18 +7,16 @@ $(document).ready(function(){
       var el = document.getElementById('controls');
       el.webkitRequestFullscreen();
   }
-  // setInterval(updateGame, 30);
+  setInterval(updateGame, 30);
 
 $('#move-right').on('touchstart', function(event){
   event.preventDefault();
   right = true;
-  updateGame();
 });
 
 $('#move-right').on('touchend', function(event){
   event.preventDefault();
   right = false;
-  updateGame();
 });
 
 function updateGame() {
