@@ -1,11 +1,12 @@
 var socket = io();
 
 var players = [];
-var bullets;
+// var bullets;
 
 function Game () {
   this.bullets;
   this.player1 = null;
+  this.player2 = null;
   this.playerCount;
   this.platforms;
   this.cursors;
@@ -59,24 +60,36 @@ Game.prototype = {
 		ledge = this.platforms.create(580, 450, 'pipe');
     ledge.body.immovable = true;
 
-    // The player1 and its settings
+    // Player1/Player and settings
     this.player1 = this.add.sprite(32, this.world.height - 150, 'dude');
+    this.player2 = this.add.sprite(200, this.world.height - 150, 'kirby');
+    this.player2.scale.setTo(1.5,1.5);
 
     //  We need to enable physics on the player1
 		this.player1.anchor.set(0.5);
+    this.player2.anchor.set(2);
 
     this.physics.enable(this.player1, Phaser.Physics.ARCADE);
+    this.physics.enable(this.player2, Phaser.Physics.ARCADE);
 
     //  Player physics properties. Give the little guy a slight bounce.
     this.player1.body.bounce.y = 0.2;
     this.player1.body.gravity.y = 300;
     this.player1.body.collideWorldBounds = true;
 
+    this.player2.body.bounce.y = 0.2;
+    this.player2.body.gravity.y = 300;
+    this.player2.body.collideWorldBounds = true;
+
     this.player1.animations.add('left', [0, 1, 2, 3], 13, true);
     this.player1.animations.add('right', [6, 7, 8, 9], 13, true);
 		this.player1.animations.add('jump', [10], 13, true);
 		this.player1.animations.add('jumpdown', [11], 13, true);
     this.player1.animations.add('hit', [12], 13, true);
+
+    this.player2.animations.add('left', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21], 21, true);
+    this.player2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 21, true);
+		// this.player2.animations.add('jump', [10], 13, true);
 
     // console.log('player', this.player1);
 
@@ -95,91 +108,40 @@ Game.prototype = {
 		this.fireButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
   },
-  customSep: function (player1, platform) {
-      if (!this.locked && player1.body.velocity.y > 0)
-      {
-          this.locked = true;
-          this.lockedTo = platform;
-          platform.playerLocked = true;
-          player1.body.velocity.y = 0;
-      }
-  },
-  checkLock: function () {
-      this.player1.body.velocity.y = 0;
-      //  If the player has walked off either side of the platform then they're no longer locked to it
-      if (this.player1.body.right < this.lockedTo.body.x || this.player1.body.x > this.lockedTo.body.right)
-      {
-          this.cancelLock();
-      }
-  },
-  cancelLock: function () {
-      this.wasLocked = true;
-      this.locked = false;
-  },
-  preRender: function () {
-      if (this.game.paused)
-      {
-          //  Because preRender still runs even if your game pauses!
-          return;
-      }
-      if (this.locked || this.wasLocked)
-      {
-          this.player1.x += this.lockedTo.deltaX;
-          this.player1.y = this.lockedTo.y - 48;
-          if (this.player1.body.velocity.x !== 0)
-          {
-              this.player1.body.velocity.y = 0;
-          }
-      }
-      if (this.willJump)
-      {
-          this.willJump = false;
-          if (this.lockedTo && this.lockedTo.deltaY < 0 && this.wasLocked)
-          {
-              //  If the platform is moving up we add its velocity to the players jump
-              this.player1.body.velocity.y = -400 + (this.lockedTo.deltaY * 10);
-          }
-          else
-          {
-              this.player1.body.velocity.y = -400;
-          }
-          this.jumpTimer = this.time.time + 750;
-      }
-      if (this.wasLocked)
-      {
-          this.wasLocked = false;
-          this.lockedTo.playerLocked = false;
-          this.lockedTo = null;
-      }
-  },
   update: function() {
     //  Collide the player with platforms
     this.physics.arcade.collide(this.player1, this.platforms);
     this.physics.arcade.collide(this.player1, this.moveBox, this.customSep, null, this);
 
-    var standing = this.player1.body.blocked.down || this.player1.body.touching.down || this.locked;
+    this.physics.arcade.collide(this.player2, this.platforms);
+    this.physics.arcade.collide(this.player2, this.moveBox, this.customSep, null, this);
 
-    //  Reset the player1s velocity (movement)
+    var standing = this.player1.body.blocked.down || this.player1.body.touching.down;
+
+    //  Player1 Movement
     this.player1.body.velocity.x = 0;
 
     var self = this;
     socket.on('game-update', function(data) {
       self.right = data.right;
+      self.left = data.left;
+      self.jump = data.jump;
+      self.fire = data.fire;
     })
 
-    if (this.cursors.left.isDown || this.left === true)
+    if (this.left === true)
     {
         //  Move to the left
         this.player1.body.velocity.x = -150;
         this.player1.animations.play('left');
     }
-    else if ( this.cursors.right.isDown || this.right === true)
+    else if (this.right === true)
     {
         //  Move to the right
         this.player1.body.velocity.x = 150;
         this.player1.animations.play('right');
     }
-		else if(this.cursors.up.isDown || this.jump === true)
+		else if(this.jump === true)
 		{
 			this.player1.animations.play('jump');
 		}
@@ -189,31 +151,48 @@ Game.prototype = {
       this.player1.animations.stop();
       this.player1.frame = 5;
     }
-    if(this.fireButton.isDown || this.fire === true)
+    if(this.fire === true)
 		{
-			this.fire();
+			this.fireGun();
 		}
     //  Allow the player1 to jump if they are touching the ground.
-    if (this.cursors.up.isDown && this.player1.body.touching.down)
+    if (this.jump === true && this.player1.body.touching.down)
     {
         this.player1.body.velocity.y = -350;
     }
-    if (standing && this.cursors.up.isDown && this.time.time > this.jumpTimer)
+
+    // Player2 Movement
+    this.player2.body.velocity.x = 0;
+    if (this.cursors.left.isDown)
     {
-        if (this.locked)
-        {
-            this.cancelLock();
-        }
-        this.willJump = true;
-        jump.play();
+        //  Move to the left
+        this.player2.body.velocity.x = -150;
+        this.player2.animations.play('left');
     }
-    if (this.locked)
+    else if (this.cursors.right.isDown)
     {
-        this.checkLock();
+        //  Move to the right
+        this.player2.body.velocity.x = 150;
+        this.player2.animations.play('right');
+    }
+		// else if(this.cursors.up.isDown)
+		// {
+		// 	this.player2.animations.play('jump');
+		// }
+    else
+    {
+      //  Stand still
+      this.player2.animations.stop();
+      this.player2.frame = 11;
+    }
+        //  Allow the player2 to jump if they are touching the ground.
+    if (this.cursors.up.isDown && this.player2.body.touching.down)
+    {
+        this.player2.body.velocity.y = -350;
     }
 
   },
-  fire: function() {
+  fireGun: function() {
     if (this.time.now > this.nextFire && this.bullets.countDead() > 0)
     {
         this.nextFire = this.time.now + this.fireRate;
@@ -221,10 +200,10 @@ Game.prototype = {
         var bullet = this.bullets.getFirstDead();
 
         bullet.reset(this.player1.x, this.player1.y);
-        if(this.cursors.right.isDown || this.cursors.up.isDown) {
+        if(this.right === true) {
           bullet.body.velocity.x = 400;
         }
-        if(this.cursors.left.isDown || this.cursors.down.isDown) {
+        if(this.left === true) {
           bullet.body.velocity.x = -400;
         }
         else {
@@ -234,39 +213,3 @@ Game.prototype = {
     }
   },
 }
-
-CloudPlatform = function (game, x, y, key, group) {
-    if (typeof group === 'undefined') { group = game.world; }
-    Phaser.Sprite.call(this, game, x, y, key);
-    game.physics.arcade.enable(this);
-    this.anchor.x = 0.5;
-    this.body.customSeparateX = true;
-    this.body.customSeparateY = true;
-    this.body.allowGravity = false;
-    this.body.immovable = true;
-    this.playerLocked = false;
-    group.add(this);
-};
-
-CloudPlatform.prototype = Object.create(Phaser.Sprite.prototype);
-CloudPlatform.prototype.constructor = CloudPlatform;
-CloudPlatform.prototype.addMotionPath = function (motionPath) {
-    this.tweenX = this.game.add.tween(this.body);
-    this.tweenY = this.game.add.tween(this.body);
-
-    for (var i = 0; i < motionPath.length; i++)
-    {
-        this.tweenX.to( { x: motionPath[i].x }, motionPath[i].xSpeed, motionPath[i].xEase);
-        this.tweenY.to( { y: motionPath[i].y }, motionPath[i].ySpeed, motionPath[i].yEase);
-    }
-    this.tweenX.loop();
-    this.tweenY.loop();
-};
-CloudPlatform.prototype.start = function () {
-    this.tweenX.start();
-    this.tweenY.start();
-};
-CloudPlatform.prototype.stop = function () {
-    this.tweenX.stop();
-    this.tweenY.stop();
-};

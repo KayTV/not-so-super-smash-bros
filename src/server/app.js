@@ -57,7 +57,7 @@ io.on('connect', function(socket){
     console.log('user disconnected');
   });
   socket.on('game-update', function(data) {
-    console.log('data:', data);
+    // console.log('data:', data);
     io.sockets.emit('game-update', data);
   })
 });
