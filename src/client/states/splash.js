@@ -24,7 +24,7 @@ Splash.prototype = {
       this.loadAssets();
     },
     addGameStates: function() {
-      game.state.add('Game', Game);
+      game.state.add('Game', Game, true);
     },
     create: function () {
       this.addGameStates();
