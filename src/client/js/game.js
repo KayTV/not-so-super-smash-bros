@@ -106,6 +106,8 @@ MarioGame.prototype = {
 		this.player1.animations.add('jumpdown', [11], 13, true);
     this.player1.animations.add('hit', [12], 13, true);
 
+    console.log('player', this.player1);
+
     //bullets for megaman
 		this.bullets = this.add.group();
     this.bullets.enableBody = true;
