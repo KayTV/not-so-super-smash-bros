@@ -1,18 +1,14 @@
 var socket = io();
 
-// var bullets;
+var players = [];
+var bullets;
 
-var Game = function() {
+function Game () {
+  this.bullets;
   this.player1 = null;
+  this.playerCount;
   this.platforms;
   this.cursors;
-  this.bullets;
-  this.stars;
-  this.moveBox;
-  this.score = 0;
-  this.scoreText;
-  this.pOneHealth = 100;
-  this.pOneHealthText;
   this.fireButton;
   this.fireRate = 100;
   this.nextFire = 0;
@@ -21,7 +17,9 @@ var Game = function() {
 }
 
 Game.prototype = {
-  init: function () {
+  init: function (playerCount) {
+    this.playerCount = playerCount;
+    console.log("playerCount:", playerCount);
     this.game.renderer.renderSession.roundPixels = true;
     this.game.stage.disableVisibilityChange = true;
     this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -61,15 +59,6 @@ Game.prototype = {
 		ledge = this.platforms.create(580, 450, 'pipe');
     ledge.body.immovable = true;
 
-    this.moveBox = this.add.physicsGroup();
-
-    var moveBox1 = new CloudPlatform(this.game, 600, 100, 'move-box', this.moveBox);
-
-    moveBox1.addMotionPath([
-        { x: "-600", xSpeed: 3000, xEase: "Linear", y: "-0", ySpeed: 3000, yEase: "Sine.easeIn" },
-        { x: "+600", xSpeed: 3000, xEase: "Linear", y: "0", ySpeed: 3000, yEase: "Sine.easeOut" },
-    ]);
-
     // The player1 and its settings
     this.player1 = this.add.sprite(32, this.world.height - 150, 'dude');
 
@@ -104,7 +93,6 @@ Game.prototype = {
     //  Our controls.
     this.cursors = this.input.keyboard.createCursorKeys();
 		this.fireButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    this.moveBox.callAll('start');
 
   },
   customSep: function (player1, platform) {
