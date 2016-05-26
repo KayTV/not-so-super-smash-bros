@@ -4,56 +4,65 @@ $(document).ready(function(){
   var left = false;
   var jump = false;
   var fire = false;
+  var player = null;
+  var playerColor;
+  var colors = ['#7f2120', '#1c3a66', '#eac84d', '#31563c' ];
 
   document.fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.documentElement.webkitRequestFullScreen;
+
   if (document.fullscreenEnabled) {
       var el = document.getElementById('controls');
       el.webkitRequestFullscreen();
   }
+
   setInterval(updateGame, 30);
 
-$('#move-right').on('touchstart', function(event){
-  event.preventDefault();
-  right = true;
-});
+  // $('#join').on('click', function(data){
+  //   socket.emit('new-player', {data: data})
+  // });
 
-$('#move-right').on('touchend', function(event){
-  event.preventDefault();
-  right = false;
-});
+  $('#move-right').on('touchstart', function(event){
+    event.preventDefault();
+    right = true;
+  });
 
-$('#move-left').on('touchstart', function(event){
-  event.preventDefault();
-  left = true;
-});
+  $('#move-right').on('touchend', function(event){
+    event.preventDefault();
+    right = false;
+  });
 
-$('#move-left').on('touchend', function(event){
-  event.preventDefault();
-  left = false;
-});
+  $('#move-left').on('touchstart', function(event){
+    event.preventDefault();
+    left = true;
+  });
 
-$('#jump').on('touchstart', function(event){
-  event.preventDefault();
-  jump = true;
-});
+  $('#move-left').on('touchend', function(event){
+    event.preventDefault();
+    left = false;
+  });
 
-$('#jump').on('touchend', function(event){
-  event.preventDefault();
-  jump = false;
-});
+  $('#jump').on('touchstart', function(event){
+    event.preventDefault();
+    jump = true;
+  });
 
-$('#fire').on('touchstart', function(event){
-  event.preventDefault();
-  fire = true;
-});
+  $('#jump').on('touchend', function(event){
+    event.preventDefault();
+    jump = false;
+  });
 
-$('#fire').on('touchend', function(event){
-  event.preventDefault();
-  fire = false;
-});
+  $('#fire').on('touchstart', function(event){
+    event.preventDefault();
+    fire = true;
+  });
 
-function updateGame() {
-    // sends game-update to server with the players input and player number
-    socket.emit('game-update', {right: right, left: left, jump: jump, fire: fire});
-}
+  $('#fire').on('touchend', function(event){
+    event.preventDefault();
+    fire = false;
+  });
+
+  function updateGame() {
+      // sends game-update to server with the players input and player number
+      socket.emit('game-update', {right: right, left: left, jump: jump, fire: fire});
+  }
 });

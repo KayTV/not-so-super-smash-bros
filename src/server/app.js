@@ -53,6 +53,9 @@ var rooms = {};
 io.on('connect', function(socket){
   console.log('a user connected');
   // socket.room = data.gameRoom;
+  socket.on('new-player', function(data){
+    console.log('new player', data);
+  });
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
