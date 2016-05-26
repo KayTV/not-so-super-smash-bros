@@ -2,6 +2,7 @@ function Splash() {}
 
 Splash.prototype = {
     loadScripts: function () {
+      game.load.script('menu', 'states/menu.js');
       game.load.script('game', 'states/game.js');
     },
     loadAssets: function () {
@@ -21,14 +22,27 @@ Splash.prototype = {
       game.load.spritesheet('pikachu', 'assets/sprites/pikachuSprite.png', 40, 30);
 
     },
+    init: function() {
+      this.status = game.make.text(game.world.centerX, 380, 'Loading...', {fill: 'blue'});
+      this.status.anchor.setTo(0.5);
+    },
     preload: function() {
+      
+      game.add.existing(this.status);
+
       this.loadScripts();
       this.loadAssets();
     },
     addGameStates: function() {
-      game.state.add('Game', Game, true);
+      game.state.add('Menu', Menu)
+      game.state.add('Game', Game);
     },
     create: function () {
+      this.status.setText('Loaded!')
       this.addGameStates();
+
+      setTimeout(function() {
+        game.state.start('Menu');
+      }, 1000);
     }
 };
