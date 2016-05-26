@@ -52,13 +52,32 @@ var rooms = {};
 
 io.on('connect', function(socket){
   console.log('a user connected');
-  // socket.room = data.gameRoom;
+
   socket.on('new-player', function(data){
     console.log('new player', data);
+
+    if (!rooms[data.gameRoom] || rooms[data.gameRoom].started) {
+      socket.emit('invalid-room');
+    } else {
+      socket.room = data.gameRoom;
+
+      if (rooms[data.gameRoom].players) {
+        rooms[data.gameRoom].players++;
+      } else {
+        rooms[data.gameRoom].players = 1;
+      }
+      console.log("Phone:", data.gameRoom);
+      io.sockets.in(rooms[socket.room].id).emit('player-joined', rooms[data.gameRoom].players);
+
+      var playerId = rooms[data.gameRoom].players - 1;
+      socket.emit('success-join', playerId);
+
+      if (rooms[data.gameRoom].players >= 1 ) {
+        io.sockets.in(rooms[socket.room].id).emit('start-game');
+      }
+    }
   });
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
+
   socket.on('game-update', function(data) {
     // if (rooms[socket.room]) {
     //   io.sockets.in(rooms[socket.room].id).emit('game-update', data);
@@ -84,6 +103,11 @@ io.on('connect', function(socket){
     console.log('GameRoom:', data.gameRoom);
     room[data.gameRoom].started = true;
   })
+
+  // Check for 'disconnect emit'
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
 });
 
 // io.on('game-update', function(data) {
