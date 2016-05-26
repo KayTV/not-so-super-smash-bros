@@ -2,3 +2,7 @@ body {
   background-color: grey;
   margin-top: 13%;
 }
+
+div {
+    -webkit-touch-callout: none !important;
+}

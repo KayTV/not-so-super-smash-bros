@@ -9,10 +9,12 @@ $(document).ready(function(){
   var colors = ['#7f2120', '#1c3a66', '#eac84d', '#31563c' ];
 
   document.fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.documentElement.webkitRequestFullScreen;
+
   if (document.fullscreenEnabled) {
       var el = document.getElementById('controls');
       el.webkitRequestFullscreen();
   }
+  
   setInterval(updateGame, 30);
 
   // $('#join').on('click', function(){
