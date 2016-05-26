@@ -19,10 +19,17 @@ Menu.prototype = {
 
   create: function() {
     game.add.existing(this.titleText);
+    socket.on('player-joined', function(data) {
+      this.playerCount ?
+      this.playerCount ++ :
+      this.playerCount = 1;
+      if (this.playerCount > 1) {
+        this.startGameMenu();
+      }
+    }.bind(this));
     socket.on('success-create', function(data) {
       this.gameRoom = data.gameRoom;
       this.viewId = data.viewId;
-
       this.createMenu = this.addMenu();
     }.bind(this));
   },
@@ -59,7 +66,7 @@ Menu.prototype = {
       });
       text.anchor.setTo(0.5, 0.5);
 
-      if (self.playerCount >= 1) {
+      if (self.playerCount >= 0) {
         console.log("A new player connected!");
         self.startGameMenu();
       }
