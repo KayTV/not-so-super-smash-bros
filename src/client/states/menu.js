@@ -49,16 +49,32 @@ Menu.prototype = {
       button.stroke = 'rgba(0,0,0,0)';
     }
 
+    var onClick = function (button) {
+      var text = game.add.text(game.world.centerX, game.world.centerY, 'Game ID: ', this.gameRoom, {
+        font: '30pt Sans',
+        fill: 'red',
+        align: 'center',
+        stroke: 'rgba(0,0,0,0)',
+        strokeThickness: 4
+      });
+      text.anchor.setTo(0.5, 0.5);
+
+      if (self.playerCount >= 1) {
+        console.log("A new player connected!");
+        // self.addStart();
+      }
+      button.destroy();
+    }.bind(this);
+
+    text.stroke = "rgba(0,0,0,0";
+    text.strokeThickness = 4;
     text.inputEnable = true;
-    // text.events.onInputUp.add(onClick);
-    text.events.onInputUp.add(hoverTrue);
-    text.events.onInputUp.add(hoverFalse);
+    text.events.onInputUp.add(onClick);
+    text.events.onInputOver.add(hoverTrue);
+    text.events.onInputOut.add(hoverFalse);
     game.add.existing(text);
     return text;
 
-    // var onClick = function (button) {
-    //
-    // }
 
 
   },
