@@ -8,6 +8,16 @@ $(document).ready(function(){
   var playerColor;
   var colors = ['#7f2120', '#1c3a66', '#eac84d', '#31563c' ];
 
+  $('#join').on('click', function() {
+    var gameRoom = $('#user-input').val();
+    socket.emit('new-player', {gameRoom: gameRoom});
+
+    socket.on('success-join', function(playerNum) {
+      $('#game-room-input').hide();
+      setInterval(updateGame, 30);
+    })
+  })
+
   document.fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.documentElement.webkitRequestFullScreen;
 
   if (document.fullscreenEnabled) {
@@ -15,7 +25,7 @@ $(document).ready(function(){
       el.webkitRequestFullscreen();
   }
 
-  setInterval(updateGame, 30);
+  // setInterval(updateGame, 30);
 
   // $('#join').on('click', function(data){
   //   socket.emit('new-player', {data: data})
