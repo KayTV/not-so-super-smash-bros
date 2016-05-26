@@ -95,8 +95,8 @@ Game.prototype = {
 		this.player1.animations.add('jumpdown', [11], 13, true);
     this.player1.animations.add('hit', [12], 13, true);
 
-    this.player2.animations.add('left', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21], 21, true);
-    this.player2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 21, true);
+    this.player2.animations.add('left', [20, 19, 18, 17, 16, 15, 14, 13, 12, 11], 13, true);
+    this.player2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 13, true);
 		// this.player2.animations.add('jump', [10], 13, true);
 
     this.player3.animations.add('left', [0, 1, 2], 8, true);
@@ -201,7 +201,7 @@ Game.prototype = {
     {
       //  Stand still
       this.player2.animations.stop();
-      this.player2.frame = 11;
+      this.player2.frame = 10;
     }
         //  Allow the player2 to jump if they are touching the ground.
     if (this.cursors.up.isDown && this.player2.body.touching.down)
