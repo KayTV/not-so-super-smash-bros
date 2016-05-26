@@ -57,14 +57,30 @@ io.on('connect', function(socket){
     console.log('user disconnected');
   });
   socket.on('game-update', function(data) {
-    // console.log('data:', data);
+    // if (rooms[socket.room]) {
+    //   io.sockets.in(rooms[socket.room].id).emit('game-update', data);
+    // }
     io.sockets.emit('game-update', data);
+  })
+
+  socket.on('create-game', function(data) {
+    if(!rooms[data.gameRoom]) {
+      console.log('Creating game... GameRoom:', data.gameRoom)
+      rooms[data.gameRoom] = {id: data.viewId};
+      rooms[data.gameRoom].started = false;
+      socket.join(data.viewId);
+      socket.emit('success-create', data);
+    } else {
+      console.log("Shit's broke server-side");
+    }
   })
 });
 
 // io.on('game-update', function(data) {
 //   console.log('data:', data);
 // })
+
+
 
 // *** error handlers *** //
 
