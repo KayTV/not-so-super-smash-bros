@@ -61,7 +61,7 @@ Menu.prototype = {
 
       if (self.playerCount >= 1) {
         console.log("A new player connected!");
-        // self.startGameMenu();
+        self.startGameMenu();
       }
       button.destroy();
     }.bind(this);
@@ -110,7 +110,7 @@ Menu.prototype = {
 
     var onClick = function () {
       socket.emit('game-start', {gameRoom: this.gameRoom});
-      game.state.start('Game', true, false, this.playerCount)
+      game.state.start('Game', true, this.playerCount)
     }.bind(this);
 
     text.stroke = "rgba(0,0,0,0)";
