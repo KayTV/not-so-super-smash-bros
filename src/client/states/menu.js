@@ -50,7 +50,7 @@ Menu.prototype = {
     }
 
     var onClick = function (button) {
-      var text = game.add.text(game.world.centerX, game.world.centerY, 'Game ID: ', this.gameRoom, {
+      var text = game.add.text(game.world.centerX, game.world.centerY, 'Game ID: ' + this.gameRoom, {
         font: '30pt Sans',
         fill: 'red',
         align: 'center',
@@ -66,16 +66,14 @@ Menu.prototype = {
       button.destroy();
     }.bind(this);
 
-    text.stroke = "rgba(0,0,0,0";
+    text.stroke = "rgba(0,0,0,0)";
     text.strokeThickness = 4;
-    text.inputEnable = true;
+    text.inputEnabled = true;
     text.events.onInputUp.add(onClick);
     text.events.onInputOver.add(hoverTrue);
     text.events.onInputOut.add(hoverFalse);
     game.add.existing(text);
     return text;
-
-
 
   },
   createGame: function () {
