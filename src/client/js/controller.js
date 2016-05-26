@@ -14,10 +14,10 @@ $(document).ready(function(){
       var el = document.getElementById('controls');
       el.webkitRequestFullscreen();
   }
-  
+
   setInterval(updateGame, 30);
 
-  // $('#join').on('click', function(){
+  // $('#join').on('click', function(data){
   //   socket.emit('new-player', {data: data})
   // });
 
