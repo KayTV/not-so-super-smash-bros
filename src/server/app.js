@@ -66,6 +66,7 @@ io.on('connect', function(socket){
     io.sockets.emit('game-update', data);
   })
 
+  // Check for 'create-game' emit
   socket.on('create-game', function(data) {
     if(!rooms[data.gameRoom]) {
       console.log('Creating game... GameRoom:', data.gameRoom)
@@ -76,6 +77,12 @@ io.on('connect', function(socket){
     } else {
       console.log("Shit's broke server-side");
     }
+  })
+
+  // Check for 'start-game' emit
+  socket.on('game-start', function(data) {
+    console.log('GameRoom:', data.gameRoom);
+    room[data.gameRoom].started = true;
   })
 });
 
