@@ -16,7 +16,7 @@ Splash.prototype = {
       // Sprite Assets
       game.load.image('bullet', 'assets/weapons/bullet2.png')
       game.load.spritesheet('dude', 'assets/sprites/MegaManSprite2.png', 55, 55);
-      game.load.spritesheet('kirby', 'assets/sprites/kirbySprite.png', 22.2, 23);
+      game.load.spritesheet('kirby', 'assets/sprites/kirbySprite2.png', 23, 22);
 
     },
     preload: function() {
