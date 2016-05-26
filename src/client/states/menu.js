@@ -61,7 +61,7 @@ Menu.prototype = {
 
       if (self.playerCount >= 1) {
         console.log("A new player connected!");
-        // self.addStart();
+        // self.startGameMenu();
       }
       button.destroy();
     }.bind(this);
@@ -86,6 +86,42 @@ Menu.prototype = {
     // Emit 'create-game' to backend
     socket.emit('create-game', {gameRoom: tempGameRoom, viewId: tempViewId})
   },
+  startGameMenu: function () {
+    var style = {
+      font: '30pt Sans',
+      fill: 'red',
+      align: 'center',
+      stroke: 'rgba(0,0,0,0)',
+      strokeThickness: 4
+    }
+
+    var text = game.add.text(game.world.centerX, game.world.centerY + 100, 'Start Match', style);
+    text.anchor.setTo(0.5,0.5);
+
+    var hoverTrue = function (button) {
+      button.fill = 'red';
+      button.stroke = 'rgba(200,200,200,0.5)';
+    }
+
+    var hoverFalse = function (button) {
+      button.fill = 'blue';
+      button.stroke = 'rgba(0,0,0,0)';
+    }
+
+    var onClick = function () {
+      socket.emit('game-start', {gameRoom: this.gameRoom});
+      game.state.start('Game', true, false, this.playerCount)
+    }.bind(this);
+
+    text.stroke = "rgba(0,0,0,0)";
+    text.strokeThickness = 4;
+    text.inputEnabled = true;
+    text.events.onInputUp.add(onClick);
+    text.events.onInputOver.add(hoverTrue);
+    text.events.onInputOut.add(hoverFalse);
+
+  }
+
 
   preload: function() {
     this.playerCount;
