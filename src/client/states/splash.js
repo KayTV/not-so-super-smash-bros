@@ -2,6 +2,7 @@ function Splash() {}
 
 Splash.prototype = {
     loadScripts: function () {
+      game.load.script('menu', 'states/menu.js');
       game.load.script('game', 'states/game.js');
     },
     loadAssets: function () {
@@ -26,9 +27,14 @@ Splash.prototype = {
       this.loadAssets();
     },
     addGameStates: function() {
-      game.state.add('Game', Game, true);
+      game.state.add('Menu', Menu)
+      game.state.add('Game', Game);
     },
     create: function () {
       this.addGameStates();
+
+      setTimeout(function() {
+        game.state.start('Menu');
+      }, 1000);
     }
 };
