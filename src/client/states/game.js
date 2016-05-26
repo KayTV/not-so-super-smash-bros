@@ -7,6 +7,7 @@ function Game () {
   this.bullets;
   this.player1 = null;
   this.player2 = null;
+  this.player3 = null;
   this.playerCount;
   this.platforms;
   this.cursors;
@@ -64,13 +65,16 @@ Game.prototype = {
     this.player1 = this.add.sprite(32, this.world.height - 150, 'dude');
     this.player2 = this.add.sprite(200, this.world.height - 150, 'kirby');
     this.player2.scale.setTo(1.5,1.5);
+    this.player3 = this.add.sprite(300, this.world.height -150, 'pikachu');
 
     //  We need to enable physics on the player1
 		this.player1.anchor.set(0.5);
     this.player2.anchor.set(2);
+    this.player3.anchor.set(0.5);
 
     this.physics.enable(this.player1, Phaser.Physics.ARCADE);
     this.physics.enable(this.player2, Phaser.Physics.ARCADE);
+    this.physics.enable(this.player3, Phaser.Physics.ARCADE);
 
     //  Player physics properties. Give the little guy a slight bounce.
     this.player1.body.bounce.y = 0.2;
@@ -81,6 +85,10 @@ Game.prototype = {
     this.player2.body.gravity.y = 300;
     this.player2.body.collideWorldBounds = true;
 
+    this.player3.body.bounce.y = 0.2;
+    this.player3.body.gravity.y = 300;
+    this.player3.body.collideWorldBounds = true;
+
     this.player1.animations.add('left', [0, 1, 2, 3], 13, true);
     this.player1.animations.add('right', [6, 7, 8, 9], 13, true);
 		this.player1.animations.add('jump', [10], 13, true);
@@ -90,6 +98,10 @@ Game.prototype = {
     this.player2.animations.add('left', [12, 13, 14, 15, 16, 17, 18, 19, 20, 21], 21, true);
     this.player2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 21, true);
 		// this.player2.animations.add('jump', [10], 13, true);
+
+    this.player3.animations.add('left', [0, 1, 2], 8, true);
+    this.player3.animations.add('right', [6, 7, 8], 8, true);
+    this.player3.animations.add('jump', [4], 8, true);
 
     // console.log('player', this.player1);
 
@@ -106,6 +118,9 @@ Game.prototype = {
     //  Our controls.
     this.cursors = this.input.keyboard.createCursorKeys();
 		this.fireButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    this.A = this.input.keyboard.addKey(Phaser.Keyboard.A);
+    this.D = this.input.keyboard.addKey(Phaser.Keyboard.D);
+    this.W = this.input.keyboard.addKey(Phaser.Keyboard.W);
 
   },
   update: function() {
@@ -115,6 +130,9 @@ Game.prototype = {
 
     this.physics.arcade.collide(this.player2, this.platforms);
     this.physics.arcade.collide(this.player2, this.moveBox, this.customSep, null, this);
+
+    this.physics.arcade.collide(this.player3, this.platforms);
+    this.physics.arcade.collide(this.player3, this.moveBox, this.customSep, null, this);
 
     var standing = this.player1.body.blocked.down || this.player1.body.touching.down;
 
@@ -189,6 +207,27 @@ Game.prototype = {
     if (this.cursors.up.isDown && this.player2.body.touching.down)
     {
         this.player2.body.velocity.y = -350;
+    }
+    this.physics.arcade.collide(this.player3, this.platforms);
+
+    this.player3.body.velocity.x = 0;
+
+    if (this.A.isDown) {
+      this.player3.body.velocity.x = -150;
+      this.player3.animations.play('left');
+    }
+    else if (this.D.isDown) {
+      this.player3.body.velocity.x = 150;
+      this.player3.animations.play('right');
+    } else {
+      this.player3.animations.stop();
+      this.player3.frame = 3;
+    }
+
+    // Conditional for jumping (P3)
+    if (this.W.isDown) {
+      this.player3.animations.play('jump');
+      this.player3.body.velocity.y = -350;
     }
 
   },
