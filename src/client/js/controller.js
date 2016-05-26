@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $('#controls').hide();
   var socket = io();
   var right = false;
   var left = false;
@@ -14,6 +15,7 @@ $(document).ready(function(){
 
     socket.on('success-join', function(playerNum) {
       $('#game-room-input').hide();
+      $('#controls').show();
       setInterval(updateGame, 30);
     })
   })
@@ -26,10 +28,6 @@ $(document).ready(function(){
   }
 
   // setInterval(updateGame, 30);
-
-  // $('#join').on('click', function(data){
-  //   socket.emit('new-player', {data: data})
-  // });
 
   $('#move-right').on('touchstart', function(event){
     event.preventDefault();
