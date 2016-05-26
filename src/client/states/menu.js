@@ -120,7 +120,7 @@ Menu.prototype = {
     text.events.onInputOver.add(hoverTrue);
     text.events.onInputOut.add(hoverFalse);
 
-  }
+  },
 
 
   preload: function() {
