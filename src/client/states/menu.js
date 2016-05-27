@@ -23,7 +23,7 @@ Menu.prototype = {
       this.playerCount ?
       this.playerCount ++ :
       this.playerCount = 1;
-      if (this.playerCount > 1) {
+      if (this.playerCount > 0) {
         this.startGameMenu();
       }
     }.bind(this));

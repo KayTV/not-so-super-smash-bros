@@ -22,12 +22,11 @@ function Game () {
 Game.prototype = {
   init: function (playerCount) {
     this.playerCount = playerCount;
-        console.log("Players:",playerCount);
-        // for (var i = 0; i <= playerCount; i++) {
-        //     inputs.push({left: 1, right: 1,  fire: false});
-        // }
+        console.log("PlayerCount:",playerCount);
+        for (var i = 0; i <= playerCount; i++) {
+            inputs.push({left: true, right: true, jump: true, fire: false});
+        }
 
-    console.log("playerCount:", playerCount);
     this.game.renderer.renderSession.roundPixels = true;
     this.game.stage.disableVisibilityChange = true;
     this.physics.startSystem(Phaser.Physics.ARCADE);

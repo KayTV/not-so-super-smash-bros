@@ -31,6 +31,7 @@ $(document).ready(function(){
 
   $('#move-right').on('touchstart', function(event){
     event.preventDefault();
+    console.log("right");
     right = true;
   });
 
