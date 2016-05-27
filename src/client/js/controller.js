@@ -15,6 +15,7 @@ $(document).ready(function(){
 
     socket.on('success-join', function(playerNum) {
       console.log("PlayerNum:", playerNum)
+      player = playerNum;
       $('#game-room-input').hide();
       $('#controls').show();
       setInterval(updateGame, 30);
@@ -29,10 +30,10 @@ $(document).ready(function(){
   // }
 
   // setInterval(updateGame, 30);
-  socket.on('game-start', function(playerNum) {
-    console.log("Number of players:", playerNum);
-    setInterval(updateGame, 30);
-  })
+  // socket.on('game-start', function(playerNum) {
+  //   console.log("Number of players:", playerNum);
+  //   setInterval(updateGame, 30);
+  // })
 
   $('#move-right').on('touchstart', function(event){
     event.preventDefault();
@@ -76,6 +77,6 @@ $(document).ready(function(){
 
   function updateGame() {
       // sends game-update to server with the players input and player number
-      socket.emit('game-update', {right: right, left: left, jump: jump, fire: fire});
+      socket.emit('game-update', {right: right, left: left, jump: jump, fire: fire, player: player});
   }
 });

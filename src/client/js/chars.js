@@ -1,7 +1,7 @@
 function Character (controller) {
   var x, y, character, left, right, jump;
-  switch(true) {
-    case controller === 0:
+  switch(controller) {
+    case 0:
       x = 50;
       y = game.world.height - 250;
       character = 'megaman';
@@ -9,7 +9,7 @@ function Character (controller) {
       right = [6, 7, 8, 9];
       jump = [10];
       break;
-    case controller === 1:
+    case 1:
       x = 200;
       y = game.world.height - 250;
       character = 'kirby';
@@ -17,7 +17,7 @@ function Character (controller) {
       right = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
       jump = [10];
       break;
-    case controller === 2:
+    case 2:
       x = 400;
       y = game.world.height - 250;
       character = 'pikachu';
@@ -25,7 +25,7 @@ function Character (controller) {
       right = [6, 7, 8];
       jump = [4];
       break;
-    case controller === 3:
+    case 3:
       x = 500;
       y = game.world.height - 250;
       character = 'mario';
@@ -43,22 +43,26 @@ function Character (controller) {
 
   // Enable physics
   game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
-  this.sprite.collideWorldBounds = true;
+  this.sprite.body.collideWorldBounds = true;
   this.sprite.playerId = this.controller;
   this.sprite.body.bounce.y = 0.2;
   this.sprite.body.gravity.y = 300;
+  // console.log("charsJS inputs:",inputs[0]);
 }
 
 Character.prototype = {
-  update: function () {
-    this.physics.arcade.collide(this.sprite, this.platforms);
+  update: function (inputs) {
+    game.physics.arcade.collide(this.sprite.body, this.platforms);
     var standing = this.sprite.body.blocked.down || this.sprite.body.touching.down;
     this.sprite.body.velocity.x = 0;
-
     // Sprite Movement
+    // console.log("charsJS inputs:", inputs[this.controller]);
     if(inputs[this.controller].left === true) {
       this.sprite.body.velocity.x = -150;
       this.sprite.animations.play('left');
+    } else if (inputs[this.controller].right === true) {
+      this.sprite.body.velocity.x = 150;
+      this.sprite.animations.play('right');
     }
   }
 

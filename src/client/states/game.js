@@ -1,4 +1,4 @@
-var socket = io();
+// var socket = io();
 
 var players = [];
 var inputs = [];
@@ -7,33 +7,29 @@ var platforms;
 // var bullets;
 
 function Game () {
-  this.bullets;
-  this.player1 = null;
-  this.player2 = null;
-  this.player3 = null;
+  // this.bullets;
+  // this.player1 = null;
+  // this.player2 = null;
+  // this.player3 = null;
   this.playerCount;
   // this.platforms;
-  this.cursors;
-  this.fireButton;
-  this.fireRate = 100;
-  this.nextFire = 0;
-  this.bulletTime = 0;
-  this.right = false;
+  // this.cursors;
+  // this.fireButton;
+  // this.fireRate = 100;
+  // this.nextFire = 0;
+  // this.bulletTime = 0;
+  // this.right = false;
 }
 
 Game.prototype = {
   init: function (playerCount) {
     this.playerCount = playerCount;
-        console.log("Players:",playerCount);
-        // for (var i = 0; i <= playerCount; i++) {
-        //     inputs.push({left: 1, right: 1,  fire: false});
-        // }
-    console.log("PlayerCount:",playerCount);
+    // console.log("PlayerCount:",playerCount);
     for (var i = 0; i <= playerCount; i++) {
         inputs.push({left: false, right: false, jump: false, fire: false});
     }
+    // console.log("GameJS inputs:",inputs)
 
-    console.log("playerCount:", playerCount);
     this.game.renderer.renderSession.roundPixels = true;
     this.game.stage.disableVisibilityChange = true;
     // this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -46,7 +42,6 @@ Game.prototype = {
 
   },
   create: function() {
-    players = [];
     this.add.sprite(0, 0, 'sky');
     this.platforms = this.add.group();
 
@@ -73,61 +68,25 @@ Game.prototype = {
 		ledge = this.platforms.create(580, 450, 'pipe');
     ledge.body.immovable = true;
 
-    // Player1/Player and settings
-    // this.player1 = this.add.sprite(32, this.world.height - 150, 'megaman');
 
     // Phone Characters
+    players = [];
+    // console.log("GameJS Inputs before update:",inputs);
+    var self = this;
+
     socket.on('game-update', function(data) {
+      console.log('data', data);
       inputs[data.player] = data;
     });
 
+    // console.log(this.inputs);
+
     for (var i = 0; i<this.playerCount; i++) {
       players.push(new Character(i))
-      console.log(players);
+      // console.log("GameJS players:",players);
     }
 
     this.physics.startSystem(Phaser.Physics.ARCADE);
-
-    // this.player2 = this.add.sprite(200, this.world.height - 150, 'kirby');
-    // this.player2.scale.setTo(1.5,1.5);
-    // this.player3 = this.add.sprite(300, this.world.height -150, 'pikachu');
-
-    //  We need to enable physics on the player1
-		// this.player1.anchor.set(0.5);
-    // this.player2.anchor.set(2);
-    // this.player3.anchor.set(0.5);
-
-    // this.physics.enable(this.player1, Phaser.Physics.ARCADE);
-    // this.physics.enable(this.player2, Phaser.Physics.ARCADE);
-    // this.physics.enable(this.player3, Phaser.Physics.ARCADE);
-
-    //  Player physics properties. Give the little guy a slight bounce.
-    // this.player1.body.bounce.y = 0.2;
-    // this.player1.body.gravity.y = 300;
-    // this.player1.body.collideWorldBounds = true;
-
-    // this.player2.body.bounce.y = 0.2;
-    // this.player2.body.gravity.y = 300;
-    // this.player2.body.collideWorldBounds = true;
-
-    // this.player3.body.bounce.y = 0.2;
-    // this.player3.body.gravity.y = 300;
-    // this.player3.body.collideWorldBounds = true;
-
-    // this.player1.animations.add('left', [0, 1, 2, 3], 13, true);
-    // this.player1.animations.add('right', [6, 7, 8, 9], 13, true);
-		// this.player1.animations.add('jump', [10], 13, true);
-    // this.player1.animations.add('hit', [12], 13, true);
-
-    // this.player2.animations.add('left', [20, 19, 18, 17, 16, 15, 14, 13, 12, 11], 13, true);
-    // this.player2.animations.add('right', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 13, true);
-		// this.player2.animations.add('jump', [10], 13, true);
-
-    // this.player3.animations.add('left', [0, 1, 2], 8, true);
-    // this.player3.animations.add('right', [6, 7, 8], 8, true);
-    // this.player3.animations.add('jump', [4], 8, true);
-
-    // console.log('player', this.player1);
 
     //bullets for megaman
 		this.bullets = this.add.group();
@@ -140,81 +99,26 @@ Game.prototype = {
     this.bullets.setAll('outOfBoundsKill', true);
 
     //  Our controls.
-    this.cursors = this.input.keyboard.createCursorKeys();
-		this.fireButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    this.A = this.input.keyboard.addKey(Phaser.Keyboard.A);
-    this.D = this.input.keyboard.addKey(Phaser.Keyboard.D);
-    this.W = this.input.keyboard.addKey(Phaser.Keyboard.W);
+    // this.cursors = this.input.keyboard.createCursorKeys();
+		// this.fireButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    // this.A = this.input.keyboard.addKey(Phaser.Keyboard.A);
+    // this.D = this.input.keyboard.addKey(Phaser.Keyboard.D);
+    // this.W = this.input.keyboard.addKey(Phaser.Keyboard.W);
+
+    // console.log("players:", players);
 
   },
   update: function() {
-    //  Collide the player with platforms
-    this.physics.arcade.collide(this.player1, this.platforms);
-    this.physics.arcade.collide(this.player1, this.moveBox, this.customSep, null, this);
+    var count = 0
 
-    this.physics.arcade.collide(this.player2, this.platforms);
-    this.physics.arcade.collide(this.player2, this.moveBox, this.customSep, null, this);
-
-    this.physics.arcade.collide(this.player3, this.platforms);
-    this.physics.arcade.collide(this.player3, this.moveBox, this.customSep, null, this);
-
-    var standing = this.player1.body.blocked.down || this.player1.body.touching.down;
-
-    //  Player1 Movement
-    this.player1.body.velocity.x = 0;
-
-    var self = this;
-    socket.on('game-update', function(data) {
-      self.right = data.right;
-      self.left = data.left;
-      self.jump = data.jump;
-      self.fire = data.fire;
-    })
-
-    if (this.left === true)
-    {
-        //  Move to the left
-        this.player1.body.velocity.x = -150;
-        this.player1.animations.play('left');
-    }
-    else if (this.right === true)
-    {
-        //  Move to the right
-        this.player1.body.velocity.x = 150;
-        this.player1.animations.play('right');
-    }
-		else if(this.jump === true)
-		{
-			this.player1.animations.play('jump');
-		}
-    else
-    {
-      //  Stand still
-      this.player1.animations.stop();
-      this.player1.frame = 5;
-    }
-    if(this.fire === true)
-		{
-			this.fireGun();
-		}
-    //  Allow the player1 to jump if they are touching the ground.
-    if (this.jump === true && this.player1.body.touching.down)
-    {
-        this.player1.body.velocity.y = -350;
+    for (var i=0; i < players.length; i++) {
+      if (players[i].sprite.alive) {
+        count ++;
+        players[i].update(inputs);
+      }
     }
 
-    // this.physics.arcade.collide(this.player1, this.platforms);
-    //
-
-    // this.physics.arcade.collide(this.player2, this.platforms);
-    //
-    // this.physics.arcade.collide(this.player3, this.platforms);
-    // this.physics.arcade.collide(this.player3, this.moveBox, this.customSep, null, this);
-
-    // var standing = this.player1.body.blocked.down || this.player1.body.touching.down;
-    //
-    // //  Player1 Movement
-    // this.player1.body.velocity.x = 0;
+    // game.physics.arcade.collide(players, this.platforms)
 
     // var self = this;
     // socket.on('game-update', function(data) {
@@ -224,124 +128,11 @@ Game.prototype = {
     //   self.fire = data.fire;
     // })
 
-    // if (this.left === true)
-    // {
-    //     //  Move to the left
-    //     this.player1.body.velocity.x = -150;
-    //     this.player1.animations.play('left');
-    // }
-    // else if (this.right === true)
-    // {
-    //     //  Move to the right
-    //     // console.log("right");
-    //     this.player1.body.velocity.x = 150;
-    //     this.player1.animations.play('right');
-    // }
-		// else if(this.jump === true)
-		// {
-		// 	this.player1.animations.play('jump');
-		// }
-    // else
-    // {
-    //   //  Stand still
-    //   this.player1.animations.stop();
-    //   this.player1.frame = 5;
-    // }
     // if(this.fire === true)
 		// {
 		// 	this.fireGun();
 		// }
-    // //  Allow the player1 to jump if they are touching the ground.
-    // if (this.jump === true && this.player1.body.touching.down)
-    // {
-    //     this.player1.body.velocity.y = -350;
-    // }
 
-    // Player2 Movement
-    // this.player2.body.velocity.x = 0;
-    // if (this.cursors.left.isDown)
-    // {
-    //     //  Move to the left
-    //     this.player2.body.velocity.x = -150;
-    //     this.player2.animations.play('left');
-    // }
-    // else if (this.cursors.right.isDown)
-    // {
-    //     //  Move to the right
-    //     this.player2.body.velocity.x = 150;
-    //     this.player2.animations.play('right');
-    // }
-		// else if(this.cursors.up.isDown)
-		// {
-		// 	this.player2.animations.play('jump');
-		// }
-
-    else
-    {
-      //  Stand still
-      this.player2.animations.stop();
-      this.player2.frame = 10;
-    }
-        //  Allow the player2 to jump if they are touching the ground.
-    if (this.cursors.up.isDown && this.player2.body.touching.down)
-    {
-        this.player2.body.velocity.y = -350;
-    }
-    this.physics.arcade.collide(this.player3, this.platforms);
-
-    this.player3.body.velocity.x = 0;
-
-    if (this.A.isDown) {
-      this.player3.body.velocity.x = -150;
-      this.player3.animations.play('left');
-    }
-    else if (this.D.isDown) {
-      this.player3.body.velocity.x = 150;
-      this.player3.animations.play('right');
-    } else {
-      this.player3.animations.stop();
-      this.player3.frame = 3;
-    }
-
-    // Conditional for jumping (P3)
-    if (this.W.isDown && this.player1.body.touching.down) {
-      this.player3.animations.play('jump');
-      this.player3.body.velocity.y = -350;
-    }
-
-    // else
-    // {
-    //   //  Stand still
-    //   this.player2.animations.stop();
-    //   this.player2.frame = 10;
-    // }
-    //     //  Allow the player2 to jump if they are touching the ground.
-    // if (this.cursors.up.isDown && this.player2.body.touching.down)
-    // {
-    //     this.player2.body.velocity.y = -350;
-    // }
-    // this.physics.arcade.collide(this.player3, this.platforms);
-    //
-    // this.player3.body.velocity.x = 0;
-    //
-    // if (this.A.isDown) {
-    //   this.player3.body.velocity.x = -150;
-    //   this.player3.animations.play('left');
-    // }
-    // else if (this.D.isDown) {
-    //   this.player3.body.velocity.x = 150;
-    //   this.player3.animations.play('right');
-    // } else {
-    //   this.player3.animations.stop();
-    //   this.player3.frame = 3;
-    // }
-    //
-    // // Conditional for jumping (P3)
-    // if (this.W.isDown && this.player3.body.touching.down) {
-    //   this.player3.animations.play('jump');
-    //   this.player3.body.velocity.y = -350;
-    // }
-    
   },
   // fireGun: function() {
   //   if (this.time.now > this.nextFire && this.bullets.countDead() > 0)
