@@ -117,7 +117,7 @@ Menu.prototype = {
 
     var onClick = function () {
       socket.emit('game-start', {gameRoom: this.gameRoom});
-      game.state.start('Game', true, this.playerCount)
+      game.state.start('Game', true, false, this.playerCount)
     }.bind(this);
 
     text.stroke = "rgba(0,0,0,0)";
