@@ -16,7 +16,7 @@ Splash.prototype = {
 
       // Sprite Assets
       game.load.image('bullet', 'assets/weapons/bullet2.png')
-      game.load.spritesheet('dude', 'assets/sprites/MegaManSprite2.png', 55, 55);
+      game.load.spritesheet('megaman', 'assets/sprites/MegaManSprite2.png', 55, 55);
       game.load.spritesheet('pikachu', 'assets/sprites/pikachuSprite.png', 40, 30);
       game.load.spritesheet('kirby', 'assets/sprites/kirbySprite2.png', 23, 22);
       game.load.spritesheet('pikachu', 'assets/sprites/pikachuSprite.png', 40, 30);
@@ -27,7 +27,7 @@ Splash.prototype = {
       this.status.anchor.setTo(0.5);
     },
     preload: function() {
-      
+
       game.add.existing(this.status);
 
       this.loadScripts();

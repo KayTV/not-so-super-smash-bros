@@ -67,7 +67,7 @@ Game.prototype = {
     ledge.body.immovable = true;
 
     // Player1/Player and settings
-    this.player1 = this.add.sprite(32, this.world.height - 150, 'dude');
+    this.player1 = this.add.sprite(32, this.world.height - 150, 'megaman');
     this.player2 = this.add.sprite(200, this.world.height - 150, 'kirby');
     this.player2.scale.setTo(1.5,1.5);
     this.player3 = this.add.sprite(300, this.world.height -150, 'pikachu');
