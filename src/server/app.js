@@ -105,7 +105,7 @@ io.on('connect', function(socket){
   // Check for 'start-game' emit
   socket.on('game-start', function(data) {
     console.log('GameRoom:', data.gameRoom);
-    room[data.gameRoom].started = true;
+    rooms[data.gameRoom].started = true;
   })
 
   // Check for 'disconnect emit'

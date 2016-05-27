@@ -14,6 +14,7 @@ $(document).ready(function(){
     socket.emit('new-player', {gameRoom: gameRoom});
 
     socket.on('success-join', function(playerNum) {
+      console.log("PlayerNum:", playerNum)
       $('#game-room-input').hide();
       $('#controls').show();
       setInterval(updateGame, 30);
@@ -22,12 +23,16 @@ $(document).ready(function(){
 
   document.fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.documentElement.webkitRequestFullScreen;
 
-  if (document.fullscreenEnabled) {
-      var el = document.getElementById('controls');
-      el.webkitRequestFullscreen();
-  }
+  // if (document.fullscreenEnabled) {
+  //     var el = document.getElementById('controls');
+  //     el.webkitRequestFullscreen();
+  // }
 
   // setInterval(updateGame, 30);
+  socket.on('game-start', function(playerNum) {
+    console.log("Number of players:", playerNum);
+    setInterval(updateGame, 30);
+  })
 
   $('#move-right').on('touchstart', function(event){
     event.preventDefault();

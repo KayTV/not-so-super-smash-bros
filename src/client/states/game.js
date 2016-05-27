@@ -22,12 +22,11 @@ function Game () {
 Game.prototype = {
   init: function (playerCount) {
     this.playerCount = playerCount;
-        console.log("Players:",playerCount);
+        console.log("PlayerCount:",playerCount);
         // for (var i = 0; i <= playerCount; i++) {
-        //     inputs.push({left: 1, right: 1,  fire: false});
+        //     inputs.push({left: true, right: true, jump: true, fire: false});
         // }
 
-    console.log("playerCount:", playerCount);
     this.game.renderer.renderSession.roundPixels = true;
     this.game.stage.disableVisibilityChange = true;
     this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -162,6 +161,7 @@ Game.prototype = {
     else if (this.right === true)
     {
         //  Move to the right
+        // console.log("right");
         this.player1.body.velocity.x = 150;
         this.player1.animations.play('right');
     }
