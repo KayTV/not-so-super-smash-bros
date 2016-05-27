@@ -231,7 +231,7 @@ Game.prototype = {
     }
 
     // Conditional for jumping (P3)
-    if (this.W.isDown) {
+    if (this.W.isDown && this.player3.body.touching.down) {
       this.player3.animations.play('jump');
       this.player3.body.velocity.y = -350;
     }
