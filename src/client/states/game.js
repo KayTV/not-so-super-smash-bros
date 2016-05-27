@@ -23,9 +23,9 @@ Game.prototype = {
   init: function (playerCount) {
     this.playerCount = playerCount;
         console.log("PlayerCount:",playerCount);
-        for (var i = 0; i <= playerCount; i++) {
-            inputs.push({left: true, right: true, jump: true, fire: false});
-        }
+        // for (var i = 0; i <= playerCount; i++) {
+        //     inputs.push({left: true, right: true, jump: true, fire: false});
+        // }
 
     this.game.renderer.renderSession.roundPixels = true;
     this.game.stage.disableVisibilityChange = true;
@@ -161,6 +161,7 @@ Game.prototype = {
     else if (this.right === true)
     {
         //  Move to the right
+        // console.log("right");
         this.player1.body.velocity.x = 150;
         this.player1.animations.play('right');
     }
