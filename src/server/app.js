@@ -54,17 +54,21 @@ io.on('connect', function(socket){
   console.log('a user connected');
 
   socket.on('new-player', function(data){
-    console.log('new player', data);
+    // console.log('new player', data);
 
     if (!rooms[data.gameRoom] || rooms[data.gameRoom].started) {
+      console.log('invalid room');
       socket.emit('invalid-room');
     } else {
+      console.log("Joined",data.gameRoom)
       socket.room = data.gameRoom;
 
       if (rooms[data.gameRoom].players) {
         rooms[data.gameRoom].players++;
+        console.log("Players:",rooms[data.gameRoom].players)
       } else {
         rooms[data.gameRoom].players = 1;
+        console.log("Players:",rooms[data.gameRoom].players)
       }
       console.log("Phone:", data.gameRoom);
       io.sockets.in(rooms[socket.room].id).emit('player-joined', rooms[data.gameRoom].players);
@@ -79,10 +83,10 @@ io.on('connect', function(socket){
   });
 
   socket.on('game-update', function(data) {
-    // if (rooms[socket.room]) {
-    //   io.sockets.in(rooms[socket.room].id).emit('game-update', data);
-    // }
-    io.sockets.emit('game-update', data);
+    if (rooms[socket.room]) {
+      io.sockets.in(rooms[socket.room].id).emit('game-update', data);
+    }
+    // io.sockets.emit('game-update', data);
   })
 
   // Check for 'create-game' emit
