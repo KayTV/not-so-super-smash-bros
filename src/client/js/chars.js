@@ -41,18 +41,26 @@ function Character (controller) {
   this.sprite.animations.add('right', right, 13, true);
   this.sprite.animations.add('jump', jump, 13, true);
 
-  // Enable physics
-  game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
-  this.sprite.body.collideWorldBounds = true;
-  this.sprite.playerId = this.controller;
-  this.sprite.body.bounce.y = 0.2;
-  this.sprite.body.gravity.y = 300;
+  // // Enable physics
+  // game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
+  // this.sprite.body.collideWorldBounds = true;
+  // this.sprite.playerId = this.controller;
+  // this.sprite.body.bounce.y = 0.2;
+  // this.sprite.body.gravity.y = 300;
   // console.log("charsJS inputs:",inputs[0]);
 }
 
 Character.prototype = {
   update: function (inputs) {
+    // Enable physics
+    game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
+    this.sprite.body.collideWorldBounds = true;
+    this.sprite.playerId = this.controller;
+    this.sprite.body.bounce.y = 0.2;
+    this.sprite.body.gravity.y = 300;
+
     game.physics.arcade.collide(this.sprite.body, this.platforms);
+    // console.log('char', this.platforms);
     var standing = this.sprite.body.blocked.down || this.sprite.body.touching.down;
     this.sprite.body.velocity.x = 0;
     // Sprite Movement

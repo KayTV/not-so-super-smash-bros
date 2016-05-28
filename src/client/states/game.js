@@ -12,7 +12,7 @@ function Game () {
   // this.player2 = null;
   // this.player3 = null;
   this.playerCount;
-  // this.platforms;
+  this.platforms;
   // this.cursors;
   // this.fireButton;
   // this.fireRate = 100;
@@ -45,6 +45,7 @@ Game.prototype = {
     this.add.sprite(0, 0, 'sky');
     this.platforms = this.add.group();
 
+    console.log('platforms',this.platforms);
     //  We will enable physics for any object that is created in this group
     this.platforms.enableBody = true;
 
@@ -75,7 +76,7 @@ Game.prototype = {
     var self = this;
 
     socket.on('game-update', function(data) {
-      console.log('data', data);
+      // console.log('data', data);
       inputs[data.player] = data;
     });
 
