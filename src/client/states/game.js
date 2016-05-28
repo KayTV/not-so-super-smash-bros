@@ -32,7 +32,7 @@ Game.prototype = {
 
     this.game.renderer.renderSession.roundPixels = true;
     this.game.stage.disableVisibilityChange = true;
-    // this.physics.startSystem(Phaser.Physics.ARCADE);
+    // this.game.physics.startSystem(Phaser.Physics.ARCADE);
     socket.on('connect', function(){
       console.log('connected');
     })
@@ -82,12 +82,15 @@ Game.prototype = {
 
     // console.log(this.inputs);
 
+    // this.physics.startSystem(Phaser.Physics.ARCADE);
     for (var i = 0; i<this.playerCount; i++) {
-      players.push(new Character(i))
+      players.push(new Character(i, this.platforms))
       // console.log("GameJS players:",players);
+      // this.physics.arcade.collide(players[i].sprite, this.platforms)
     }
 
-    this.physics.startSystem(Phaser.Physics.ARCADE);
+    // game.physics.startSystem(Phaser.Physics.ARCADE);
+    // game.physics.arcade.collide(players, this.platforms)
 
     //bullets for megaman
 		this.bullets = this.add.group();
