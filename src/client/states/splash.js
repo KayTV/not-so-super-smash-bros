@@ -18,8 +18,13 @@ Splash.prototype = {
       // Menu Assets
       game.load.image('menu', 'assets/main_background.png');
 
-      // Sprite Assets
-      game.load.image('bullet', 'assets/weapons/bullet2.png')
+      // Sprite Bullets
+      game.load.image('bullet0', 'assets/weapons/bullet0.png')
+      game.load.image('bullet1', 'assets/weapons/bullet1.png')
+      game.load.image('bullet2', 'assets/weapons/bullet2.png')
+      game.load.image('bullet3', 'assets/weapons/bullet3.png')
+
+      // Sprites
       game.load.spritesheet('megaman0', 'assets/sprites/MegaManSprite2.png', 55, 55);
       game.load.spritesheet('kirby1', 'assets/sprites/kirbySprite2.png', 23, 22);
       game.load.spritesheet('pikachu2', 'assets/sprites/pikachuSprite2.png', 40, 30);
