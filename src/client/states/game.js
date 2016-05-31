@@ -75,18 +75,13 @@ Game.prototype = {
     this.bullets.createMultiple(50, 'bullet');
     this.bullets.setAll('checkWorldBounds', true);
     this.bullets.setAll('outOfBoundsKill', true);
-
+    var xHP = 0;
     for (var i = 0; i<this.playerCount; i++) {
-      var playersHealth = [10, 100, 200, 300];
-      for (var j = 0; j<this.playerCount; j++) {
-        this.health = this.add.text(10, playersHealth[j], 'P' + i + ' HP: 100', {
-          fontSize: '25px',
-          fill: '#000'
-        })
-        console.log(this.health)
-
-      }
-      // this.health;
+      xHP += 100;
+      this.health = this.add.text(xHP, 0, 'P' + i + ' HP: 100', {
+        fontSize: '15px',
+        fill: '#000'
+      })
       players.push(new Character(i, this.platforms, this.bullets))
     }
 
