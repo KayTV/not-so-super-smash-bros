@@ -33,7 +33,7 @@ function Character (controller, platforms, bullets) {
       left = [0, 1, 2];
       right = [6, 7, 8];
       jump = [4];
-      stand = [5];
+      stand = [3];
       break;
     case 3:
       x = 500;

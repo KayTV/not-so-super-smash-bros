@@ -22,9 +22,7 @@ Splash.prototype = {
       game.load.image('bullet', 'assets/weapons/bullet2.png')
       game.load.spritesheet('megaman0', 'assets/sprites/MegaManSprite2.png', 55, 55);
       game.load.spritesheet('kirby1', 'assets/sprites/kirbySprite2.png', 23, 22);
-      game.load.spritesheet('pikachu2', 'assets/sprites/pikachuSprite.png', 40, 30);
-      game.load.spritesheet('kirby', 'assets/sprites/kirbySprite2.png', 23, 22);
-      game.load.spritesheet('pikachu', 'assets/sprites/pikachuSprite.png', 40, 30);
+      game.load.spritesheet('pikachu2', 'assets/sprites/pikachuSprite2.png', 40, 30);
       game.load.spritesheet('mario3', 'assets/sprites/mario1.png', 24, 38);
 
     },
