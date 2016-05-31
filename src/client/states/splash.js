@@ -31,8 +31,8 @@ Splash.prototype = {
     loadFonts: function () {
       WebFontConfig = {
             custom: {
-                families: ['PressStart2P'],
-                urls: ['assets/css/2P.css']
+                families: ['PressStart2P', 'Mario'],
+                urls: ['assets/css/fonts.css']
             }
         };
     },

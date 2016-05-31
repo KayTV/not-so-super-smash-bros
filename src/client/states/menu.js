@@ -10,7 +10,7 @@ Menu.prototype = {
     // Call createGame on init, which will emit 'create-game to the backend'
     this.createGame();
     this.titleText = game.make.text(game.world.centerX, 100, 'Not-So-Super Smash Bros.', {
-      font: '24px PressStart2P',
+      font: '40px Mario',
       align: 'center',
       fill: 'red'
     });
