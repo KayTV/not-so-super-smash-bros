@@ -66,22 +66,24 @@ Game.prototype = {
       inputs[data.player] = data;
     });
 
-    //bullets for megaman
-		this.bullets = this.add.group();
-    this.bullets.enableBody = true;
-    this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-    this.bullets.setAll('anchor.x', 0.5);
-    this.bullets.setAll('anchor.y', 0.5);
-    this.bullets.createMultiple(50, 'bullet0');
-    this.bullets.setAll('checkWorldBounds', true);
-    this.bullets.setAll('outOfBoundsKill', true);
+
     var xHP = 0;
     for (var i = 0; i<this.playerCount; i++) {
+      // Set health for each character
       xHP += 100;
       this.health = this.add.text(xHP, 0, 'P' + i + ' HP: 100', {
         fontSize: '15px',
         fill: '#000'
       })
+
+      // Add unique bullets for each character
+      this.bullets = this.add.group();
+      this.bullets.enableBody = true;
+      this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
+      this.bullets.setAll('anchor.x', 0.5);
+      this.bullets.setAll('anchor.y', 0.5);
+      this.bullets.createMultiple(50, 'bullet' + i);
+
       players.push(new Character(i, this.platforms, this.bullets))
     }
 
