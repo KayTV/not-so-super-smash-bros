@@ -39,7 +39,7 @@ Splash.prototype = {
     init: function() {
       this.status = game.make.text(game.world.centerX, 380, 'Loading...', {
         fill: 'blue',
-        font: '18px PressStart2P'});
+        font: '40px Mario'});
       this.status.anchor.setTo(0.5);
     },
     preload: function() {
@@ -56,8 +56,12 @@ Splash.prototype = {
       game.state.add('Game', Game);
     },
     create: function () {
-      this.status.setText('Loaded!')
       this.addGameStates();
+      this.status.setText('Loading...')
+
+      setTimeout(function() {
+        this.status.setText('Loaded!');
+      }, 2000);
 
       setTimeout(function() {
         game.state.start('Menu');
