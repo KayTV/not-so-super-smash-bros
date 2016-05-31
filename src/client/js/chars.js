@@ -25,6 +25,9 @@ function Character (controller, platforms, bullets) {
       right = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
       jump = [10];
       stand = [10];
+      fireRight = [21];
+      fireLeft = [22];
+      die = [23];
       break;
     case 2:
       x = 400;
