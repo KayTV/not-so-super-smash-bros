@@ -8,6 +8,8 @@ $(document).ready(function(){
   var player = null;
   var playerColor;
   var colors = ['#7f2120', '#1c3a66', '#eac84d', '#31563c' ];
+  var playerPic;
+  var pic = ['http://rs958.pbsrc.com/albums/ae69/SparkMan1324/8-bitmegaman.png~c200', 'http://vignette2.wikia.nocookie.net/kirbyfan73s/images/5/5b/8_bit_kirby_sprite_by_toshirofrog-d5h7rpp.png/revision/latest?cb=20150626024511', 'http://i.imgur.com/rSH6cVx.png', 'http://orig06.deviantart.net/d1bd/f/2013/207/7/2/mario_8_bit_emoticon_by_nickmarino-d6f9dhi.png'];
 
   $('#join').on('click', function() {
     var gameRoom = $('#user-input').val();
@@ -18,8 +20,10 @@ $(document).ready(function(){
       player = playerNum;
 
       playerColor = colors[playerNum];
-      $('body').css('background-color', playerColor)
-      
+      playerPic = pic[playerNum];
+      $('body').css('background-color', playerColor);
+      $('#picture').append('<img src='+playerPic+'>');
+
       $('#game-room-input').hide();
       $('#controls').show();
       setInterval(updateGame, 30);

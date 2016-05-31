@@ -6,3 +6,12 @@ body {
 div {
     -webkit-touch-callout: none !important;
 }
+
+#picture {
+  text-align: center;
+}
+
+#picture img {
+  height: 10%;
+  width: 10%;
+}
