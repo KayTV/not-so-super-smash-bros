@@ -14,6 +14,9 @@ Splash.prototype = {
   		game.load.image('littlebox', 'assets/marioLevel/box.png');
   		game.load.image('pipe', 'assets/marioLevel/pipe2.png');
 
+      // Menu Assets
+      game.load.image('menu', 'assets/main_background.png');
+
       // Sprite Assets
       game.load.image('bullet', 'assets/weapons/bullet2.png')
       game.load.spritesheet('megaman0', 'assets/sprites/MegaManSprite2.png', 55, 55);
@@ -30,6 +33,7 @@ Splash.prototype = {
     },
     preload: function() {
 
+      game.add.sprite(0, 0, 'load-bg');
       game.add.existing(this.status);
 
       this.loadScripts();

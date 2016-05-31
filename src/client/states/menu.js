@@ -18,6 +18,7 @@ Menu.prototype = {
   },
 
   create: function() {
+    game.add.sprite(0, 0, 'menu');
     game.add.existing(this.titleText);
     socket.on('player-joined', function(data) {
       this.playerCount ?
