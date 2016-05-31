@@ -9,8 +9,8 @@ Menu.prototype = {
   init: function() {
     // Call createGame on init, which will emit 'create-game to the backend'
     this.createGame();
-    this.titleText = game.make.text(game.world.centerX, 100, '(Not So) Super Smash Bros.', {
-      font: '42pt Sans',
+    this.titleText = game.make.text(game.world.centerX, 100, 'Not-So-Super Smash Bros.', {
+      font: '40px Mario',
       align: 'center',
       fill: 'red'
     });
@@ -18,6 +18,7 @@ Menu.prototype = {
   },
 
   create: function() {
+    game.add.sprite(0, 0, 'menu');
     game.add.existing(this.titleText);
     socket.on('player-joined', function(data) {
       this.playerCount ?
@@ -36,7 +37,7 @@ Menu.prototype = {
   // Function to add the menu to the game world
   addMenu: function() {
     var style = {
-      font: '30pt Sans',
+      font: '30px PressStart2P',
       fill: 'blue',
       align: 'center',
       stroke: 'rgba(0,0,0,0)',
@@ -58,7 +59,7 @@ Menu.prototype = {
 
     var onClick = function (button) {
       var text = game.add.text(game.world.centerX, game.world.centerY, 'Game ID: ' + this.gameRoom, {
-        font: '30pt Sans',
+        font: '30px PressStart2P',
         fill: 'red',
         align: 'center',
         stroke: 'rgba(0,0,0,0)',
@@ -95,7 +96,7 @@ Menu.prototype = {
   },
   startGameMenu: function () {
     var style = {
-      font: '30pt Sans',
+      font: '24px PressStart2P',
       fill: 'red',
       align: 'center',
       stroke: 'rgba(0,0,0,0)',

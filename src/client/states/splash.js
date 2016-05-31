@@ -2,6 +2,7 @@ function Splash() {}
 
 Splash.prototype = {
     loadScripts: function () {
+      game.load.script('WebFont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js');
       game.load.script('menu', 'states/menu.js');
       game.load.script('game', 'states/game.js');
     },
@@ -14,6 +15,9 @@ Splash.prototype = {
   		game.load.image('littlebox', 'assets/marioLevel/box.png');
   		game.load.image('pipe', 'assets/marioLevel/pipe2.png');
 
+      // Menu Assets
+      game.load.image('menu', 'assets/main_background.png');
+
       // Sprite Assets
       game.load.image('bullet', 'assets/weapons/bullet2.png')
       game.load.spritesheet('megaman0', 'assets/sprites/MegaManSprite2.png', 55, 55);
@@ -24,24 +28,40 @@ Splash.prototype = {
       game.load.spritesheet('mario3', 'assets/sprites/mario1.png', 24, 38);
 
     },
+    loadFonts: function () {
+      WebFontConfig = {
+            custom: {
+                families: ['PressStart2P', 'Mario'],
+                urls: ['assets/css/fonts.css']
+            }
+        };
+    },
     init: function() {
-      this.status = game.make.text(game.world.centerX, 380, 'Loading...', {fill: 'blue'});
+      this.status = game.make.text(game.world.centerX, 380, 'Loading...', {
+        fill: 'blue',
+        font: '40px Mario'});
       this.status.anchor.setTo(0.5);
     },
     preload: function() {
 
+      game.add.sprite(0, 0, 'load-bg');
       game.add.existing(this.status);
 
       this.loadScripts();
       this.loadAssets();
+      this.loadFonts();
     },
     addGameStates: function() {
       game.state.add('Menu', Menu)
       game.state.add('Game', Game);
     },
     create: function () {
-      this.status.setText('Loaded!')
       this.addGameStates();
+      this.status.setText('Loading...')
+
+      setTimeout(function() {
+        this.status.setText('Loaded!');
+      }, 2000);
 
       setTimeout(function() {
         game.state.start('Menu');

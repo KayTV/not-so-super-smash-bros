@@ -6,6 +6,7 @@ function Main() {}
 
 Main.prototype = {
     preload: function() {
+      game.load.image('load-bg', 'assets/main_background.png');
       game.load.script('splash', 'states/splash.js');
     },
     create: function() {
