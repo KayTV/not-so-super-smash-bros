@@ -36,15 +36,6 @@ app.get('/controller', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'controller.html'));
 });
 
-// app.use('/', routes);
-
-
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
 
 // *** SOCKET.IO *** //
 var io = require('socket.io').listen(server);
@@ -53,8 +44,8 @@ var rooms = {};
 io.on('connect', function(socket){
   console.log('a user connected');
 
+  //connect new player to the room
   socket.on('new-player', function(data){
-    // console.log('new player', data);
 
     if (!rooms[data.gameRoom] || rooms[data.gameRoom].started) {
       console.log('invalid room');
@@ -82,6 +73,7 @@ io.on('connect', function(socket){
     }
   });
 
+  //updates game while being played
   socket.on('game-update', function(data) {
     if (rooms[socket.room]) {
       io.sockets.in(rooms[socket.room].id).emit('game-update', data);
@@ -113,36 +105,6 @@ io.on('connect', function(socket){
     console.log('user disconnected');
   });
 });
-
-// io.on('game-update', function(data) {
-//   console.log('data:', data);
-// })
-
-
-
-// *** error handlers *** //
-
-// development error handler
-// will print stacktrace
-// if (app.get('env') === 'development') {
-//   app.use(function(err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('error', {
-//       message: err.message,
-//       error: err
-//     });
-//   });
-// }
-
-// production error handler
-// no stacktraces leaked to user
-// app.use(function(err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.render('error', {
-//     message: err.message,
-//     error: {}
-//   });
-// });
 
 
 module.exports = server;
