@@ -21,6 +21,7 @@ Splash.prototype = {
       game.load.spritesheet('pikachu2', 'assets/sprites/pikachuSprite.png', 40, 30);
       game.load.spritesheet('kirby', 'assets/sprites/kirbySprite2.png', 23, 22);
       game.load.spritesheet('pikachu', 'assets/sprites/pikachuSprite.png', 40, 30);
+      game.load.spritesheet('mario3', 'assets/sprites/mario1.png', 24, 38);
 
     },
     init: function() {
