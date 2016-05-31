@@ -56,7 +56,7 @@ function Character (controller, platforms, bullets) {
   this.sprite.animations.add('jump', jump, 13, true);
   this.sprite.animations.add('stand', stand, 13, true);
 
-  // // Enable physics
+  // Enable physics
   game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
   this.sprite.body.collideWorldBounds = true;
   this.sprite.playerId = this.controller;

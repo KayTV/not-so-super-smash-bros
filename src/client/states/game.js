@@ -5,34 +5,22 @@ var inputs = [];
 var ground;
 var platforms;
 var bullets;
+var health = 100;
 
 function Game () {
-  // this.bullets;
-  // this.player1 = null;
-  // this.player2 = null;
-  // this.player3 = null;
   this.playerCount;
   this.platforms;
-  // this.cursors;
-  // this.fireButton;
-  // this.fireRate = 100;
-  // this.nextFire = 0;
-  // this.bulletTime = 0;
-  // this.right = false;
 }
 
 Game.prototype = {
   init: function (playerCount) {
     this.playerCount = playerCount;
-    // console.log("PlayerCount:",playerCount);
     for (var i = 0; i <= playerCount; i++) {
         inputs.push({left: false, right: false, jump: false, fire: false});
     }
-    // console.log("GameJS inputs:",inputs)
 
     this.game.renderer.renderSession.roundPixels = true;
     this.game.stage.disableVisibilityChange = true;
-    // this.game.physics.startSystem(Phaser.Physics.ARCADE);
     socket.on('connect', function(){
       console.log('connected');
     })
@@ -72,11 +60,9 @@ Game.prototype = {
 
     // Phone Characters
     players = [];
-    // console.log("GameJS Inputs before update:",inputs);
     var self = this;
 
     socket.on('game-update', function(data) {
-      // console.log('data', data);
       inputs[data.player] = data;
     });
 
@@ -89,26 +75,20 @@ Game.prototype = {
     this.bullets.createMultiple(50, 'bullet');
     this.bullets.setAll('checkWorldBounds', true);
     this.bullets.setAll('outOfBoundsKill', true);
-    console.log('bullets', this.bullets);
 
-    // this.physics.startSystem(Phaser.Physics.ARCADE);
     for (var i = 0; i<this.playerCount; i++) {
+      var playersHealth = [10, 100, 200, 300];
+      for (var j = 0; j<this.playerCount; j++) {
+        this.health = this.add.text(10, playersHealth[j], 'P' + i + ' HP: 100', {
+          fontSize: '25px',
+          fill: '#000'
+        })
+        console.log(this.health)
+
+      }
+      // this.health;
       players.push(new Character(i, this.platforms, this.bullets))
-      // console.log("GameJS players:",players);
-      // this.physics.arcade.collide(players[i].sprite, this.platforms)
     }
-
-    // game.physics.startSystem(Phaser.Physics.ARCADE);
-    // game.physics.arcade.collide(players, this.platforms)
-
-    //  Our controls.
-    // this.cursors = this.input.keyboard.createCursorKeys();
-		// this.fireButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    // this.A = this.input.keyboard.addKey(Phaser.Keyboard.A);
-    // this.D = this.input.keyboard.addKey(Phaser.Keyboard.D);
-    // this.W = this.input.keyboard.addKey(Phaser.Keyboard.W);
-
-    // console.log("players:", players);
 
   },
   update: function() {
@@ -121,40 +101,5 @@ Game.prototype = {
       }
     }
 
-    // game.physics.arcade.collide(players, this.platforms)
-
-    // var self = this;
-    // socket.on('game-update', function(data) {
-    //   self.right = data.right;
-    //   self.left = data.left;
-    //   self.jump = data.jump;
-    //   self.fire = data.fire;
-    // })
-
-    // if(this.fire === true)
-		// {
-		// 	this.fireGun();
-		// }
-
-  },
-  // fireGun: function() {
-  //   if (this.time.now > this.nextFire && this.bullets.countDead() > 0)
-  //   {
-  //       this.nextFire = this.time.now + this.fireRate;
-  //
-  //       var bullet = this.bullets.getFirstDead();
-  //
-  //       bullet.reset(this.player1.x, this.player1.y);
-  //       if(this.right === true) {
-  //         bullet.body.velocity.x = 400;
-  //       }
-  //       if(this.left === true) {
-  //         bullet.body.velocity.x = -400;
-  //       }
-  //       else {
-  //         bullet.body.velocity.x = 400;
-  //       }
-  //       // this.physics.arcade.moveToXY(bullet, 500, 500, 400);
-  //   }
-  // },
+  }
 }
