@@ -57,9 +57,7 @@ Splash.prototype = {
       this.addGameStates();
       this.status.setText('Loading...')
 
-      setTimeout(function() {
-        this.status.setText('Loaded!');
-      }, 2000);
+      // this.status.setText('Loaded!');
 
       setTimeout(function() {
         game.state.start('Menu');
