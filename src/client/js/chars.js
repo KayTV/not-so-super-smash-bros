@@ -77,7 +77,7 @@ Character.prototype = {
     } else if (inputs[this.controller].right === true) {
       this.sprite.body.velocity.x = 150;
       this.sprite.animations.play('right');
-    } else if(inputs[this.controller].jump === true ) {
+    } else if(inputs[this.controller].jump === true) {
       // this.sprite.body.velocity.y = -350;
       this.sprite.animations.play('jump');
     } else {
