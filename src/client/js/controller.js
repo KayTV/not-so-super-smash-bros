@@ -16,6 +16,10 @@ $(document).ready(function(){
     socket.on('success-join', function(playerNum) {
       console.log("PlayerNum:", playerNum)
       player = playerNum;
+
+      playerColor = colors[playerNum];
+      $('body').css('background-color', playerColor)
+      
       $('#game-room-input').hide();
       $('#controls').show();
       setInterval(updateGame, 30);
