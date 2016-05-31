@@ -6,7 +6,7 @@ var nextFire = 0;
 function bulletCollision (character, bullet) {
   console.log("bullet",bullet);
   console.log("character", character);
-  if (bullet.game.id !== character.playerId) {
+  if (bullet.playerId !== character.playerId) {
     bullet.kill();
     character.health -= 10;
   }
@@ -125,6 +125,7 @@ Character.prototype = {
         console.log('bullets', this.bullets);
 
         var bullet = this.bullets.getFirstDead();
+        bullet.playerId = this.controller;
 
         bullet.reset(this.sprite.x, this.sprite.y);
         if(inputs[this.controller].right === true || inputs[this.controller].jump === true) {
