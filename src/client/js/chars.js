@@ -39,6 +39,10 @@ function Character (controller, platforms, bullets) {
       x = 500;
       y = game.world.height - 250;
       character = 'mario';
+      left = [1, 2, 3, 4, 5, 6, 7];
+      right = [9, 10, 11, 12, 13, 14, 15];
+      jump = [17];
+      stand = [8];
       break;
   }
 
