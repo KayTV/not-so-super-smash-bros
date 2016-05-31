@@ -1,6 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Press+Start+2P);
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 25px "Press Start 2P", "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {

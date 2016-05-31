@@ -2,6 +2,7 @@ function Splash() {}
 
 Splash.prototype = {
     loadScripts: function () {
+      game.load.script('WebFont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js');
       game.load.script('menu', 'states/menu.js');
       game.load.script('game', 'states/game.js');
     },
@@ -27,8 +28,18 @@ Splash.prototype = {
       game.load.spritesheet('mario3', 'assets/sprites/mario1.png', 24, 38);
 
     },
+    loadFonts: function () {
+      WebFontConfig = {
+            custom: {
+                families: ['PressStart2P'],
+                urls: ['assets/css/2P.css']
+            }
+        };
+    },
     init: function() {
-      this.status = game.make.text(game.world.centerX, 380, 'Loading...', {fill: 'blue'});
+      this.status = game.make.text(game.world.centerX, 380, 'Loading...', {
+        fill: 'blue',
+        font: '18px PressStart2P'});
       this.status.anchor.setTo(0.5);
     },
     preload: function() {
@@ -38,6 +49,7 @@ Splash.prototype = {
 
       this.loadScripts();
       this.loadAssets();
+      this.loadFonts();
     },
     addGameStates: function() {
       game.state.add('Menu', Menu)
