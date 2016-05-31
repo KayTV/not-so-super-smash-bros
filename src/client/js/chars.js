@@ -2,9 +2,20 @@ var bulletTime = 0;
 var fireRate = 100;
 var nextFire = 0;
 
+
+function bulletCollision (character, bullet) {
+  console.log("bullet",bullet);
+  console.log("character", character);
+  if (bullet.playerId !== character.playerId) {
+    bullet.kill();
+    character.health -= 10;
+  }
+}
+
 function Character (controller, platforms, bullets) {
   this.platforms = platforms;
   this.bullets = bullets;
+  // this.bullets.playerId = playerId;
 
   var x, y, character, left, right, jump;
   switch(controller) {
@@ -58,11 +69,14 @@ function Character (controller, platforms, bullets) {
   this.sprite.animations.add('right', right, 13, true);
   this.sprite.animations.add('jump', jump, 13, true);
   this.sprite.animations.add('stand', stand, 13, true);
+  this.sprite.playerId = this.controller;
+
+  // Sprite health
+  this.sprite.health = 100;
 
   // Enable physics
   game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
   this.sprite.body.collideWorldBounds = true;
-  this.sprite.playerId = this.controller;
   this.sprite.body.bounce.y = 0.2;
   this.sprite.body.gravity.y = 300;
 }
@@ -73,6 +87,12 @@ Character.prototype = {
     game.physics.arcade.collide(this.sprite, this.platforms);
     var standing = this.sprite.body.blocked.down || this.sprite.body.touching.down;
     this.sprite.body.velocity.x = 0;
+
+    // Check sprite health
+    if (this.sprite.health <= 0) {
+      this.sprite.kill()
+    }
+
     // Sprite Movement
     if(inputs[this.controller].left === true) {
       this.sprite.body.velocity.x = -150;
@@ -118,5 +138,4 @@ Character.prototype = {
         }
     }
   }
-
 }
