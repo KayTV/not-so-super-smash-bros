@@ -62,12 +62,12 @@ Splash.prototype = {
       this.loadFonts();
     },
     addGameStates: function() {
-      game.state.add('Menu', Menu)
+      game.state.add('Menu', Menu);
       game.state.add('Game', Game);
     },
     create: function () {
       this.addGameStates();
-      this.status.setText('Loading...')
+      this.status.setText('Loading...');
 
       // this.status.setText('Loaded!');
 

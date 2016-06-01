@@ -67,6 +67,8 @@ Menu.prototype = {
       });
       text.anchor.setTo(0.5, 0.5);
 
+      var selectChar = game.add.sprite()
+
       if (self.playerCount >= 0) {
         console.log("A new player connected!");
         self.startGameMenu();
