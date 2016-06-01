@@ -10,19 +10,26 @@ Splash.prototype = {
       // Map assets
       game.load.image('sky', 'assets/marioLevel/MarioLevelBackground.png');
       game.load.image('ground', 'assets/marioLevel/ground.png');
-      game.load.image('move-box', 'assets/marioLevel/box.png')
+      game.load.image('move-box', 'assets/marioLevel/box.png');
   		game.load.image('box', 'assets/marioLevel/ledge2.png');
   		game.load.image('littlebox', 'assets/marioLevel/box.png');
   		game.load.image('pipe', 'assets/marioLevel/pipe2.png');
 
       // Menu Assets
       game.load.image('menu', 'assets/main_background.png');
+      game.load.image('player-selection', 'assets/player_selection.png');
+
+      //Character Pictures for Player Selection
+      game.load.image('megaman-select0', 'assets/megamanSplash.png');
+      game.load.image('kirby-select1', 'assets/kirbySplash.png');
+      game.load.image('pikachu-select2', 'assets/pikachuSplash.png');
+      game.load.image('mario-select3', 'assets/marioSplash.png');
 
       // Sprite Bullets
-      game.load.image('bullet0', 'assets/weapons/bullet0.png')
-      game.load.image('bullet1', 'assets/weapons/bullet1.png')
-      game.load.image('bullet2', 'assets/weapons/bullet2.png')
-      game.load.image('bullet3', 'assets/weapons/bullet3.png')
+      game.load.image('bullet0', 'assets/weapons/bullet0.png');
+      game.load.image('bullet1', 'assets/weapons/bullet1.png');
+      game.load.image('bullet2', 'assets/weapons/bullet2.png');
+      game.load.image('bullet3', 'assets/weapons/bullet3.png');
 
       // Sprites
       game.load.spritesheet('megaman0', 'assets/sprites/MegamanNew1.png', 50, 48);
