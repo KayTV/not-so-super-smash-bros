@@ -138,16 +138,20 @@ Menu.prototype = {
       console.log(game);
       this.mainBackground.kill();
       game.add.image(10, 320, 'player-selection');
-      game.add.sprite(-30, 300, 'select0');
+      var mega = game.add.sprite(0, 350, 'select0');
+      mega.scale.set(0.8, 0.8);
     }
     if(this.playerCount === 2) {
-      game.add.sprite(180, 320, 'select1');
+      var kirb = game.add.sprite(180, 360, 'select1');
+      kirb.scale.set(0.8, 0.8);
     }
     if(this.playerCount === 3) {
-      game.add.sprite(380, 300, 'select2');
+      var pika = game.add.sprite(385, 350, 'select2');
+      pika.scale.set(0.8, 0.8);
     }
     if (this.playerCount === 4) {
-      game.add.sprite(550, 300, 'select3')
+      var mar = game.add.sprite(570, 350, 'select3');
+      mar.scale.set(0.8, 0.8);
     }
 
   },
