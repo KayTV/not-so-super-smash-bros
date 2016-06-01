@@ -94,11 +94,11 @@ Game.prototype = {
       }
     }
 
-    if (count <= 1) {
-      game.time.events.repeat(2000, 1, function() {
-        game.state.start('GameOver', true, false, winner, this.playerCount);
-      }.bind(this), game);
-    }
+    // if (count <= 1) {
+    //   game.time.events.repeat(2000, 1, function() {
+    //     game.state.start('GameOver', true, false, winner, this.playerCount);
+    //   }.bind(this), game);
+    // }
 
   }
 }
