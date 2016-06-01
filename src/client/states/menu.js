@@ -132,10 +132,7 @@ Menu.prototype = {
   },
 
   addPlayerPic: function() {
-    this.selectchar = this.add.group();
-    var selectChar = this.selectchar.create(10, 320, 'player-selection');
-
-    if (this.player === 1) {
+    if (this.playerCount === 1) {
       var mega = game.add.sprite('megaman-select0');
     }
     // else if(this.playerCount === 2) {
