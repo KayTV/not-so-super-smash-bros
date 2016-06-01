@@ -1,11 +1,8 @@
-// var socket = io();
-
 var players = [];
 var inputs = [];
 var ground;
 var platforms;
 var bullets;
-var health = 100;
 
 function Game () {
   this.playerCount;
@@ -68,13 +65,8 @@ Game.prototype = {
 
 
     var xHP = 0;
+
     for (var i = 0; i<this.playerCount; i++) {
-      // Set health for each character
-      xHP += 100;
-      this.health = this.add.text(xHP, 0, 'P' + i + ' HP: 100', {
-        fontSize: '15px',
-        fill: '#000'
-      })
 
       // Add unique bullets for each character
       this.bullets = this.add.group();
