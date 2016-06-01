@@ -19,12 +19,13 @@ Menu.prototype = {
   },
 
   create: function() {
-    game.add.sprite(0, 0, 'menu');
+    this.mainBackground = game.add.sprite(0, 0, 'menu');
     game.add.existing(this.titleText);
     socket.on('player-joined', function(data) {
       this.playerCount ?
       this.playerCount ++ :
       this.playerCount = 1;
+      this.addPlayerPic();
       if (this.playerCount > 0) {
         this.startGameMenu();
       }
@@ -104,7 +105,7 @@ Menu.prototype = {
       strokeThickness: 4
     }
 
-    var text = game.add.text(game.world.centerX, game.world.centerY + 100, 'Start Match', style);
+    var text = game.add.text(game.world.centerX, game.world.centerY - 100, 'Start Match', style);
     text.anchor.setTo(0.5,0.5);
 
     var hoverTrue = function (button) {
@@ -132,12 +133,16 @@ Menu.prototype = {
   },
 
   addPlayerPic: function() {
+
+    if (this.playerCount === 1) {
+      console.log(game);
+      this.mainBackground.kill();
+      game.add.image(10, 320, 'player-selection')
+      game.add.sprite(10, 300, 'select0');
     if (this.playerCount === 1) {
       var mega = game.add.sprite('megaman-select0');
     }
-    // else if(this.playerCount === 2) {
-    //
-    // }
+
   },
 
 
