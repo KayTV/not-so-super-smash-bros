@@ -27,6 +27,7 @@ function Character (controller, platforms, bullets) {
       right = [6, 7, 8, 9];
       jump = [10];
       stand = [5];
+      scale = 1;
       break;
     case 1:
       x = 200;
@@ -39,6 +40,7 @@ function Character (controller, platforms, bullets) {
       fireRight = [21];
       fireLeft = [22];
       die = [23];
+      scale = 1.9;
       break;
     case 2:
       x = 400;
@@ -48,6 +50,7 @@ function Character (controller, platforms, bullets) {
       right = [6, 7, 8];
       jump = [4];
       stand = [3];
+      scale = 1.8;
       break;
     case 3:
       x = 500;
@@ -57,6 +60,7 @@ function Character (controller, platforms, bullets) {
       right = [9, 10, 11, 12, 13, 14, 15];
       jump = [17];
       stand = [8];
+      scale = 1.3;
       break;
   }
 
@@ -70,6 +74,7 @@ function Character (controller, platforms, bullets) {
   this.sprite.animations.add('jump', jump, 13, true);
   this.sprite.animations.add('stand', stand, 13, true);
   this.sprite.playerId = this.controller;
+  this.sprite.scale.set(scale, scale);
 
   // Sprite health
   this.sprite.health = 100;
