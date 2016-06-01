@@ -139,6 +139,8 @@ Menu.prototype = {
       this.mainBackground.kill();
       game.add.image(10, 320, 'player-selection')
       game.add.sprite(10, 300, 'select0');
+    if (this.playerCount === 1) {
+      var mega = game.add.sprite('megaman-select0');
     }
 
   },
