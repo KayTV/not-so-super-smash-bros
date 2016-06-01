@@ -137,10 +137,17 @@ Menu.prototype = {
     if (this.playerCount === 1) {
       console.log(game);
       this.mainBackground.kill();
-      game.add.image(10, 320, 'player-selection')
-      game.add.sprite(10, 300, 'select0');
-    if (this.playerCount === 1) {
-      var mega = game.add.sprite('megaman-select0');
+      game.add.image(10, 320, 'player-selection');
+      game.add.sprite(-30, 300, 'select0');
+    }
+    if(this.playerCount === 2) {
+      game.add.sprite(180, 320, 'select1');
+    }
+    if(this.playerCount === 3) {
+      game.add.sprite(380, 300, 'select2');
+    }
+    if (this.playerCount === 4) {
+      game.add.sprite(550, 300, 'select3')
     }
 
   },
