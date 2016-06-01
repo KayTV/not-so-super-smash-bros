@@ -21,10 +21,10 @@ Splash.prototype = {
       game.load.image('player-selection', 'assets/player_selection.png');
 
       //Character Pictures for Player Selection
-      game.load.image('megaman-select0', 'assets/megamanSplash.png');
-      game.load.image('kirby-select1', 'assets/kirbySplash.png');
-      game.load.image('pikachu-select2', 'assets/pikachuSplash.png');
-      game.load.image('mario-select3', 'assets/marioSplash.png');
+      game.load.image('select0', 'assets/megamanSplash.png');
+      game.load.image('select1', 'assets/kirbySplash.png');
+      game.load.image('select2', 'assets/pikachuSplash.png');
+      game.load.image('select3', 'assets/marioSplash.png');
 
       // Sprite Bullets
       game.load.image('bullet0', 'assets/weapons/bullet0.png');
