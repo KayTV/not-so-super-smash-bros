@@ -23,10 +23,18 @@ function Character (controller, platforms, bullets) {
       x = 50;
       y = game.world.height - 250;
       character = 'megaman';
-      left = [0, 1, 2, 3];
-      right = [6, 7, 8, 9];
-      jump = [10];
-      stand = [5];
+      left = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      right = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+      jumpRight = [33];
+      jumpLeft = [34];
+      // jump is a default below until code is written for jumpLeft and jumpRight
+      jump = [33];
+      fireRight = [25, 26, 24];
+      fireLeft = [22, 21, 23];
+      // fire is a default below until code is written for fireLeft and fireRight
+      fire = [25, 26, 24];
+      die = [28, 29];
+      stand = [10];
       scale = 1;
       break;
     case 1:
@@ -114,6 +122,7 @@ Character.prototype = {
     }
     if(inputs[this.controller].fire === true)
 		{
+      this.sprite.animations.play('fire');
 			this.fireGun();
 		}
     if (inputs[this.controller].jump === true && this.sprite.body.touching.down)
@@ -134,11 +143,13 @@ Character.prototype = {
 
         bullet.reset(this.sprite.x, this.sprite.y);
         if(inputs[this.controller].right === true || inputs[this.controller].jump === true) {
+          // this.sprite.animations.play('fireRight');
           bullet.body.velocity.x = 400;
           console.log('right', bullet);
         }
         if(inputs[this.controller].left === true) {
           bullet.body.velocity.x = -400;
+          // this.sprite.animations.play('fireLeft');
         }
         else {
           bullet.body.velocity.x = 400;
