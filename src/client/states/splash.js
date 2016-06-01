@@ -5,6 +5,7 @@ Splash.prototype = {
       game.load.script('WebFont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js');
       game.load.script('menu', 'states/menu.js');
       game.load.script('game', 'states/game.js');
+      game.load.script('gameover', 'states/gameover.js');
     },
     loadAssets: function () {
       // Map assets
@@ -57,6 +58,7 @@ Splash.prototype = {
     addGameStates: function() {
       game.state.add('Menu', Menu)
       game.state.add('Game', Game);
+      game.state.add('GameOver', GameOver);
     },
     create: function () {
       this.addGameStates();

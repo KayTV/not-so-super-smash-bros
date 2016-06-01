@@ -82,6 +82,7 @@ Game.prototype = {
   },
   update: function() {
     var count = 0
+    var winner;
 
     for (var i=0; i < players.length; i++) {
       if (players[i].sprite.alive) {
@@ -89,7 +90,14 @@ Game.prototype = {
         players[i].update(inputs);
 
         this.physics.arcade.overlap(this.bullets, players[i].sprite, bulletCollision, null, this);
+        winner = i;
       }
+    }
+
+    if (count <= 1) {
+      game.time.events.repeat(2000, 1, function() {
+        game.state.start('GameOver', true, false, winner, this.playerCount);
+      }.bind(this), game);
     }
 
   }
