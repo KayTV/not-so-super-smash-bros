@@ -4,11 +4,12 @@ var nextFire = 0;
 
 
 function bulletCollision (character, bullet) {
-  console.log("bullet",bullet);
-  console.log("character", character);
+  // console.log("bullet",bullet);
+  // console.log("character", character);
   if (bullet.playerId !== character.playerId) {
     bullet.kill();
     character.health -= 10;
+    character.healthText.text = "P" + character.playerId + " HP:" + character.health;
   }
 }
 
@@ -35,7 +36,8 @@ function Character (controller, platforms, bullets) {
       fire = [25, 26, 24];
       die = [28, 29];
       stand = [10];
-      scale = 1;
+      scale = 1.5;
+      xHP = 0;
       break;
     case 1:
       x = 200;
@@ -49,6 +51,7 @@ function Character (controller, platforms, bullets) {
       fireLeft = [22];
       die = [23];
       scale = 1.9;
+      xHP = 100;
       break;
     case 2:
       x = 400;
@@ -59,6 +62,7 @@ function Character (controller, platforms, bullets) {
       jump = [4];
       stand = [3];
       scale = 1.8;
+      xHP = 200;
       break;
     case 3:
       x = 500;
@@ -69,6 +73,7 @@ function Character (controller, platforms, bullets) {
       jump = [17];
       stand = [8];
       scale = 1.3;
+      xHP = 300;
       break;
   }
 
@@ -84,8 +89,14 @@ function Character (controller, platforms, bullets) {
   this.sprite.playerId = this.controller;
   this.sprite.scale.set(scale, scale);
 
-  // Sprite health
-  this.sprite.health = 100;
+  // Set Sprite health
+  this.sprite.health = 200;
+
+  // Create Sprite HP Text
+  this.sprite.healthText = game.add.text(xHP, 0, 'P' + this.controller + ' HP:' + this.sprite.health, {
+    fontSize: '15px',
+    fill: '#000'
+  })
 
   // Enable physics
   game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
