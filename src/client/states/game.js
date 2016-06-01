@@ -95,6 +95,8 @@ Game.prototype = {
       if (players[i].sprite.alive) {
         count ++;
         players[i].update(inputs);
+
+        this.physics.arcade.overlap(this.bullets, players[i].sprite, bulletCollision, null, this);
       }
     }
 
