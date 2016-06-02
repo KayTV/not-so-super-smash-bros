@@ -61,7 +61,7 @@ function Character (controller, platforms, bullets) {
       left = [0, 1, 2];
       right = [6, 7, 8];
       jump = [4];
-      fire = [8];
+      fire = [11, 12];
       stand = [3];
       scale = 1.8;
       xHP = 430;
@@ -70,12 +70,12 @@ function Character (controller, platforms, bullets) {
       x = 500;
       y = game.world.height - 250;
       character = 'mario';
-      left = [1, 2, 3, 4, 5, 6, 7];
+      left = [1, 2, 3, 5, 6, 7];
       right = [9, 10, 11, 12, 13, 14, 15];
       jump = [17];
-      fire = [8];
+      fire = [19, 20];
       stand = [8];
-      scale = 1.3;
+      scale = 1.8;
       xHP = 630;
       break;
   }
@@ -159,8 +159,10 @@ Character.prototype = {
         var bullet = this.bullets.getFirstDead();
         bullet.playerId = this.controller;
 
-        if (this.controller === 0 || this.controller === 3) {
+        if (this.controller === 0) {
           bullet.reset(this.sprite.x + 25, this.sprite.y + 35);
+        } else if (this.controller === 3) {
+          bullet.reset(this.sprite.x + 25, this.sprite.y + 30);
         } else {
           bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
         }
