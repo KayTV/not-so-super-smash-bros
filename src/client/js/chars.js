@@ -159,7 +159,12 @@ Character.prototype = {
         var bullet = this.bullets.getFirstDead();
         bullet.playerId = this.controller;
 
-        bullet.reset(this.sprite.x, this.sprite.y);
+        if (this.controller === 0 || this.controller === 3) {
+          bullet.reset(this.sprite.x + 25, this.sprite.y + 35);
+        } else {
+          bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
+        }
+
         if(inputs[this.controller].right === true || inputs[this.controller].jump === true) {
           bullet.body.velocity.x = 400;
           // console.log('right', bullet);
