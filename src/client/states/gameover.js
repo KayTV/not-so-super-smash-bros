@@ -16,34 +16,39 @@ GameOver.prototype = {
     }
 
     // console.log("Winning:", winningPlayer);
+    console.log(game);
 
-    this.titleText = game.make.text(game.world.centerX - 200, game.world.centerY - 200, 'Not-So-Super Smash Bros.', {
+    this.titleText = game.make.text(game.world.centerX, game.world.centerY - 200, 'Not-So-Super Smash Bros.', {
       font: '40px Mario',
       align: 'center',
       fill: 'red'
     });
+    this.titleText.anchor.setTo(0.5);
 
-    this.winnerText = game.make.text(game.world.centerX - 200, 200, 'The winner is: ' , {
+    this.winnerText = game.make.text(game.world.centerX, 200, 'The winner is: ' , {
       font: '40px Mario',
       align: 'center',
       fill: 'red'
     });
+    this.winnerText.anchor.setTo(0.5);
   },
   create: function () {
     game.add.sprite(0, 0, 'menu');
     game.add.existing(this.titleText);
     game.add.existing(this.winnerText);
     // Make sprite dynamic
-    this.sprite = game.add.sprite(game.world.centerX - 50, game.world.centerY, winningPlayer);
+    this.sprite = game.add.sprite(game.world.centerX, game.world.centerY, winningPlayer);
     this.sprite.scale.setTo(3.0);
+    this.sprite.anchor.setTo(0.5);
     this.restartGame();
   },
   restartGame: function () {
-    var text = game.add.text(game.world.centerX - 50, game.world.height * 0.8, 'Rematch?', {
+    var text = game.add.text(game.world.centerX, game.world.height * 0.7, 'Rematch?', {
       font: '40px Mario',
       align: 'center',
       fill: 'red'
     });
+    text.anchor.setTo(0.5);
     var hoverTrue = function (button) {
       button.fill = "#30DEF8";
       button.stroke = "rgba(200, 200, 200, 0.5)";
