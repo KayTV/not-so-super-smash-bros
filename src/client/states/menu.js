@@ -70,7 +70,7 @@ Menu.prototype = {
       text.anchor.setTo(0.5, 0.5);
 
       if (self.playerCount >= 0) {
-        console.log("A new player connected!");
+        // console.log("A new player connected!");
         self.startGameMenu();
       }
       button.destroy();
@@ -135,7 +135,7 @@ Menu.prototype = {
   addPlayerPic: function() {
 
     if (this.playerCount === 1) {
-      console.log(game);
+      // console.log(game);
       this.mainBackground.kill();
       game.add.image(10, 320, 'player-selection');
       var mega = game.add.sprite(0, 350, 'select0');
