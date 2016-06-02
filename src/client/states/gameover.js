@@ -1,4 +1,4 @@
-var characters = ['megaman0', 'kirby1', 'pikachu2', 'mario3'];
+var characters = ['select0', 'select1', 'select2', 'select3'];
 var winningPlayer;
 
 function GameOver () {};
@@ -38,7 +38,7 @@ GameOver.prototype = {
     game.add.existing(this.winnerText);
     // Make sprite dynamic
     this.sprite = game.add.sprite(game.world.centerX, game.world.centerY, winningPlayer);
-    this.sprite.scale.setTo(3.0);
+    this.sprite.scale.setTo(0.5);
     this.sprite.anchor.setTo(0.5);
     this.restartGame();
   },
