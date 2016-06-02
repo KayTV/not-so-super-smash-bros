@@ -78,9 +78,11 @@ Game.prototype = {
       this.bullets.setAll('anchor.x', 0.5);
       this.bullets.setAll('anchor.y', 0.5);
       this.bullets.createMultiple(1000, 'bullet' + i);
+      this.bullets.playerId = i;
 
       players.push(new Character(i, this.platforms, this.bullets))
     }
+    console.log(players);
 
   },
   update: function() {
@@ -88,12 +90,16 @@ Game.prototype = {
     var winner;
 
     for (var i=0; i < players.length; i++) {
+      var allPlayers = {}
       if (players[i].sprite.alive) {
         count ++;
         players[i].update(inputs);
+        // console.log('players.bullet', players[i].name, players[i].bullet);
+        for (var n=0; n<players.length; n++) {
 
-        this.physics.arcade.overlap(this.bullets, players[i].sprite, bulletCollision, null, this);
-        winner = i;
+          this.physics.arcade.overlap(players[n].sprite, players[i].bullet, bulletCollision, null, this);
+          winner = i;
+        }
       }
     }
 
