@@ -18,7 +18,7 @@ Splash.prototype = {
 
       // Menu Assets
       game.load.image('menu', 'assets/main_background.png');
-      game.load.image('player-selection', 'assets/player_selection.png');
+      game.load.image('player-selection', 'assets/player_selection2.png');
 
       //Character Pictures for Player Selection
       game.load.image('select0', 'assets/megamanSplash.png');

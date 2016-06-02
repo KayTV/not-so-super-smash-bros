@@ -138,11 +138,11 @@ Menu.prototype = {
       // console.log(game);
       this.mainBackground.kill();
       game.add.image(10, 320, 'player-selection');
-      var mega = game.add.sprite(0, 350, 'select0');
+      var mega = game.add.sprite(0, 345, 'select0');
       mega.scale.set(0.8, 0.8);
     }
     if(this.playerCount === 2) {
-      var kirb = game.add.sprite(180, 360, 'select1');
+      var kirb = game.add.sprite(190, 350, 'select1');
       kirb.scale.set(0.8, 0.8);
     }
     if(this.playerCount === 3) {
@@ -150,7 +150,7 @@ Menu.prototype = {
       pika.scale.set(0.8, 0.8);
     }
     if (this.playerCount === 4) {
-      var mar = game.add.sprite(570, 350, 'select3');
+      var mar = game.add.sprite(570, 345, 'select3');
       mar.scale.set(0.8, 0.8);
     }
 
