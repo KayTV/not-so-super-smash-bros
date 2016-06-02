@@ -26,7 +26,8 @@ Menu.prototype = {
       this.playerCount ++ :
       this.playerCount = 1;
       this.addPlayerPic();
-      if (this.playerCount > 0) {
+
+      if (this.playerCount >= 2) {
         this.startGameMenu();
       }
     }.bind(this));
@@ -85,10 +86,6 @@ Menu.prototype = {
       });
       text.anchor.setTo(0.5, 0.5);
 
-      if (self.playerCount >= 0) {
-        // console.log("A new player connected!");
-        self.startGameMenu();
-      }
       button.destroy();
     }.bind(this);
 
@@ -118,7 +115,7 @@ Menu.prototype = {
       fill: 'red',
       align: 'center',
       stroke: 'rgba(0,0,0,0)',
-      strokeThickness: 4
+      strokeThickness: 4,
     }
 
     var text = game.add.text(game.world.centerX, game.world.centerY - 50, 'Start Match', style);
@@ -145,6 +142,7 @@ Menu.prototype = {
     text.events.onInputUp.add(onClick);
     text.events.onInputOver.add(hoverTrue);
     text.events.onInputOut.add(hoverFalse);
+
 
   },
 
