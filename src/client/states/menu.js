@@ -1,3 +1,5 @@
+var waitingText;
+
 function Menu (){
   var self = this;
   this.gameRoom;
@@ -53,11 +55,6 @@ Menu.prototype = {
       fill: 'red'
     }
 
-    // var directions = game.make.text(game.world.centerX, 150, 'Directions: Go to this website on your phone,', {
-    //   font: '20px Mario',
-    //   align: 'center',
-    //   fill: 'red'
-    // });
     var directions = game.add.text(game.world.centerX, 170, 'Directions: Go to this website on your phone,', directionStyle);
     var directions2 = game.add.text(game.world.centerX, 200, 'click HOST GAME and enter in the Game ID.', directionStyle);
     directions.anchor.setTo(0.5, 0.5);
@@ -149,15 +146,22 @@ Menu.prototype = {
   addPlayerPic: function() {
 
     if (this.playerCount === 1) {
-      // console.log(game);
       this.mainBackground.kill();
+      waitingText = game.add.text(game.world.centerX, game.world.centerY - 50, 'Waiting for more players...', {
+        font: '40px Mario',
+        align: 'center',
+        fill: 'red'
+      });
+      waitingText.anchor.setTo(0.5);
       game.add.image(10, 320, 'player-selection');
       var mega = game.add.sprite(0, 345, 'select0');
       mega.scale.set(0.8, 0.8);
+      console.log(game);
     }
     if(this.playerCount === 2) {
       var kirb = game.add.sprite(190, 350, 'select1');
       kirb.scale.set(0.8, 0.8);
+      removeText();
     }
     if(this.playerCount === 3) {
       var pika = game.add.sprite(385, 350, 'select2');
@@ -177,5 +181,10 @@ Menu.prototype = {
 
   update: function() {
 
+
   }
 };
+
+function removeText () {
+  waitingText.destroy()
+}
