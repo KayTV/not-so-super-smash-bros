@@ -90,16 +90,15 @@ Game.prototype = {
     var winner;
 
     for (var i=0; i < players.length; i++) {
-      var allPlayers = {}
-      if (players[i].sprite.alive) {
-        count ++;
-        players[i].update(inputs);
         // console.log('players.bullet', players[i].name, players[i].bullet);
         for (var n=0; n<players.length; n++) {
+          this.physics.arcade.overlap(players[n].sprite, players[i].bullets, bulletCollision, null, this);
 
-          this.physics.arcade.overlap(players[n].sprite, players[i].bullet, bulletCollision, null, this);
-          winner = i;
         }
+        if (players[i].sprite.alive) {
+          count ++;
+          players[i].update(inputs);
+          winner = i;
       }
     }
 
