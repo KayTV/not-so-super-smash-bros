@@ -42,7 +42,10 @@ Game.prototype = {
     var ledge = this.platforms.create(250, 350, 'box');
     ledge.body.immovable = true;
 
-    ledge = this.platforms.create(650, 100, 'box');
+    ledge = this.platforms.create(600, 150, 'box');
+    ledge.body.immovable = true;
+
+    ledge = this.platforms.create(-50, 150, 'box');
     ledge.body.immovable = true;
 
     ledge = this.platforms.create(100, 350, 'littlebox');
