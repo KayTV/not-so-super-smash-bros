@@ -46,6 +46,22 @@ Menu.prototype = {
       strokeThickness: 4
     }
 
+    var directionStyle = {
+      font: '25px Mario',
+      align: 'center',
+      fill: 'red'
+    }
+
+    // var directions = game.make.text(game.world.centerX, 150, 'Directions: Go to this website on your phone,', {
+    //   font: '20px Mario',
+    //   align: 'center',
+    //   fill: 'red'
+    // });
+    var directions = game.add.text(game.world.centerX, 170, 'Directions: Go to this website on your phone,', directionStyle);
+    var directions2 = game.add.text(game.world.centerX, 200, 'click HOST GAME and enter in the Game ID.', directionStyle);
+    directions.anchor.setTo(0.5, 0.5);
+    directions2.anchor.setTo(0.5, 0.5);
+
     var text = game.make.text(game.world.centerX, game.world.centerY, 'HOST GAME', style);
     text.anchor.setTo(0.5, 0.5);
 
@@ -105,7 +121,7 @@ Menu.prototype = {
       strokeThickness: 4
     }
 
-    var text = game.add.text(game.world.centerX, game.world.centerY - 100, 'Start Match', style);
+    var text = game.add.text(game.world.centerX, game.world.centerY - 50, 'Start Match', style);
     text.anchor.setTo(0.5,0.5);
 
     var hoverTrue = function (button) {
