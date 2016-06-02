@@ -1,9 +1,21 @@
+var characters = ['megaman0', 'kirby1', 'pikachu2', 'mario3'];
+var winningPlayer;
+
 function GameOver () {};
 
 GameOver.prototype = {
   init: function(winner, playerCount) {
+
     this.winner = winner;
     this.playerCount = playerCount;
+
+    for (var i=0; i < characters.length; i++) {
+      if (i === winner) {
+        winningPlayer = characters[i];
+      }
+    }
+
+    // console.log("Winning:", winningPlayer);
 
     this.titleText = game.make.text(game.world.centerX, 100, 'Not-So-Super Smash Bros.', {
       font: '40px Mario',
@@ -22,7 +34,7 @@ GameOver.prototype = {
     game.add.existing(this.titleText);
     game.add.existing(this.winnerText);
     // Make sprite dynamic
-    this.sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'kirby' + this.winner);
+    this.sprite = game.add.sprite(game.world.centerX, game.world.centerY, winningPlayer);
     this.sprite.scale.setTo(3.0);
     this.restartGame();
   },

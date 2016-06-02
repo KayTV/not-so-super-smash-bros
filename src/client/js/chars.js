@@ -51,7 +51,7 @@ function Character (controller, platforms, bullets) {
       fireLeft = [22];
       fire = [21];
       die = [23];
-      scale = 1.9;
+      scale = 2.3;
       xHP = 100;
       break;
     case 2:
@@ -151,7 +151,7 @@ Character.prototype = {
     {
         nextFire = game.time.now + fireRate;
         this.bullets.playerId = this.controller;
-        console.log('bullets', this.bullets);
+        // console.log('bullets', this.bullets);
 
         var bullet = this.bullets.getFirstDead();
         bullet.playerId = this.controller;
@@ -159,7 +159,7 @@ Character.prototype = {
         bullet.reset(this.sprite.x, this.sprite.y);
         if(inputs[this.controller].right === true || inputs[this.controller].jump === true) {
           bullet.body.velocity.x = 400;
-          console.log('right', bullet);
+          // console.log('right', bullet);
         }
         if(inputs[this.controller].left === true) {
           bullet.body.velocity.x = -400;

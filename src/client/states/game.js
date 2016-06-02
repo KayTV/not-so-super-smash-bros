@@ -30,7 +30,7 @@ Game.prototype = {
     this.add.sprite(0, 0, 'sky');
     this.platforms = this.add.group();
 
-    console.log('platforms',this.platforms);
+    // console.log('platforms',this.platforms);
     //  We will enable physics for any object that is created in this group
     this.platforms.enableBody = true;
 
@@ -94,11 +94,11 @@ Game.prototype = {
       }
     }
 
-    // if (count <= 1) {
-    //   game.time.events.repeat(2000, 1, function() {
-    //     game.state.start('GameOver', true, false, winner, this.playerCount);
-    //   }.bind(this), game);
-    // }
+    if (count <= 1) {
+      game.time.events.repeat(2000, 1, function() {
+        game.state.start('GameOver', true, false, winner, this.playerCount);
+      }.bind(this), game);
+    }
 
   }
 }
