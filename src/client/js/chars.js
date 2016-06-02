@@ -131,11 +131,7 @@ Character.prototype = {
     } else if(inputs[this.controller].jump === true) {
       // this.sprite.body.velocity.y = -350;
       this.sprite.animations.play('jump');
-    } else if (inputs[this.controller].fire === true)
-		{
-			this.fireGun();
-      this.sprite.animations.play('fire');
-		}
+    }
     else {
       this.sprite.animations.stop();
       this.sprite.animations.play('stand');
@@ -144,6 +140,11 @@ Character.prototype = {
     {
         this.sprite.body.velocity.y = -350;
     }
+    if (inputs[this.controller].fire === true)
+		{
+			this.fireGun();
+      this.sprite.animations.play('fire');
+		}
   },
   fireGun: function() {
 
