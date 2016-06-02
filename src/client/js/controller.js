@@ -7,7 +7,7 @@ $(document).ready(function(){
   var fire = false;
   var player = null;
   var playerColor;
-  var colors = ['#bf1313', '#1111bd', '#fef700', '#11bd13' ];
+  var colors = ['#bf1313', '#1111bd', '#eac84d', '#11bd13' ];
   var playerPic;
   var pic = ['../assets/controller/megamanController.png', '../assets/controller/kirbyController.png', '../assets/controller/pikachuController.png', '../assets/controller/marioController.png'];
 
