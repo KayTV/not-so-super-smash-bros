@@ -74,7 +74,7 @@ Game.prototype = {
       this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
       this.bullets.setAll('anchor.x', 0.5);
       this.bullets.setAll('anchor.y', 0.5);
-      this.bullets.createMultiple(50, 'bullet' + i);
+      this.bullets.createMultiple(1000, 'bullet' + i);
 
       players.push(new Character(i, this.platforms, this.bullets))
     }
