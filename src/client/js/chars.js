@@ -37,7 +37,7 @@ function Character (controller, platforms, bullets) {
       die = [28, 29];
       stand = [10];
       scale = 1.5;
-      xHP = 0;
+      xHP = 40;
       break;
     case 1:
       x = 200;
@@ -52,7 +52,7 @@ function Character (controller, platforms, bullets) {
       fire = [21];
       die = [23];
       scale = 2.3;
-      xHP = 100;
+      xHP = 230;
       break;
     case 2:
       x = 400;
@@ -64,7 +64,7 @@ function Character (controller, platforms, bullets) {
       fire = [8];
       stand = [3];
       scale = 1.8;
-      xHP = 200;
+      xHP = 430;
       break;
     case 3:
       x = 500;
@@ -76,7 +76,7 @@ function Character (controller, platforms, bullets) {
       fire = [8];
       stand = [8];
       scale = 1.3;
-      xHP = 300;
+      xHP = 630;
       break;
   }
 
@@ -97,9 +97,11 @@ function Character (controller, platforms, bullets) {
   this.sprite.health = 200;
 
   // Create Sprite HP Text
-  this.sprite.healthText = game.add.text(xHP, 0, 'P' + this.controller + ' HP:' + this.sprite.health, {
-    fontSize: '15px',
-    fill: '#000'
+  this.sprite.healthText = game.add.text(xHP, 0, 'P' + (this.controller + 1) + ' HP:' + this.sprite.health, {
+    font: '17px PressStart2P',
+    fill: '#000',
+    align: 'center',
+    backgroundColor: '#98e800'
   })
 
   // Enable physics
