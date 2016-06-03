@@ -16,17 +16,22 @@ $(document).ready(function(){
     socket.emit('new-player', {gameRoom: gameRoom});
 
     socket.on('success-join', function(playerNum) {
-      console.log("PlayerNum:", playerNum);
-      player = playerNum;
+      if( playerNum <= 3) {
+        console.log("PlayerNum:", playerNum);
+        player = playerNum;
 
-      playerColor = colors[playerNum];
-      playerPic = pic[playerNum];
-      $('body').css('background-color', playerColor);
-      $('#picture').append('<img src='+playerPic+'>');
+        playerColor = colors[playerNum];
+        playerPic = pic[playerNum];
+        $('body').css('background-color', playerColor);
+        $('#picture').append('<img src='+playerPic+'>');
 
-      $('#game-room-input').hide();
-      $('#controls').show();
-      setInterval(updateGame, 30);
+        $('#game-room-input').hide();
+        $('#controls').show();
+        setInterval(updateGame, 30);
+      }
+      else {
+        $('#game-room-input').append('<p>Too many people in room</p>');
+      }
     })
   })
 

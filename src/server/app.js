@@ -67,8 +67,11 @@ io.on('connect', function(socket){
       var playerId = rooms[data.gameRoom].players - 1;
       socket.emit('success-join', playerId);
 
-      if (rooms[data.gameRoom].players >= 1 ) {
+      if (rooms[data.gameRoom].players >= 1 && rooms[data.gameRoom].players < 4 ) {
         io.sockets.in(rooms[socket.room].id).emit('start-game');
+      }
+      else {
+        console.log('Error');
       }
     }
   });
