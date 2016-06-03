@@ -54,7 +54,7 @@ io.on('connect', function(socket){
       console.log("Joined",data.gameRoom)
       socket.room = data.gameRoom;
 
-      if (rooms[data.gameRoom].players < 5) {
+      if (rooms[data.gameRoom].players) {
         rooms[data.gameRoom].players++;
         console.log("Players:",rooms[data.gameRoom].players)
       } else {
@@ -62,11 +62,12 @@ io.on('connect', function(socket){
         console.log("Players:",rooms[data.gameRoom].players)
       }
       console.log("Phone:", data.gameRoom);
-      io.sockets.in(rooms[socket.room].id).emit('player-joined', rooms[data.gameRoom].players);
+      if(rooms[data.gameRoom].players < 5) {
+        io.sockets.in(rooms[socket.room].id).emit('player-joined', rooms[data.gameRoom].players);
 
-      var playerId = rooms[data.gameRoom].players - 1;
-      socket.emit('success-join', playerId);
-
+        var playerId = rooms[data.gameRoom].players - 1;
+        socket.emit('success-join', playerId);
+      }
       if (rooms[data.gameRoom].players >= 1 && rooms[data.gameRoom].players < 5 ) {
         io.sockets.in(rooms[socket.room].id).emit('start-game');
       }
