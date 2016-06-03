@@ -162,7 +162,7 @@ Character.prototype = {
     if (inputs[this.controller].fire === true && inputs[this.controller].left === true) {
       this.fireGun();
       this.sprite.animations.play('fireLeft');
-      console.log('test');
+      // console.log('test');
     }
     if (inputs[this.controller].fire === true && !inputs[this.controller].left && !inputs[this.controller].right) {
       this.fireGun();
@@ -207,6 +207,7 @@ Character.prototype = {
         }
         if(inputs[this.controller].left === true) {
           this.bullet.body.velocity.x = -400;
+
         }
         else {
           this.bullet.body.velocity.x = 400;
