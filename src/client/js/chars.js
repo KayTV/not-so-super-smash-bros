@@ -5,7 +5,7 @@ var nextFire = 0;
 
 function bulletCollision (character, bullet) {
   // console.log("game",game)
-  console.log("bullet",bullet);
+  // console.log("bullet",bullet);
   // console.log("character", character);
   // bullet.kill();
   if (bullet.playerId !== character.playerId) {
@@ -68,6 +68,8 @@ function Character (controller, platforms, bullets) {
       right = [6, 7, 8];
       jump = [4];
       fire = [11, 12];
+      fireRight = [12];
+      fireLeft = [13];
       stand = [3];
       scale = 1.8;
       xHP = 430;
@@ -80,6 +82,8 @@ function Character (controller, platforms, bullets) {
       right = [9, 10, 11, 12, 13, 14, 15];
       jump = [17];
       fire = [19, 20];
+      fireRight = [19, 20];
+      fireLeft = [21, 22];
       stand = [8];
       scale = 1.8;
       xHP = 630;
@@ -95,7 +99,9 @@ function Character (controller, platforms, bullets) {
   this.sprite.animations.add('right', right, 13, true);
   this.sprite.animations.add('jump', jump, 13, true);
   this.sprite.animations.add('stand', stand, 13, true);
-  this.sprite.animations.add('fire', fire, 13, true);
+  // this.sprite.animations.add('fire', fire, 13, true);
+  this.sprite.animations.add('fireRight', fireRight, 13, true);
+  this.sprite.animations.add('fireLeft', fireLeft, 13, true);
   this.sprite.playerId = this.controller;
   this.sprite.scale.set(scale, scale);
 
@@ -148,11 +154,22 @@ Character.prototype = {
     {
         this.sprite.body.velocity.y = -350;
     }
-    if (inputs[this.controller].fire === true)
+    if (inputs[this.controller].fire === true && inputs[this.controller].right === true)
 		{
-			this.fireGun();
-      this.sprite.animations.play('fire');
+      this.sprite.animations.play('fireRight');
+      this.fireGun();
 		}
+    if (inputs[this.controller].fire === true && inputs[this.controller].left === true) {
+      this.fireGun();
+      this.sprite.animations.play('fireLeft');
+      // console.log('test');
+    }
+    if (inputs[this.controller].fire === true && !inputs[this.controller].left && !inputs[this.controller].right) {
+      this.fireGun();
+      this.sprite.animations.play('fireRight');
+    }
+
+
   },
   fireGun: function() {
 
@@ -190,6 +207,7 @@ Character.prototype = {
         }
         if(inputs[this.controller].left === true) {
           this.bullet.body.velocity.x = -400;
+
         }
         else {
           this.bullet.body.velocity.x = 400;
