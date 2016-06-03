@@ -3,8 +3,13 @@
 body {
   padding: 50px;
   font-family: 25px "Press Start 2P", "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: flex;
 }
 
 a {
   color: #00B7FF;
+}
+
+canvas {
+  margin: 0 auto;
 }
