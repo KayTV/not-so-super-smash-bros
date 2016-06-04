@@ -13,7 +13,7 @@ Menu.prototype = {
     // Call createGame on init, which will emit 'create-game to the backend'
     this.createGame();
     this.titleText = game.make.text(game.world.centerX, 100, 'Not-So-Super Smash Bros.', {
-      font: '40px Mario',
+      font: '43px Mario',
       align: 'center',
       fill: 'red'
     });
@@ -50,13 +50,13 @@ Menu.prototype = {
     }
 
     var directionStyle = {
-      font: '25px Mario',
+      font: '29px Mario',
       align: 'center',
       fill: 'red'
     }
 
-    var directions = game.add.text(game.world.centerX, 170, 'Directions: Go to this website on your phone,', directionStyle);
-    var directions2 = game.add.text(game.world.centerX, 200, 'click HOST GAME and enter in the Game ID.', directionStyle);
+    var directions = game.add.text(game.world.centerX, 150, 'Directions: Go to this website on your phone,', directionStyle);
+    var directions2 = game.add.text(game.world.centerX, 190, 'click HOST GAME and enter in the Game ID.', directionStyle);
     directions.anchor.setTo(0.5, 0.5);
     directions2.anchor.setTo(0.5, 0.5);
 
