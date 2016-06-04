@@ -15,6 +15,10 @@ $(document).ready(function(){
     var gameRoom = $('#user-input').val();
     socket.emit('new-player', {gameRoom: gameRoom});
 
+    socket.on('invalid-room', function() {
+      $('#game-room-input').append('<p>Invalid Room</p>');
+    })
+
     socket.on('success-join', function(playerNum) {
       if( playerNum <= 3) {
         console.log("PlayerNum:", playerNum);
@@ -29,9 +33,9 @@ $(document).ready(function(){
         $('#controls').show();
         setInterval(updateGame, 30);
       }
-      else {
-        $('#game-room-input').append('<p>Too many people in room</p>');
-      }
+    })
+    socket.on('fail-join', function() {
+      $('#game-room-input').append('<p>Too many players in room</p>');
     })
   })
 

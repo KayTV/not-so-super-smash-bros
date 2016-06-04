@@ -8,6 +8,10 @@ div {
     -webkit-touch-callout: none !important;
 }
 
+p {
+  text-align: center;
+}
+
 #picture {
   text-align: center;
 }
