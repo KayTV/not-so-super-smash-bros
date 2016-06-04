@@ -11,7 +11,7 @@
   <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 </head>
 
-<body>
+<body oncopy="return false" oncut="return false" onpaste="return false">
 
   <div class="container" id="game-room-input">
     <div class="form-group text-center" >
@@ -20,6 +20,9 @@
       <br>
       <button class="btn btn-lg btn-default" type="button" id="join">Join Room</button>
     </div>
+  </div>
+
+  <div id="error">
   </div>
 
   <div id="picture">

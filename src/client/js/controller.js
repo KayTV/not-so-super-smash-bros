@@ -16,7 +16,7 @@ $(document).ready(function(){
     socket.emit('new-player', {gameRoom: gameRoom});
 
     socket.on('invalid-room', function() {
-      $('#game-room-input').append('<p>Invalid Room</p>');
+      $('#error').html('<p>Invalid Room</p>');
     })
 
     socket.on('success-join', function(playerNum) {
@@ -27,15 +27,16 @@ $(document).ready(function(){
         playerColor = colors[playerNum];
         playerPic = pic[playerNum];
         $('body').css('background-color', playerColor);
-        $('#picture').append('<img src='+playerPic+'>');
+        $('#picture').html('<img src='+playerPic+'>');
 
         $('#game-room-input').hide();
+        $('#error').hide();
         $('#controls').show();
         setInterval(updateGame, 30);
       }
     })
     socket.on('fail-join', function() {
-      $('#game-room-input').append('<p>Too many players in room</p>');
+      $('#error').html('<p>Too many players in room</p>');
     })
   })
 
