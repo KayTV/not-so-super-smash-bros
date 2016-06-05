@@ -65,7 +65,7 @@ function Character (controller, platforms, bullets) {
       y = game.world.height - 250;
       character = 'pikachu';
       left = [0, 1, 2];
-      right = [6, 7, 8];
+      right = [8, 7, 6];
       jump = [4];
       fire = [11, 12];
       fireRight = [12];
