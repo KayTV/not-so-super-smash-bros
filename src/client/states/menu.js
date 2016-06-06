@@ -51,13 +51,13 @@ Menu.prototype = {
     }
 
     var directionStyle = {
-      font: '29px Mario',
+      font: '32px PipeDream',
       align: 'center',
-      fill: 'red'
+      fill: 'purple',
     }
 
-    var directions = game.add.text(game.world.centerX, 150, 'Directions: Go to this website on your phone,', directionStyle);
-    var directions2 = game.add.text(game.world.centerX, 190, 'click HOST GAME and enter in the Game ID.', directionStyle);
+    var directions = game.add.text(game.world.centerX, 190, 'Directions: Go to this website on your phone,', directionStyle);
+    var directions2 = game.add.text(game.world.centerX, 230, 'click HOST GAME and enter in the Game ID.', directionStyle);
     directions.anchor.setTo(0.5, 0.5);
     directions2.anchor.setTo(0.5, 0.5);
 
