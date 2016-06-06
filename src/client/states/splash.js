@@ -1,4 +1,5 @@
-function Splash() {}
+function Splash() {};
+// console.log("splash");
 
 Splash.prototype = {
     loadScripts: function () {

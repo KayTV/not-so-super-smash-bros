@@ -4,12 +4,7 @@ var nextFire = 0;
 
 
 function bulletCollision (character, bullet) {
-  // console.log("game",game)
-  // console.log("bullet",bullet);
-  // console.log("character", character);
-  // bullet.kill();
-  if (bullet.playerId !== character.playerId) {
-    // console.log("bullet:", bullet);
+  if (bullet.playerId !== character.playerId && character.health > 0) {
     bullet.kill();
     character.health -= 10;
     character.healthText.text = "P" + character.playerId + " HP:" + character.health;
@@ -20,8 +15,6 @@ function Character (controller, platforms, bullets) {
   var self = this;
   this.platforms = platforms;
   this.bullets = bullets;
-  // console.log("Bullets", this.bullets)
-  // this.bullets.playerId = controller;
 
   var x, y, character, left, right, jump;
   switch(controller) {
@@ -38,9 +31,8 @@ function Character (controller, platforms, bullets) {
       jump = [33];
       fireRight = [25, 26, 24];
       fireLeft = [22, 21, 23];
-      // fire is a default below until code is written for fireLeft and fireRight
       fire = [25, 26, 24];
-      die = [28, 29];
+      die = [29, 30, 29, 30, 29, 30];
       stand = [10];
       scale = 1.5;
       xHP = 40;
@@ -56,7 +48,7 @@ function Character (controller, platforms, bullets) {
       fireRight = [21];
       fireLeft = [22];
       fire = [21];
-      die = [23];
+      die = [23, 23, 23, 23, 23, 23];
       scale = 2.3;
       xHP = 230;
       break;
@@ -73,6 +65,7 @@ function Character (controller, platforms, bullets) {
       stand = [3];
       scale = 1.8;
       xHP = 430;
+      die = [4, 4, 4, 4, 4, 4];
       break;
     case 3:
       x = 600;
@@ -84,6 +77,7 @@ function Character (controller, platforms, bullets) {
       fire = [19, 20];
       fireRight = [19, 20];
       fireLeft = [21, 22];
+      die = [23, 23, 23, 23, 23, 23];
       stand = [8];
       scale = 1.8;
       xHP = 630;
@@ -102,6 +96,7 @@ function Character (controller, platforms, bullets) {
   // this.sprite.animations.add('fire', fire, 13, true);
   this.sprite.animations.add('fireRight', fireRight, 13, true);
   this.sprite.animations.add('fireLeft', fireLeft, 13, true);
+  this.sprite.animations.add('die', die, 2, false);
   this.sprite.playerId = this.controller;
   this.sprite.scale.set(scale, scale);
 
@@ -132,14 +127,15 @@ Character.prototype = {
 
     // Check sprite health
     if (this.sprite.health <= 0) {
-      this.sprite.kill()
+      inputs[this.controller] = {};
+      this.sprite.animations.play('die', 6, false, true);
+      // this.sprite.kill();
     }
 
 
     // Default direction to fire
-    if (inputs[this.controller].fire === true && this.sprite.body.touching.down) {
+    else if (inputs[this.controller].fire === true && this.sprite.body.touching.down) {
       this.fireGun();
-      // this.sprite.animations.play('fireLeft')
     }
 
     // Sprite Movement
@@ -176,7 +172,6 @@ Character.prototype = {
       this.sprite.animations.play('fireLeft');
       // Maintain movement while firing
       this.sprite.body.velocity.x = -150;
-      // console.log('test');
     }
 
 
@@ -187,11 +182,8 @@ Character.prototype = {
     {
         nextFire = game.time.now + fireRate;
         // this.bullets.playerId = this.controller;
-        // console.log('bullets', this.bullets);
 
         this.bullet = this.bullets.getFirstDead();
-
-        // console.log("this.bullet",this.bullet)
 
         this.bullet.playerId = this.controller;
 

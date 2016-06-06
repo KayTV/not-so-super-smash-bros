@@ -82,7 +82,7 @@ Game.prototype = {
 
       players.push(new Character(i, this.platforms, this.bullets))
     }
-    console.log(players);
+    // console.log("GameJS: players:",players);
 
   },
   update: function() {
