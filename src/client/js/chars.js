@@ -107,6 +107,9 @@ function Character (controller, platforms, bullets) {
   // Set Sprite health
   this.sprite.health = 200;
 
+  // Set Sprite PowerUp
+  this.sprite.powerUp = 0;
+
   // Create Sprite HP Text
   this.sprite.healthText = game.add.text(xHP, 0, 'P' + (this.controller + 1) + ' HP:' + this.sprite.health, {
     font: '17px PressStart2P',
@@ -140,6 +143,9 @@ Character.prototype = {
       // this.sprite.kill();
     }
 
+    else if (this.sprite.powerUp === 100 && inputs[this.controller].firePowerUp === true) {
+      this.firePowerUp();
+    }
 
     // Default direction to fire
     else if (inputs[this.controller].fire === true && this.sprite.body.touching.down) {
@@ -181,6 +187,10 @@ Character.prototype = {
       // Maintain movement while firing
       this.sprite.body.velocity.x = -150;
     }
+
+    // if (this.sprite.powerUp === 100) {
+    //   console.log("Powered up!");
+    // }
 
 
   },
@@ -237,5 +247,35 @@ Character.prototype = {
           this.bullet.body.velocity.x = 400;
         }
     }
+  },
+  firePowerUp: function () {
+    if (game.time.now > nextFire && this.bullets.countDead() > 0)
+    {
+      nextFire = game.time.now + fireRate;
+      // this.bullets.playerId = this.controller;
+
+      this.bullet = this.bullets.getFirstDead();
+      
+
+      this.bullet.playerId = this.controller;
+
+      if (this.controller === 0) {
+        this.bullet.reset(this.sprite.x + 25, this.sprite.y + 35);
+        // console.log("Player0 bullet", this.bullet)
+      }
+      if (this.controller === 1) {
+        this.bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
+      }
+      if (this.controller === 2) {
+        this.bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
+      }
+      if (this.controller === 3) {
+        this.bullet.reset(this.sprite.x + 25, this.sprite.y + 30);
+      }
+
+      this.bullet.body.velocity.y = -400;
+    }
+    // this.bigBullet = this.bullets.getFirstDead();
+    // this.bigBullet.body.velocity.y = -400;
   }
 }

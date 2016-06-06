@@ -11,11 +11,20 @@ function Game () {
   this.platforms;
 }
 
+
+function powerUp () {
+  for (var i=0; i<players.length; i++) {
+    if (players[i].sprite.alive === true && players[i].sprite.powerUp !== 100) {
+      players[i].sprite.powerUp += 25;
+    }
+  }
+}
+
 Game.prototype = {
   init: function (playerCount) {
     this.playerCount = playerCount;
     for (var i = 0; i <= playerCount; i++) {
-        inputs.push({left: false, right: false, jump: false, fire: false});
+        inputs.push({left: false, right: false, jump: false, fire: false, firePowerUp: false});
     }
 
     this.game.renderer.renderSession.roundPixels = true;
@@ -88,7 +97,8 @@ Game.prototype = {
 
       players.push(new Character(i, this.platforms, this.bullets, dieSound))
     }
-    // console.log("GameJS: players:",players);
+    console.log("GameJS: players:",players);
+    setInterval(powerUp, 1000);
 
   },
   update: function() {
