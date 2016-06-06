@@ -215,16 +215,16 @@ Character.prototype = {
         //   this.bullet.body.velocity.x = 400;
         //   // console.log('right', bullet);
         // }
-        if ( this.sprite.lastLeftFire > this.sprite.lastRightFire && this.sprite.body.velocity.x === 0) {
-          // console.log('test');
-          this.bullet.body.velocity.x = -400;
-          // this.sprite.animations.play('fireLeft');
-        }
-        else if (inputs[this.controller].right === true) {
+        if (inputs[this.controller].right === true) {
           this.sprite.lastRightFire = 1;
           this.sprite.lastLeftFire = 0;
           this.bullet.body.velocity.x = 400;
           // console.log("last right fire",this.sprite.lastRightFire);
+        }
+        else if ( this.sprite.lastLeftFire > this.sprite.lastRightFire && this.sprite.body.velocity.x === 0) {
+          // console.log('test');
+          this.bullet.body.velocity.x = -400;
+          // this.sprite.animations.play('fireLeft');
         }
         else if (inputs[this.controller].left === true || this.sprite.lastLeftFire > this.sprite.lastRightFire ) {
           this.sprite.lastLeftFire = 1;
