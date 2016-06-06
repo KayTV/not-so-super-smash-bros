@@ -6,6 +6,7 @@ $(document).ready(function(){
   var jump = false;
   var fire = false;
   var player = null;
+  var firePowerUp = false;
   var playerColor;
   var colors = ['#bf1313', '#1111bd', '#eac84d', '#11bd13' ];
   var playerPic;
@@ -83,8 +84,18 @@ $(document).ready(function(){
     fire = false;
   });
 
+  $('#picture').on('touchstart', function(event){
+    event.preventDefault();
+    firePowerUp = true;
+  });
+
+  $('#picture').on('touchend', function(event){
+    event.preventDefault()
+    firePowerUp = false;
+  });
+
   function updateGame() {
       // sends game-update to server with the players input and player number
-      socket.emit('game-update', {right: right, left: left, jump: jump, fire: fire, player: player});
+      socket.emit('game-update', {right: right, left: left, jump: jump, fire: fire, player: player, firePowerUp: firePowerUp});
   }
 });
