@@ -105,7 +105,7 @@ function Character (controller, platforms, bullets) {
   this.sprite.scale.set(scale, scale);
 
   // Set Sprite health
-  this.sprite.health = 200;
+  this.sprite.health = 100;
 
   // Set Sprite PowerUp
   this.sprite.powerUp = 0;
@@ -143,9 +143,9 @@ Character.prototype = {
       // this.sprite.kill();
     }
 
-    else if (this.sprite.powerUp === 100 && inputs[this.controller].firePowerUp === true) {
-      this.firePowerUp();
-    }
+    // else if (this.sprite.powerUp === 100 && inputs[this.controller].firePowerUp === true) {
+    //   this.fireGun();
+    // }
 
     // Default direction to fire
     else if (inputs[this.controller].fire === true && this.sprite.body.touching.down) {
@@ -195,13 +195,16 @@ Character.prototype = {
 
   },
   fireGun: function() {
-
     if (game.time.now > nextFire && this.bullets.countDead() > 0)
     {
         nextFire = game.time.now + fireRate;
         // this.bullets.playerId = this.controller;
-
+        // console.log(this.bullets);
         this.bullet = this.bullets.getFirstDead();
+
+        // if (this.powerUp === 100 && inputs[this.controller].firePowerUp === true) {
+        //   this.bullet.scale.set(1.5);
+        // }
 
         this.bullet.playerId = this.controller;
 
@@ -248,34 +251,41 @@ Character.prototype = {
         }
     }
   },
-  firePowerUp: function () {
-    if (game.time.now > nextFire && this.bullets.countDead() > 0)
-    {
-      nextFire = game.time.now + fireRate;
-      // this.bullets.playerId = this.controller;
-
-      this.bullet = this.bullets.getFirstDead();
-      
-
-      this.bullet.playerId = this.controller;
-
-      if (this.controller === 0) {
-        this.bullet.reset(this.sprite.x + 25, this.sprite.y + 35);
-        // console.log("Player0 bullet", this.bullet)
-      }
-      if (this.controller === 1) {
-        this.bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
-      }
-      if (this.controller === 2) {
-        this.bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
-      }
-      if (this.controller === 3) {
-        this.bullet.reset(this.sprite.x + 25, this.sprite.y + 30);
-      }
-
-      this.bullet.body.velocity.y = -400;
-    }
-    // this.bigBullet = this.bullets.getFirstDead();
-    // this.bigBullet.body.velocity.y = -400;
-  }
+  // firePowerUp: function () {
+  //   if (game.time.now > nextFire && this.bullets.countDead() > 0)
+  //   {
+  //     nextFire = game.time.now + fireRate;
+  //
+  //     this.bullet1 = this.bullets.getFirstDead();
+  //
+  //
+  //     this.bullet1.playerId = this.controller;
+  //     this.bullet2.playerId = this.controller;
+  //
+  //     if (this.controller === 0) {
+  //       this.bullet1.reset(this.sprite.x + 25, this.sprite.y + 35);
+  //       this.bullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+  //       // console.log("Player0 bullet", this.bullet)
+  //     }
+  //     if (this.controller === 1) {
+  //       // this.bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
+  //       this.bullet1.reset(this.sprite.x + 25, this.sprite.y + 35);
+  //       this.bullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+  //     }
+  //     if (this.controller === 2) {
+  //       // this.bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
+  //       this.bullet1.reset(this.sprite.x + 25, this.sprite.y + 35);
+  //       this.bullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+  //     }
+  //     if (this.controller === 3) {
+  //       // this.bullet.reset(this.sprite.x + 25, this.sprite.y + 30);
+  //       this.bullet1.reset(this.sprite.x + 25, this.sprite.y + 35);
+  //       this.bullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+  //     }
+  //
+  //     this.bullet1.body.velocity.x = -400;
+  //     this.bullet2.body.velocity.x = 400;
+  //
+  //   }
+  // }
 }
