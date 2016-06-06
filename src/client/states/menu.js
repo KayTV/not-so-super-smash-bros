@@ -9,16 +9,29 @@ function Menu (){
   this.selectchar;
 }
 
+// function colors () {
+//   var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'violet'];
+// }
+
 Menu.prototype = {
   init: function() {
     // Call createGame on init, which will emit 'create-game to the backend'
     this.createGame();
-    this.titleText = game.make.text(game.world.centerX, 100, 'Not-So-Super Smash Bros.', {
-      font: '43px Mario',
+    this.titleText = game.make.text(game.world.centerX, 90, 'Not-So-Super\n Smash Bros.', {
+      font: '60px PipeDream',
       align: 'center',
-      fill: 'red'
+      // fill: 'red'
     });
+    // this.titleText.addColor('#0b9bd7', 0);
+    this.titleText.addColor('blue', 0);
+    this.titleText.addColor('black', 3);
+    this.titleText.addColor('#fbcf08', 4);
+    this.titleText.addColor('black', 6);
+    this.titleText.addColor('#E42926', 7);
+    this.titleText.addColor('#00c600', 12);
+    this.titleText.addColor('#fbcf08', 18);
     this.titleText.anchor.setTo(0.5);
+    this.titleText.setShadow(5, 5, 'rgba(0, 0, 0, 0.5)', 0);
   },
 
   create: function() {
@@ -43,7 +56,7 @@ Menu.prototype = {
   // Function to add the menu to the game world
   addMenu: function() {
     var style = {
-      font: '30px PressStart2P',
+      font: '40px PipeDream',
       fill: 'blue',
       align: 'center',
       stroke: 'rgba(0,0,0,0)',
@@ -51,15 +64,19 @@ Menu.prototype = {
     }
 
     var directionStyle = {
-      font: '29px Mario',
+      font: '32px PipeDream',
       align: 'center',
-      fill: 'red'
+      // fill: 'purple',
     }
 
-    var directions = game.add.text(game.world.centerX, 150, 'Directions: Go to this website on your phone,', directionStyle);
-    var directions2 = game.add.text(game.world.centerX, 190, 'click HOST GAME and enter in the Game ID.', directionStyle);
+    var directions = game.add.text(game.world.centerX, 200, 'Directions: Go to this website on your phone, \n click HOST GAME and enter in the Game ID.', directionStyle);
+    // directions.addColor('red', 2);
+    directions.addColor('blue', 0);
     directions.anchor.setTo(0.5, 0.5);
-    directions2.anchor.setTo(0.5, 0.5);
+
+    // var directions2 = game.add.text(game.world.centerX, 230, 'click HOST GAME and enter in the Game ID.', directionStyle);
+    // directions.anchor.setTo(0.5, 0.5);
+    // directions2.anchor.setTo(0.5, 0.5);
 
     var text = game.make.text(game.world.centerX, game.world.centerY, 'HOST GAME', style);
     text.anchor.setTo(0.5, 0.5);
@@ -75,9 +92,9 @@ Menu.prototype = {
     }
 
     var onClick = function (button) {
-      var text = game.add.text(game.world.centerX, game.world.centerY, 'Game ID: ' + this.gameRoom, {
-        font: '30px PressStart2P',
-        fill: 'red',
+      var text = game.add.text(game.world.centerX, game.world.centerY + 15, 'Game ID: ' + this.gameRoom, {
+        font: '40px PipeDream',
+        fill: 'blue',
         align: 'center',
         stroke: 'rgba(0,0,0,0)',
         strokeThickness: 4
@@ -109,23 +126,24 @@ Menu.prototype = {
   },
   startGameMenu: function () {
     var style = {
-      font: '24px PressStart2P',
-      fill: 'red',
+      font: '50px PipeDream',
+      fill: '#fbcf08',
       align: 'center',
-      stroke: 'rgba(0,0,0,0)',
-      strokeThickness: 4,
+      // stroke: 'rgba(0,0,0,0)',
+      // strokeThickness: 4,
     }
 
-    var text = game.add.text(game.world.centerX, game.world.centerY - 50, 'Start Match', style);
+    var text = game.add.text(game.world.centerX, game.world.centerY - 35, 'Start Match', style);
     text.anchor.setTo(0.5,0.5);
+    text.setShadow(5, 5, 'rgba(0, 0, 0, 0.5)', 0);
 
     var hoverTrue = function (button) {
-      button.fill = 'red';
+      button.fill = '#00c600';
       button.stroke = 'rgba(200,200,200,0.5)';
     }
 
     var hoverFalse = function (button) {
-      button.fill = 'blue';
+      button.fill = '#fbcf08';
       button.stroke = 'rgba(0,0,0,0)';
     }
 
@@ -134,8 +152,8 @@ Menu.prototype = {
       game.state.start('Game', true, false, this.playerCount)
     }.bind(this);
 
-    text.stroke = "rgba(0,0,0,0)";
-    text.strokeThickness = 4;
+    // text.stroke = "rgba(0,0,0,0)";
+    // text.strokeThickness = 4;
     text.inputEnabled = true;
     text.events.onInputUp.add(onClick);
     text.events.onInputOver.add(hoverTrue);
@@ -147,9 +165,12 @@ Menu.prototype = {
   addPlayerPic: function() {
 
     if (this.playerCount === 1) {
+      console.log(this);
       this.mainBackground.kill();
-      waitingText = game.add.text(game.world.centerX, game.world.centerY - 50, 'Waiting for more players...', {
-        font: '40px Mario',
+      game.stage.backgroundColor = '#6899F8';
+
+      waitingText = game.add.text(game.world.centerX, game.world.centerY - 25, 'Waiting for more players...', {
+        font: '35px PipeDream',
         align: 'center',
         fill: 'red'
       });
@@ -187,5 +208,5 @@ Menu.prototype = {
 };
 
 function removeText () {
-  waitingText.destroy()
+  waitingText.destroy();
 }
