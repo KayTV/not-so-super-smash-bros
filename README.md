@@ -14,12 +14,12 @@
   <h3>Controllers Layout: </h3>
   <hr>
 
-  <img src="src/client/assets/readme/controllers.jpg">
+  <img src="src/client/assets/readme/controllers2.JPG">
 
   <h3>Game Character Screen: </h3>
   <hr>
 
-  <img src="src/client/assets/readme/gamescreen.png">
+  <img src="src/client/assets/readme/splashpage.png">
 
   <h3>Game Screen: </h3>
   <hr>
