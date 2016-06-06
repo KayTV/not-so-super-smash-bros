@@ -4,6 +4,7 @@ var ground;
 var platforms;
 var bullets;
 var dieSound;
+var mainSound;
 
 function Game () {
   this.playerCount;
@@ -59,6 +60,8 @@ Game.prototype = {
     ledge.body.immovable = true;
 
     dieSound = this.add.audio('soundDie');
+    mainSound = this.add.audio('mainSound');
+    mainSound.play();
 
 
     // Phone Characters

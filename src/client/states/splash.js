@@ -41,6 +41,7 @@ Splash.prototype = {
 
       //Audio
       game.load.audio('soundDie', 'assets/sounds/Pacman-death-sound.mp3');
+      game.load.audio('mainSound', 'assets/sounds/SuperMarioBros.mp3')
 
     },
     loadFonts: function () {

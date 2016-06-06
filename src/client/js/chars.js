@@ -132,6 +132,7 @@ Character.prototype = {
     // Check sprite health
     if (this.sprite.health <= 0) {
       dieSound.play();
+      dieSound.currentTime = 0.1;
       this.sprite.body.moves = false;
       // console.log(this.sprite);
       inputs[this.controller].fire = false;
