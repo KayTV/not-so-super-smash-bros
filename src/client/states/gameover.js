@@ -1,5 +1,7 @@
 var characters = ['select0', 'select1', 'select2', 'select3'];
 var winningPlayer;
+var count = 0;
+this.winnerText;
 
 function GameOver () {};
 
@@ -18,19 +20,40 @@ GameOver.prototype = {
     // console.log("Winning:", winningPlayer);
     // console.log("GameOverJS: game:",game);
 
-    this.titleText = game.make.text(game.world.centerX, game.world.centerY - 200, 'Not-So-Super Smash Bros.', {
-      font: '40px Mario',
+    this.titleText = game.make.text(game.world.centerX, 90, 'Not-So-Super\n Smash Bros.', {
+      font: '60px PipeDream',
       align: 'center',
-      fill: 'red'
     });
+    this.titleText.addColor('blue', 0);
+    this.titleText.addColor('black', 3);
+    this.titleText.addColor('#fbcf08', 4);
+    this.titleText.addColor('black', 6);
+    this.titleText.addColor('#E42926', 7);
+    this.titleText.addColor('#00c600', 12);
+    this.titleText.addColor('#fbcf08', 18);
+    this.titleText.anchor.setTo(0.5);
+    this.titleText.setShadow(5, 5, 'rgba(0, 0, 0, 0.5)', 0);
     this.titleText.anchor.setTo(0.5);
 
     this.winnerText = game.make.text(game.world.centerX, 200, 'The winner is: ' , {
-      font: '40px Mario',
+      font: '50px PipeDream',
       align: 'center',
-      fill: 'red'
+      // fill: 'red'
     });
     this.winnerText.anchor.setTo(0.5);
+
+
+    // if (count === 1) {
+    //   this.winnerText.addColor('#E42926', 0);
+    // } else if (count === 2) {
+    //   this.winnerText.addColor('blue', 0);
+    // } else if (count === 3) {
+    //   this.winnerText.addColor('#fbcf08', 0);
+    // } else {
+    //   this.winnerText.addColor('#00c600', 0);
+    // }
+
+
   },
   create: function () {
     game.add.sprite(0, 0, 'menu');
@@ -41,10 +64,11 @@ GameOver.prototype = {
     this.sprite.scale.setTo(0.5);
     this.sprite.anchor.setTo(0.5);
     this.restartGame();
+    setInterval(timer, 800);
   },
   restartGame: function () {
     var text = game.add.text(game.world.centerX, game.world.height * 0.7, 'Rematch?', {
-      font: '40px Mario',
+      font: '50px PipeDream',
       align: 'center',
       fill: 'red'
     });
@@ -72,6 +96,27 @@ GameOver.prototype = {
 
   },
   update: function() {
-
+    if (count === 0){
+      this.winnerText.addColor('red', 0);
+    }
+    if (count === 1) {
+      this.winnerText.addColor('#fbcf08', 0);
+    }
+    if (count === 2) {
+      this.winnerText.addColor('blue', 0);
+    }
+    if (count === 3) {
+      this.winnerText.addColor('#E42926', 0);
+    }
+    if (count === 4){
+      this.winnerText.addColor('#00c600', 0);
+    }
   }
 };
+
+function timer () {
+  if (count === 4) {
+    count = 0;
+  }
+  count += 1;
+}

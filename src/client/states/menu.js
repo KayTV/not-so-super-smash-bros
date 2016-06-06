@@ -30,7 +30,6 @@ Menu.prototype = {
     this.titleText.addColor('#E42926', 7);
     this.titleText.addColor('#00c600', 12);
     this.titleText.addColor('#fbcf08', 18);
-    // this.titleText.addColor('#45AF49', 16);
     this.titleText.anchor.setTo(0.5);
     this.titleText.setShadow(5, 5, 'rgba(0, 0, 0, 0.5)', 0);
   },
