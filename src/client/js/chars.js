@@ -127,7 +127,9 @@ Character.prototype = {
 
     // Check sprite health
     if (this.sprite.health <= 0) {
-      inputs[this.controller] = {};
+      this.sprite.body.moves = false;
+      // console.log(this.sprite);
+      inputs[this.controller].fire = false;
       this.sprite.animations.play('die', 6, false, true);
       // this.sprite.kill();
     }
