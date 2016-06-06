@@ -11,4 +11,4 @@
     </ul>
   <p>You will then go to the link to the game on your computer and then each person will go to the same link on their phone as well. You will then on your computer click the 'HOST GAME' button and enter in the given number on your phone. Once you have more than one player, you can start the game! Each character has 200 HP points, whoever is the last one standing, wins! Remember to have fun!</p>  
 
-  <img src="client/assets/readme/controllers.jpg">
+  <img src="src/client/assets/readme/controllers.jpg">
