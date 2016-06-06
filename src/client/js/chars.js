@@ -27,7 +27,7 @@ function Character (controller, platforms, bullets) {
   switch(controller) {
     case 0:
       x = 50;
-      y = game.world.height - 250;
+      y = game.world.height - 150;
       character = 'megaman';
       self.name = character;
       left = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -46,8 +46,8 @@ function Character (controller, platforms, bullets) {
       xHP = 40;
       break;
     case 1:
-      x = 200;
-      y = game.world.height - 250;
+      x = 100;
+      y = game.world.height - 350;
       character = 'kirby';
       left = [20, 19, 18, 17, 16, 15, 14, 13, 12, 11];
       right = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -61,7 +61,7 @@ function Character (controller, platforms, bullets) {
       xHP = 230;
       break;
     case 2:
-      x = 400;
+      x = 600;
       y = game.world.height - 250;
       character = 'pikachu';
       left = [0, 1, 2];
@@ -75,8 +75,8 @@ function Character (controller, platforms, bullets) {
       xHP = 430;
       break;
     case 3:
-      x = 500;
-      y = game.world.height - 250;
+      x = 600;
+      y = game.world.height - 550;
       character = 'mario';
       left = [1, 2, 3, 5, 6, 7];
       right = [9, 10, 11, 12, 13, 14, 15];
