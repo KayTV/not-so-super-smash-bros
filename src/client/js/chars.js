@@ -135,8 +135,15 @@ Character.prototype = {
       this.sprite.kill()
     }
 
+
+    // Default direction to fire
+    if (inputs[this.controller].fire === true && this.sprite.body.touching.down) {
+      this.fireGun();
+      // this.sprite.animations.play('fireLeft')
+    }
+
     // Sprite Movement
-    if(inputs[this.controller].left === true) {
+    else if(inputs[this.controller].left === true) {
       this.sprite.body.velocity.x = -150;
       this.sprite.animations.play('left');
     } else if (inputs[this.controller].right === true) {
@@ -159,18 +166,17 @@ Character.prototype = {
     if (inputs[this.controller].fire === true && inputs[this.controller].right === true)
 		{
       this.sprite.animations.play('fireRight');
+      // Maintain movement while firing
+      this.sprite.body.velocity.x = 150;
       this.fireGun();
 		}
 
     if (inputs[this.controller].fire === true && inputs[this.controller].left === true) {
       this.fireGun();
       this.sprite.animations.play('fireLeft');
+      // Maintain movement while firing
+      this.sprite.body.velocity.x = -150;
       // console.log('test');
-    }
-
-    if (inputs[this.controller].fire === true && !inputs[this.controller].left && !inputs[this.controller].right) {
-      this.fireGun();
-      // this.sprite.animations.play('fireRight');
     }
 
 
@@ -210,7 +216,7 @@ Character.prototype = {
         //   // console.log('right', bullet);
         // }
         if ( this.sprite.lastLeftFire > this.sprite.lastRightFire && this.sprite.body.velocity.x === 0) {
-          console.log('test');
+          // console.log('test');
           this.bullet.body.velocity.x = -400;
           // this.sprite.animations.play('fireLeft');
         }
@@ -218,13 +224,13 @@ Character.prototype = {
           this.sprite.lastRightFire = 1;
           this.sprite.lastLeftFire = 0;
           this.bullet.body.velocity.x = 400;
-          console.log("last right fire",this.sprite.lastRightFire);
+          // console.log("last right fire",this.sprite.lastRightFire);
         }
         else if (inputs[this.controller].left === true || this.sprite.lastLeftFire > this.sprite.lastRightFire ) {
           this.sprite.lastLeftFire = 1;
           this.sprite.lastRightFire = 0;
-          console.log("left",this.sprite.lastLeftFire);
-          console.log("right",this.sprite.lastRightFire);
+          // console.log("left",this.sprite.lastLeftFire);
+          // console.log("right",this.sprite.lastRightFire);
           this.bullet.body.velocity.x = -400;
         }
         else {
