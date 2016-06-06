@@ -1,4 +1,5 @@
 var waitingText;
+// console.log("MeunJS");
 
 function Menu (){
   var self = this;

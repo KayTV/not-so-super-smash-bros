@@ -16,7 +16,7 @@ GameOver.prototype = {
     }
 
     // console.log("Winning:", winningPlayer);
-    console.log(game);
+    // console.log("GameOverJS: game:",game);
 
     this.titleText = game.make.text(game.world.centerX, game.world.centerY - 200, 'Not-So-Super Smash Bros.', {
       font: '40px Mario',
