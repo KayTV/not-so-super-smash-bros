@@ -20,3 +20,8 @@
   <hr>
 
   <img src="src/client/assets/readme/gamescreen.png">
+
+  <h3>Game Screen: </h3>
+  <hr>
+
+  <img src="src/client/assets/readme/game.png">
