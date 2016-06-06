@@ -254,6 +254,7 @@ Character.prototype = {
       // this.bullets.playerId = this.controller;
 
       this.bullet = this.bullets.getFirstDead();
+      
 
       this.bullet.playerId = this.controller;
 
