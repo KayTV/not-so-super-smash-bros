@@ -165,7 +165,7 @@ Menu.prototype = {
   addPlayerPic: function() {
 
     if (this.playerCount === 1) {
-      console.log(this);
+      // console.log(this);
       this.mainBackground.kill();
       game.stage.backgroundColor = '#6899F8';
 
@@ -178,7 +178,7 @@ Menu.prototype = {
       game.add.image(10, 320, 'player-selection');
       var mega = game.add.sprite(0, 345, 'select0');
       mega.scale.set(0.8, 0.8);
-      console.log(game);
+      // console.log(game);
     }
     if(this.playerCount === 2) {
       var kirb = game.add.sprite(190, 350, 'select1');

@@ -97,7 +97,7 @@ Game.prototype = {
 
       players.push(new Character(i, this.platforms, this.bullets, dieSound))
     }
-    console.log("GameJS: players:",players);
+    // console.log("GameJS: players:",players);
     setInterval(powerUp, 1000);
 
   },
