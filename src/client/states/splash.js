@@ -39,6 +39,9 @@ Splash.prototype = {
       game.load.spritesheet('pikachu2', 'assets/sprites/pikachuSprite.png', 30, 30);
       game.load.spritesheet('mario3', 'assets/sprites/mario2.png', 24, 38);
 
+      //Audio
+      game.load.audio('soundDie', 'assets/sounds/Pacman-death-sound.mp3');
+
     },
     loadFonts: function () {
       WebFontConfig = {

@@ -3,6 +3,7 @@ var inputs = [];
 var ground;
 var platforms;
 var bullets;
+var dieSound;
 
 function Game () {
   this.playerCount;
@@ -57,6 +58,8 @@ Game.prototype = {
 		ledge = this.platforms.create(580, 450, 'pipe');
     ledge.body.immovable = true;
 
+    dieSound = this.add.audio('soundDie');
+
 
     // Phone Characters
     players = [];
@@ -80,7 +83,7 @@ Game.prototype = {
       this.bullets.createMultiple(1000, 'bullet' + i);
       this.bullets.playerId = i;
 
-      players.push(new Character(i, this.platforms, this.bullets))
+      players.push(new Character(i, this.platforms, this.bullets, dieSound))
     }
     // console.log("GameJS: players:",players);
 

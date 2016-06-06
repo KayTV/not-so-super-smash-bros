@@ -36,6 +36,7 @@ function Character (controller, platforms, bullets) {
       stand = [10];
       scale = 1.5;
       xHP = 40;
+      // soundDie = 'sound-die';
       break;
     case 1:
       x = 100;
@@ -51,6 +52,7 @@ function Character (controller, platforms, bullets) {
       die = [23, 23, 23, 23, 23, 23];
       scale = 2.3;
       xHP = 230;
+      // soundDie = 'sound-die';
       break;
     case 2:
       x = 600;
@@ -66,6 +68,7 @@ function Character (controller, platforms, bullets) {
       scale = 1.8;
       xHP = 430;
       die = [4, 4, 4, 4, 4, 4];
+      // soundDie = 'sound-die';
       break;
     case 3:
       x = 600;
@@ -81,6 +84,7 @@ function Character (controller, platforms, bullets) {
       stand = [8];
       scale = 1.8;
       xHP = 630;
+      // soundDie = 'sound-die';
       break;
   }
 
@@ -127,6 +131,7 @@ Character.prototype = {
 
     // Check sprite health
     if (this.sprite.health <= 0) {
+      dieSound.play();
       this.sprite.body.moves = false;
       // console.log(this.sprite);
       inputs[this.controller].fire = false;
