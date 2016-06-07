@@ -15,10 +15,11 @@ function Game () {
 function powerUp () {
   for (var i=0; i<players.length; i++) {
     if (players[i].sprite.alive === true && players[i].sprite.powerUp !== 100) {
-      players[i].sprite.powerUp += 25;
+      players[i].sprite.powerUp += 10;
     }
   }
 }
+
 
 Game.prototype = {
   init: function (playerCount) {
@@ -72,6 +73,8 @@ Game.prototype = {
     mainSound = this.add.audio('mainSound');
     mainSound.play();
 
+    setInterval(powerUp, 1000);
+
 
     // Phone Characters
     players = [];
@@ -95,10 +98,33 @@ Game.prototype = {
       this.bullets.createMultiple(1000, 'bullet' + i);
       this.bullets.playerId = i;
 
-      players.push(new Character(i, this.platforms, this.bullets, dieSound))
+      // Add powerUp Bullets
+      this.superBullets = this.add.group();
+      this.superBullets.enableBody = true;
+      this.superBullets.physicsBodyType = Phaser.Physics.ARCADE;
+      this.superBullets.setAll('anchor.x', 0.5);
+      this.superBullets.setAll('anchor.y', 0.5);
+      this.superBullets.createMultiple(1000, 'bullet' + i);
+      this.superBullets.playerId = i;
+
+      this.superBullets2 = this.add.group();
+      this.superBullets2.enableBody = true;
+      this.superBullets2.physicsBodyType = Phaser.Physics.ARCADE;
+      this.superBullets2.setAll('anchor.x', 0.5);
+      this.superBullets2.setAll('anchor.y', 0.5);
+      this.superBullets2.createMultiple(1000, 'bullet' + i);
+      this.superBullets2.playerId = i;
+
+      this.superBullets3 = this.add.group();
+      this.superBullets3.enableBody = true;
+      this.superBullets3.physicsBodyType = Phaser.Physics.ARCADE;
+      this.superBullets3.setAll('anchor.x', 0.5);
+      this.superBullets3.setAll('anchor.y', 0.5);
+      this.superBullets3.createMultiple(1000, 'bullet' + i);
+      this.superBullets3.playerId = i;
+
+      players.push(new Character(i, this.platforms, this.bullets, this.superBullets, this.superBullets2, this.superBullets3, dieSound))
     }
-    // console.log("GameJS: players:",players);
-    setInterval(powerUp, 1000);
 
   },
   update: function() {
@@ -109,6 +135,12 @@ Game.prototype = {
         // console.log('players.bullet', players[i].name, players[i].bullet);
         for (var n=0; n<players.length; n++) {
           this.physics.arcade.overlap(players[n].sprite, players[i].bullets, bulletCollision, null, this);
+
+          this.physics.arcade.overlap(players[n].sprite, players[i].superBullets, bulletCollision, null, this);
+
+          this.physics.arcade.overlap(players[n].sprite, players[i].superBullets2, bulletCollision, null, this);
+
+          this.physics.arcade.overlap(players[n].sprite, players[i].superBullets3, bulletCollision, null, this);
 
         }
         if (players[i].sprite.alive) {
