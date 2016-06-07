@@ -217,13 +217,15 @@ Character.prototype = {
 
   },
   fireGun: function() {
+
     if (game.time.now > nextFire && this.bullets.countDead() > 0)
     {
         nextFire = game.time.now + fireRate;
 
         this.bullet = this.bullets.getFirstDead();
+        console.log(this.bullet);
 
-        this.bullet.playerId = this.controller;
+        // this.bullet.playerId = this.controller;
 
         if (this.controller === 0) {
           this.bullet.reset(this.sprite.x + 25, this.sprite.y + 35);
@@ -265,9 +267,9 @@ Character.prototype = {
     {
       nextFire = game.time.now + fireRate;
 
-      this.superBullet = this.superBullets.getFirstDead();
-      this.superBullet2 = this.superBullets2.getFirstDead();
-      this.superBullet3 = this.superBullets3.getFirstDead();
+      this.superBullet = this.superBullets.getFirstExists(false);
+      this.superBullet2 = this.superBullets2.getFirstExists(false);
+      this.superBullet3 = this.superBullets3.getFirstExists(false);
 
 
       this.superBullet.playerId = this.controller;
