@@ -6,6 +6,7 @@ body {
 
 div {
     -webkit-touch-callout: none !important;
+    -webkit-user-select: none
 }
 
 p {
