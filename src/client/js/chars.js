@@ -11,6 +11,10 @@ function bulletCollision (character, bullet) {
   }
 }
 
+function bulletCollisionPlatform (platform, bullet) {
+  bullet.kill();
+}
+
 function resetPowerUp (player) {
   setTimeout(function() {player.powerUp = 0;}, 2000)
   // console.log(player);
