@@ -82,6 +82,7 @@ GameOver.prototype = {
       button.stroke = "rgba(0,0,0,0)";
     };
     var onClick = function () {
+      mainSound.stop();
       game.state.start('Game', true, false, this.playerCount);
     }.bind(this);
 
