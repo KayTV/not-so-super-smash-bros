@@ -15,10 +15,11 @@ function Game () {
 function powerUp () {
   for (var i=0; i<players.length; i++) {
     if (players[i].sprite.alive === true && players[i].sprite.powerUp !== 100) {
-      players[i].sprite.powerUp += 25;
+      players[i].sprite.powerUp += 10;
     }
   }
 }
+
 
 Game.prototype = {
   init: function (playerCount) {
@@ -72,6 +73,8 @@ Game.prototype = {
     mainSound = this.add.audio('mainSound');
     mainSound.play();
 
+    setInterval(powerUp, 1000);
+
 
     // Phone Characters
     players = [];
@@ -122,8 +125,6 @@ Game.prototype = {
 
       players.push(new Character(i, this.platforms, this.bullets, this.superBullets, this.superBullets2, this.superBullets3, dieSound))
     }
-    // console.log("GameJS: players:",players);
-    setInterval(powerUp, 1000);
 
   },
   update: function() {

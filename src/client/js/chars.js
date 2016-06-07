@@ -11,6 +11,11 @@ function bulletCollision (character, bullet) {
   }
 }
 
+function resetPowerUp (player) {
+  player.powerUp = 0;
+  console.log(player);
+}
+
 function Character (controller, platforms, bullets, superBullets, superBullets2, superBullets3) {
   var self = this;
   this.platforms = platforms;
@@ -127,6 +132,7 @@ function Character (controller, platforms, bullets, superBullets, superBullets2,
   this.sprite.body.collideWorldBounds = true;
   this.sprite.body.bounce.y = 0.2;
   this.sprite.body.gravity.y = 300;
+
 }
 
 Character.prototype = {
@@ -148,6 +154,7 @@ Character.prototype = {
     else if (this.sprite.powerUp === 100 && inputs[this.controller].firePowerUp === true) {
       this.sprite.animations.play('powerUp');
       this.firePowerUp();
+      // setTimeout(function() {this.sprite.powerUp = 0 }, 2000);
     }
 
     // Default direction to fire
