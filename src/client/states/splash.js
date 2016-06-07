@@ -77,6 +77,7 @@ Splash.prototype = {
       this.status.setText('Loading...');
 
       // this.status.setText('Loaded!');
+      // game.forceSingleUpdate = true;
 
       setTimeout(function() {
         game.state.start('Menu');

@@ -95,32 +95,33 @@ Game.prototype = {
       this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
       this.bullets.setAll('anchor.x', 0.5);
       this.bullets.setAll('anchor.y', 0.5);
-      this.bullets.createMultiple(1000, 'bullet' + i);
+      this.bullets.createMultiple(200, 'bullet' + i);
       this.bullets.playerId = i;
+      console.log(this.bullets);
 
       // Add powerUp Bullets
       this.superBullets = this.add.group();
       this.superBullets.enableBody = true;
       this.superBullets.physicsBodyType = Phaser.Physics.ARCADE;
-      this.superBullets.setAll('anchor.x', 0.5);
-      this.superBullets.setAll('anchor.y', 0.5);
-      this.superBullets.createMultiple(1000, 'bullet' + i);
+      // this.superBullets.setAll('anchor.x', 0.5);
+      // this.superBullets.setAll('anchor.y', 0.5);
+      this.superBullets.createMultiple(200, 'bullet' + i);
       this.superBullets.playerId = i;
 
       this.superBullets2 = this.add.group();
       this.superBullets2.enableBody = true;
       this.superBullets2.physicsBodyType = Phaser.Physics.ARCADE;
-      this.superBullets2.setAll('anchor.x', 0.5);
-      this.superBullets2.setAll('anchor.y', 0.5);
-      this.superBullets2.createMultiple(1000, 'bullet' + i);
+      // this.superBullets2.setAll('anchor.x', 0.5);
+      // this.superBullets2.setAll('anchor.y', 0.5);
+      this.superBullets2.createMultiple(200, 'bullet' + i);
       this.superBullets2.playerId = i;
 
       this.superBullets3 = this.add.group();
       this.superBullets3.enableBody = true;
       this.superBullets3.physicsBodyType = Phaser.Physics.ARCADE;
-      this.superBullets3.setAll('anchor.x', 0.5);
-      this.superBullets3.setAll('anchor.y', 0.5);
-      this.superBullets3.createMultiple(1000, 'bullet' + i);
+      // this.superBullets3.setAll('anchor.x', 0.5);
+      // this.superBullets3.setAll('anchor.y', 0.5);
+      this.superBullets3.createMultiple(200, 'bullet' + i);
       this.superBullets3.playerId = i;
 
       players.push(new Character(i, this.platforms, this.bullets, this.superBullets, this.superBullets2, this.superBullets3, dieSound))

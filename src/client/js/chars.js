@@ -1,6 +1,6 @@
 var bulletTime = 0;
-var fireRate = 100;
-var nextFire = 0;
+// var fireRate = 100;
+// var nextFire = 0;
 var colors = [0xffff00, 0xffff00, 0xFF3F00, 0xFFE300]
 
 
@@ -28,6 +28,8 @@ function Character (controller, platforms, bullets, superBullets, superBullets2,
   this.superBullets = superBullets;
   this.superBullets2 = superBullets2;
   this.superBullets3 = superBullets3;
+  this.fireRate = 100;
+  this.nextFire = 0;
 
   var x, y, character, left, right, jump;
   switch(controller) {
@@ -143,6 +145,7 @@ function Character (controller, platforms, bullets, superBullets, superBullets2,
 Character.prototype = {
   update: function (inputs) {
 
+
     game.physics.arcade.collide(this.sprite, this.platforms);
     var standing = this.sprite.body.blocked.down || this.sprite.body.touching.down;
     this.sprite.body.velocity.x = 0;
@@ -217,11 +220,13 @@ Character.prototype = {
 
   },
   fireGun: function() {
-    if (game.time.now > nextFire && this.bullets.countDead() > 0)
-    {
-        nextFire = game.time.now + fireRate;
 
-        this.bullet = this.bullets.getFirstDead();
+    if (game.time.now > this.nextFire)
+    {
+        this.nextFire = game.time.now + this.fireRate;
+
+        this.bullet = this.bullets.getFirstExists(false);
+        console.log(this.bullet);
 
         this.bullet.playerId = this.controller;
 
@@ -261,13 +266,13 @@ Character.prototype = {
     }
   },
   firePowerUp: function () {
-    if (game.time.now > nextFire && this.superBullets.countDead() > 0)
+    if (game.time.now > this.nextFire)
     {
-      nextFire = game.time.now + fireRate;
+      this.nextFire = game.time.now + this.fireRate;
 
-      this.superBullet = this.superBullets.getFirstDead();
-      this.superBullet2 = this.superBullets2.getFirstDead();
-      this.superBullet3 = this.superBullets3.getFirstDead();
+      this.superBullet = this.superBullets.getFirstExists(false);
+      this.superBullet2 = this.superBullets2.getFirstExists(false);
+      this.superBullet3 = this.superBullets3.getFirstExists(false);
 
 
       this.superBullet.playerId = this.controller;
