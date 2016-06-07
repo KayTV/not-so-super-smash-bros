@@ -12,8 +12,8 @@ function bulletCollision (character, bullet) {
 }
 
 function resetPowerUp (player) {
-  player.powerUp = 0;
-  console.log(player);
+  setTimeout(function() {player.powerUp = 0;}, 2000)
+  // console.log(player);
 }
 
 function Character (controller, platforms, bullets, superBullets, superBullets2, superBullets3) {
@@ -154,6 +154,7 @@ Character.prototype = {
     else if (this.sprite.powerUp === 100 && inputs[this.controller].firePowerUp === true) {
       this.sprite.animations.play('powerUp');
       this.firePowerUp();
+      resetPowerUp(this.sprite);
       // setTimeout(function() {this.sprite.powerUp = 0 }, 2000);
     }
 
