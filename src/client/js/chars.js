@@ -4,17 +4,20 @@ var nextFire = 0;
 
 
 function bulletCollision (character, bullet) {
-  if (bullet.playerId !== character.playerId && character.health > 0) {
+  if (bullet.playerId !== character.playerId && character.health > 0 ) {
     bullet.kill();
     character.health -= 10;
     character.healthText.text = "P" + character.playerId + " HP:" + character.health;
   }
 }
 
-function Character (controller, platforms, bullets) {
+function Character (controller, platforms, bullets, superBullets, superBullets2, superBullets3) {
   var self = this;
   this.platforms = platforms;
   this.bullets = bullets;
+  this.superBullets = superBullets;
+  this.superBullets2 = superBullets2;
+  this.superBullets3 = superBullets3;
 
   var x, y, character, left, right, jump;
   switch(controller) {
@@ -34,9 +37,9 @@ function Character (controller, platforms, bullets) {
       fire = [25, 26, 24];
       die = [29, 30, 29, 30, 29, 30];
       stand = [10];
+      powerUp = [27];
       scale = 1.5;
       xHP = 40;
-      // soundDie = 'sound-die';
       break;
     case 1:
       x = 100;
@@ -50,9 +53,9 @@ function Character (controller, platforms, bullets) {
       fireLeft = [22];
       fire = [21];
       die = [23, 23, 23, 23, 23, 23];
+      powerUp = [21];
       scale = 2.3;
       xHP = 230;
-      // soundDie = 'sound-die';
       break;
     case 2:
       x = 600;
@@ -65,10 +68,10 @@ function Character (controller, platforms, bullets) {
       fireRight = [12];
       fireLeft = [13];
       stand = [3];
+      powerUp = [5];
       scale = 1.8;
       xHP = 430;
       die = [4, 4, 4, 4, 4, 4];
-      // soundDie = 'sound-die';
       break;
     case 3:
       x = 600;
@@ -82,9 +85,9 @@ function Character (controller, platforms, bullets) {
       fireLeft = [21, 22];
       die = [23, 23, 23, 23, 23, 23];
       stand = [8];
+      powerUp = [19, 20];
       scale = 1.8;
       xHP = 630;
-      // soundDie = 'sound-die';
       break;
   }
 
@@ -101,6 +104,7 @@ function Character (controller, platforms, bullets) {
   this.sprite.animations.add('fireRight', fireRight, 13, true);
   this.sprite.animations.add('fireLeft', fireLeft, 13, true);
   this.sprite.animations.add('die', die, 2, false);
+  this.sprite.animations.add('powerUp', powerUp, 13, true);
   this.sprite.playerId = this.controller;
   this.sprite.scale.set(scale, scale);
 
@@ -108,7 +112,7 @@ function Character (controller, platforms, bullets) {
   this.sprite.health = 100;
 
   // Set Sprite PowerUp
-  this.sprite.powerUp = 100;
+  this.sprite.powerUp = 0;
 
   // Create Sprite HP Text
   this.sprite.healthText = game.add.text(xHP, 0, 'P' + (this.controller + 1) + ' HP:' + this.sprite.health, {
@@ -137,13 +141,12 @@ Character.prototype = {
       dieSound.play();
       dieSound.currentTime = 0.1;
       this.sprite.body.moves = false;
-      // console.log(this.sprite);
       inputs[this.controller].fire = false;
       this.sprite.animations.play('die', 6, false, true);
-      // this.sprite.kill();
     }
 
     else if (this.sprite.powerUp === 100 && inputs[this.controller].firePowerUp === true) {
+      this.sprite.animations.play('powerUp');
       this.firePowerUp();
     }
 
@@ -198,19 +201,13 @@ Character.prototype = {
     if (game.time.now > nextFire && this.bullets.countDead() > 0)
     {
         nextFire = game.time.now + fireRate;
-        // this.bullets.playerId = this.controller;
-        // console.log(this.bullets);
-        this.bullet = this.bullets.getFirstDead();
 
-        // if (this.powerUp === 100 && inputs[this.controller].firePowerUp === true) {
-        //   this.bullet.scale.set(1.5);
-        // }
+        this.bullet = this.bullets.getFirstDead();
 
         this.bullet.playerId = this.controller;
 
         if (this.controller === 0) {
           this.bullet.reset(this.sprite.x + 25, this.sprite.y + 35);
-          // console.log("Player0 bullet", this.bullet)
         }
         if (this.controller === 1) {
           this.bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
@@ -222,28 +219,21 @@ Character.prototype = {
           this.bullet.reset(this.sprite.x + 25, this.sprite.y + 30);
         }
 
-        // bullet.reset(this.sprite.x, this.sprite.y);
-
         // if(inputs[this.controller].right === true || inputs[this.controller].jump === true) {
         //   this.bullet.body.velocity.x = 400;
         //   // console.log('right', bullet);
         // }
-        if (inputs[this.controller].right === true) {
+         if (inputs[this.controller].right === true) {
           this.sprite.lastRightFire = 1;
           this.sprite.lastLeftFire = 0;
           this.bullet.body.velocity.x = 400;
-          // console.log("last right fire",this.sprite.lastRightFire);
         }
         else if ( this.sprite.lastLeftFire > this.sprite.lastRightFire && this.sprite.body.velocity.x === 0) {
-          // console.log('test');
           this.bullet.body.velocity.x = -400;
-          // this.sprite.animations.play('fireLeft');
         }
         else if (inputs[this.controller].left === true || this.sprite.lastLeftFire > this.sprite.lastRightFire ) {
           this.sprite.lastLeftFire = 1;
           this.sprite.lastRightFire = 0;
-          // console.log("left",this.sprite.lastLeftFire);
-          // console.log("right",this.sprite.lastRightFire);
           this.bullet.body.velocity.x = -400;
         }
         else {
@@ -252,39 +242,46 @@ Character.prototype = {
     }
   },
   firePowerUp: function () {
-    if (game.time.now > nextFire && this.bullets.countDead() > 0)
+    if (game.time.now > nextFire && this.superBullets.countDead() > 0)
     {
       nextFire = game.time.now + fireRate;
 
-      this.bullet1 = this.bullets.getFirstDead();
+      this.superBullet = this.superBullets.getFirstDead();
+      this.superBullet2 = this.superBullets2.getFirstDead();
+      this.superBullet3 = this.superBullets3.getFirstDead();
 
 
-      this.bullet1.playerId = this.controller;
-      this.bullet2.playerId = this.controller;
+      this.superBullet.playerId = this.controller;
+      this.superBullet2.playerId = this.controller;
+      this.superBullet3.playerId = this.controller;
 
       if (this.controller === 0) {
-        this.bullet1.reset(this.sprite.x + 25, this.sprite.y + 35);
-        this.bullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
-        // console.log("Player0 bullet", this.bullet)
+        this.superBullet.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet3.reset(this.sprite.x + 25, this.sprite.y + 35);
       }
       if (this.controller === 1) {
-        // this.bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
-        this.bullet1.reset(this.sprite.x + 25, this.sprite.y + 35);
-        this.bullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet3.reset(this.sprite.x + 25, this.sprite.y + 35);
       }
       if (this.controller === 2) {
-        // this.bullet.reset(this.sprite.x + 25, this.sprite.y + 20);
-        this.bullet1.reset(this.sprite.x + 25, this.sprite.y + 35);
-        this.bullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet3.reset(this.sprite.x + 25, this.sprite.y + 35);
       }
       if (this.controller === 3) {
-        // this.bullet.reset(this.sprite.x + 25, this.sprite.y + 30);
-        this.bullet1.reset(this.sprite.x + 25, this.sprite.y + 35);
-        this.bullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet2.reset(this.sprite.x + 25, this.sprite.y + 35);
+        this.superBullet3.reset(this.sprite.x + 25, this.sprite.y + 35);
       }
 
-      this.bullet1.body.velocity.x = -400;
-      this.bullet2.body.velocity.x = 400;
+      this.superBullet.body.velocity.x = -400;
+      this.superBullet.body.velocity.y = -400;
+      this.superBullet2.body.velocity.x = 400;
+      this.superBullet2.body.velocity.y = -400;
+      this.superBullet3.body.velocity.y = -400;
+
 
     }
   }
