@@ -1,6 +1,7 @@
 var bulletTime = 0;
 var fireRate = 100;
 var nextFire = 0;
+var colors = [0xffff00, 0xffff00, 0xFF3F00, 0xFFE300]
 
 
 function bulletCollision (character, bullet) {
@@ -86,7 +87,7 @@ function Character (controller, platforms, bullets, superBullets, superBullets2,
       x = 600;
       y = game.world.height - 550;
       character = 'mario';
-      left = [1, 2, 3, 5, 6, 7];
+      left = [0, 1, 2, 3, 5, 6, 7, 0];
       right = [9, 10, 11, 12, 13, 14, 15];
       jump = [17];
       fire = [19, 20];
@@ -147,7 +148,7 @@ Character.prototype = {
     this.sprite.body.velocity.x = 0;
 
     if (this.sprite.powerUp === 100) {
-      this.sprite.tint = 0xffff00;
+      this.sprite.tint = colors[this.controller];
     } else {
       this.sprite.tint = 0xFFFFFF;
     }
