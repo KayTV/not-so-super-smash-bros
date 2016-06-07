@@ -84,12 +84,12 @@ $(document).ready(function(){
     fire = false;
   });
 
-  $('#picture').on('touchstart', function(event){
+  $('#firePowerUp').on('touchstart', function(event){
     event.preventDefault();
     firePowerUp = true;
   });
 
-  $('#picture').on('touchend', function(event){
+  $('#firePowerUp').on('touchend', function(event){
     event.preventDefault()
     firePowerUp = false;
   });

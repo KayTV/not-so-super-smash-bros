@@ -1,6 +1,6 @@
 body {
   background-color: grey;
-  margin-top: 13%;
+  /*margin-top: 5%;*/
   font-family: 'Press Start 2P', cursive;
 }
 
@@ -20,4 +20,9 @@ p {
 #picture img {
   height: 10%;
   width: 10%;
+}
+
+#firePowerUp {
+  height: 20%;
+  width: 20%;
 }
