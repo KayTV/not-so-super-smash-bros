@@ -143,6 +143,8 @@ Game.prototype = {
           this.physics.arcade.overlap(players[n].sprite, players[i].superBullets3, bulletCollision, null, this);
 
           // Handling bullet to platform collision
+          this.physics.arcade.overlap(this.platforms, players[i].bullets, bulletCollisionPlatform, null, this);
+
           this.physics.arcade.overlap(this.platforms, players[i].superBullets, bulletCollisionPlatform, null, this);
 
           this.physics.arcade.overlap(this.platforms, players[i].superBullets2, bulletCollisionPlatform, null, this);
