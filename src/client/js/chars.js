@@ -142,6 +142,12 @@ Character.prototype = {
     var standing = this.sprite.body.blocked.down || this.sprite.body.touching.down;
     this.sprite.body.velocity.x = 0;
 
+    if (this.sprite.powerUp === 100) {
+      this.sprite.tint = 0xffff00;
+    } else {
+      this.sprite.tint = 0xFFFFFF;
+    }
+
     // Check sprite health
     if (this.sprite.health <= 0) {
       dieSound.play();
