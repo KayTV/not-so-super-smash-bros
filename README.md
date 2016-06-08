@@ -15,6 +15,7 @@
     <p>Star button on your controller is your power up. Once you see your character change color of the game screen, your power up is activated. Press the star button to use it</p>
 
   <h3>Download</h3>
+  <p>You must have node and gulp installed in order to download this game</p>
     <p>To Download this game:</p>
       <ul>
         <li>Fork and clone</li>
@@ -23,6 +24,11 @@
       </ul>
 
   <h3>Controllers Layout: </h3>
+  <hr>
+
+  <img src="src/client/assets/readme/megacontroller.png">
+
+  <h3>Individual Controllers: </h3>
   <hr>
 
   <img src="src/client/assets/readme/controllers2.JPG">
