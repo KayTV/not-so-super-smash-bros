@@ -1,5 +1,4 @@
 var waitingText;
-// console.log("MeunJS");
 
 function Menu (){
   var self = this;
@@ -9,10 +8,6 @@ function Menu (){
   this.selectchar;
 }
 
-// function colors () {
-//   var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'violet'];
-// }
-
 Menu.prototype = {
   init: function() {
     // Call createGame on init, which will emit 'create-game to the backend'
@@ -20,9 +15,7 @@ Menu.prototype = {
     this.titleText = game.make.text(game.world.centerX, 90, 'Not-So-Super\n Smash Bros.', {
       font: '60px PipeDream',
       align: 'center',
-      // fill: 'red'
     });
-    // this.titleText.addColor('#0b9bd7', 0);
     this.titleText.addColor('blue', 0);
     this.titleText.addColor('black', 3);
     this.titleText.addColor('#fbcf08', 4);
@@ -66,17 +59,11 @@ Menu.prototype = {
     var directionStyle = {
       font: '32px PipeDream',
       align: 'center',
-      // fill: 'purple',
     }
 
     var directions = game.add.text(game.world.centerX, 200, 'Directions: Go to this website on your phone, \n click HOST GAME and enter in the Game ID.', directionStyle);
-    // directions.addColor('red', 2);
     directions.addColor('blue', 0);
     directions.anchor.setTo(0.5, 0.5);
-
-    // var directions2 = game.add.text(game.world.centerX, 230, 'click HOST GAME and enter in the Game ID.', directionStyle);
-    // directions.anchor.setTo(0.5, 0.5);
-    // directions2.anchor.setTo(0.5, 0.5);
 
     var text = game.make.text(game.world.centerX, game.world.centerY, 'HOST GAME', style);
     text.anchor.setTo(0.5, 0.5);
@@ -129,8 +116,6 @@ Menu.prototype = {
       font: '50px PipeDream',
       fill: '#fbcf08',
       align: 'center',
-      // stroke: 'rgba(0,0,0,0)',
-      // strokeThickness: 4,
     }
 
     var text = game.add.text(game.world.centerX, game.world.centerY - 35, 'Start Match', style);
@@ -152,8 +137,6 @@ Menu.prototype = {
       game.state.start('Game', true, false, this.playerCount)
     }.bind(this);
 
-    // text.stroke = "rgba(0,0,0,0)";
-    // text.strokeThickness = 4;
     text.inputEnabled = true;
     text.events.onInputUp.add(onClick);
     text.events.onInputOver.add(hoverTrue);
@@ -165,7 +148,6 @@ Menu.prototype = {
   addPlayerPic: function() {
 
     if (this.playerCount === 1) {
-      // console.log(this);
       this.mainBackground.kill();
       game.stage.backgroundColor = '#6899F8';
 
@@ -178,7 +160,6 @@ Menu.prototype = {
       game.add.image(10, 320, 'player-selection');
       var mega = game.add.sprite(0, 345, 'select0');
       mega.scale.set(0.8, 0.8);
-      // console.log(game);
     }
     if(this.playerCount === 2) {
       var kirb = game.add.sprite(190, 350, 'select1');
