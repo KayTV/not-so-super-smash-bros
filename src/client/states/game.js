@@ -39,10 +39,14 @@ Game.prototype = {
 
   },
   create: function() {
+    dieSound = this.add.audio('soundDie');
+    mainSound = this.add.audio('mainSound');
+    mainSound.play();
+    mainSound.currentTime = 0.5;
+
     this.add.sprite(0, 0, 'sky');
     this.platforms = this.add.group();
 
-    // console.log('platforms',this.platforms);
     //  We will enable physics for any object that is created in this group
     this.platforms.enableBody = true;
 
@@ -68,10 +72,6 @@ Game.prototype = {
 
 		ledge = this.platforms.create(580, 450, 'pipe');
     ledge.body.immovable = true;
-
-    dieSound = this.add.audio('soundDie');
-    mainSound = this.add.audio('mainSound');
-    mainSound.play();
 
     setInterval(powerUp, 1000);
 
@@ -133,7 +133,6 @@ Game.prototype = {
     var winner;
 
     for (var i=0; i < players.length; i++) {
-        // console.log('players.bullet', players[i].name, players[i].bullet);
         for (var n=0; n<players.length; n++) {
           this.physics.arcade.overlap(players[n].sprite, players[i].bullets, bulletCollision, null, this);
 

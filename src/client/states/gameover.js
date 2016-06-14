@@ -17,9 +17,6 @@ GameOver.prototype = {
       }
     }
 
-    // console.log("Winning:", winningPlayer);
-    // console.log("GameOverJS: game:",game);
-
     this.titleText = game.make.text(game.world.centerX, 90, 'Not-So-Super\n Smash Bros.', {
       font: '60px PipeDream',
       align: 'center',
@@ -38,21 +35,8 @@ GameOver.prototype = {
     this.winnerText = game.make.text(game.world.centerX, 200, 'The winner is: ' , {
       font: '50px PipeDream',
       align: 'center',
-      // fill: 'red'
     });
     this.winnerText.anchor.setTo(0.5);
-
-
-    // if (count === 1) {
-    //   this.winnerText.addColor('#E42926', 0);
-    // } else if (count === 2) {
-    //   this.winnerText.addColor('blue', 0);
-    // } else if (count === 3) {
-    //   this.winnerText.addColor('#fbcf08', 0);
-    // } else {
-    //   this.winnerText.addColor('#00c600', 0);
-    // }
-
 
   },
   create: function () {

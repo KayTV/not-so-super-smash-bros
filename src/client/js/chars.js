@@ -1,6 +1,4 @@
 var bulletTime = 0;
-// var fireRate = 100;
-// var nextFire = 0;
 var colors = [0xffff00, 0xffff00, 0xFF3F00, 0xFFE300]
 
 
@@ -17,8 +15,7 @@ function bulletCollisionPlatform (platform, bullet) {
 }
 
 function resetPowerUp (player) {
-  setTimeout(function() {player.powerUp = 0;}, 2000)
-  // console.log(player);
+  setTimeout(function() {player.powerUp = 0;}, 2000);
 }
 
 function Character (controller, platforms, bullets, superBullets, superBullets2, superBullets3) {
@@ -112,7 +109,6 @@ function Character (controller, platforms, bullets, superBullets, superBullets2,
   this.sprite.animations.add('right', right, 13, true);
   this.sprite.animations.add('jump', jump, 13, true);
   this.sprite.animations.add('stand', stand, 13, true);
-  // this.sprite.animations.add('fire', fire, 13, true);
   this.sprite.animations.add('fireRight', fireRight, 13, true);
   this.sprite.animations.add('fireLeft', fireLeft, 13, true);
   this.sprite.animations.add('die', die, 2, false);
@@ -169,7 +165,6 @@ Character.prototype = {
       this.sprite.animations.play('powerUp');
       this.firePowerUp();
       resetPowerUp(this.sprite);
-      // setTimeout(function() {this.sprite.powerUp = 0 }, 2000);
     }
 
     // Default direction to fire
@@ -185,7 +180,6 @@ Character.prototype = {
       this.sprite.body.velocity.x = 150;
       this.sprite.animations.play('right');
     } else if(inputs[this.controller].jump === true) {
-      // this.sprite.body.velocity.y = -350;
       this.sprite.animations.play('jump');
     }
     else {
@@ -212,12 +206,6 @@ Character.prototype = {
       // Maintain movement while firing
       this.sprite.body.velocity.x = -150;
     }
-
-    // if (this.sprite.powerUp === 100) {
-    //   console.log("Powered up!");
-    // }
-
-
   },
   fireGun: function() {
 
@@ -242,15 +230,10 @@ Character.prototype = {
         if (this.controller === 3) {
           this.bullet.reset(this.sprite.x + 25, this.sprite.y + 30);
         }
-
-        // if(inputs[this.controller].right === true || inputs[this.controller].jump === true) {
-        //   this.bullet.body.velocity.x = 400;
-        //   // console.log('right', bullet);
-        // }
-         if (inputs[this.controller].right === true) {
-          this.sprite.lastRightFire = 1;
-          this.sprite.lastLeftFire = 0;
-          this.bullet.body.velocity.x = 400;
+        if (inputs[this.controller].right === true) {
+         this.sprite.lastRightFire = 1;
+         this.sprite.lastLeftFire = 0;
+         this.bullet.body.velocity.x = 400;
         }
         else if ( this.sprite.lastLeftFire > this.sprite.lastRightFire && this.sprite.body.velocity.x === 0) {
           this.bullet.body.velocity.x = -400;
