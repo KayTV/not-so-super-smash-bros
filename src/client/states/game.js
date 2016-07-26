@@ -93,11 +93,8 @@ Game.prototype = {
       this.bullets = this.add.group();
       this.bullets.enableBody = true;
       this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-      this.bullets.setAll('anchor.x', 0.5);
-      this.bullets.setAll('anchor.y', 0.5);
       this.bullets.createMultiple(200, 'bullet' + i);
       this.bullets.playerId = i;
-      console.log(this.bullets);
 
       // Add powerUp Bullets
       this.superBullets = this.add.group();
