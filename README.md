@@ -11,6 +11,8 @@
     </ul>
   <p>You will then go to the link to the game on your computer and then each person will go to the same link on their phone as well. You will then on your computer click the 'HOST GAME' button and enter in the given number on your phone. Once you have more than one player, you can start the game! Each character has 100 HP points, whoever is the last one standing, wins! Remember to have fun!</p>
 
+  <p> *** For those of you that are unsure on what Super Smash Brothers is, it is a multiplayer fighting game. You battle against the other people in the game by shooting them with your weapon. The controller that will appear on your phone has 5 buttons, left arrow to move left, right arrow to move right, a jump button, a fire button that allows you to shoot your opponents, and a star button that gives you a power up. The power up will let you shoot in multiple directions.*** </p>
+
   <h4>Star Button</h4>
     <p>Star button on your controller is your power up. Once you see your character change color of the game screen, your power up is activated. Press the star button to use it</p>
 
